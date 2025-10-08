@@ -1,0 +1,165 @@
+{
+  "result": [
+    {
+      "id": "b7c1232d-1aa2-45e8-97d9-bc3e1ac4511c",
+      "properties": {
+        "reason": [
+          "符合需求，因为硬盘容量为1TB",
+          "符合需求，内存为16G。",
+          "符合需求，提供超过4个插槽"
+        ],
+        "hard_disk": [
+          "1TB SATA硬盘"
+        ],
+        "memory": [
+          "16G DDR4 SDRAM"
+        ],
+        "slots": [
+          "3个PCIe x4，1个PCIex16，8个PCI"
+        ]
+      }
+    },
+    {
+      "id": "f41502de-8488-4106-a5ff-543b51cbb67f",
+      "properties": {
+        "reason": [
+          "符合需求，因为硬盘容量大于等于1TB",
+          "符合需求，内存为64G。"
+        ],
+        "hard_disk": [
+          "1TB SATA硬盘（up to 4TB）"
+        ],
+        "memory": [
+          "64G DDR4 SDRAM（up to 256G）"
+        ]
+      }
+    },
+    {
+      "id": "b48bfa6c-92d5-4ce2-a01e-ecc0e312b26c",
+      "properties": {
+        "reason": [
+          "符合需求，因为硬盘容量为1TB",
+          "符合需求，内存为16G。",
+          "符合需求，提供超过4个插槽"
+        ],
+        "hard_disk": [
+          "1TB SATA硬盘"
+        ],
+        "memory": [
+          "16G DDR4 SDRAM"
+        ],
+        "slots": [
+          "5个PCIe x1，2个PCIe x4，1个PCIex16，4个PCI"
+        ]
+      }
+    },
+    {
+      "id": "dd6762e2-0ccb-4b1d-aee1-21a8b9fa1c05",
+      "properties": {
+        "reason": [
+          "符合需求，因为硬盘容量为1TB",
+          "符合需求，内存为16G。"
+        ],
+        "hard_disk": [
+          "1TB SATA硬盘"
+        ],
+        "memory": [
+          "16G DDR4 SDRAM"
+        ]
+      }
+    },
+    {
+      "id": "588126a5-b115-4c84-9abe-8be13a2ce9ad",
+      "properties": {
+        "reason": [
+          "符合需求，因为硬盘容量为1TB",
+          "符合需求，内存为16G。"
+        ],
+        "hard_disk": [
+          "1TB SATA硬盘"
+        ],
+        "memory": [
+          "16GB DDR4 SDRAM（up to 32GB）"
+        ]
+      }
+    },
+    {
+      "id": "7b48c576-575f-449b-abfc-a5f41bd3e54e",
+      "properties": {
+        "reason": [
+          "符合需求，因为硬盘容量为1TB",
+          "符合需求，内存为16G。",
+          "符合需求，提供超过4个插槽"
+        ],
+        "hard_disk": [
+          "1TB SATA硬盘"
+        ],
+        "memory": [
+          "16G DDR4 SDRAM"
+        ],
+        "slots": [
+          "1个PCIe x1，1个PCIe x4，1个PCIex16，4个PCI"
+        ]
+      }
+    },
+    {
+      "id": "a245668c-9617-40b0-bcec-8d99a465e562",
+      "properties": {
+        "reason": [
+          "符合需求，因为硬盘容量大于等于1TB",
+          "符合需求，内存为64G。"
+        ],
+        "hard_disk": [
+          "1TB SATA硬盘（up to 4TB）"
+        ],
+        "memory": [
+          "64G DDR4 SDRAM（up to 256G）"
+        ]
+      }
+    },
+    {
+      "id": "7fc612e2-bee7-44ec-a8b5-7dfd7da11d6a",
+      "properties": {
+        "memory": [
+          "16GB"
+        ],
+        "reason": [
+          "符合需求，内存为16G。"
+        ]
+      }
+    },
+    {
+      "id": "3028f947-38ec-4085-81b4-9a5ff6ba51e8",
+      "properties": {
+        "memory": [
+          "16GB内存"
+        ],
+        "reason": [
+          "符合需求，内存为16G。"
+        ]
+      }
+    },
+    {
+      "id": "b654a8f3-72cd-4b35-898c-041b3eb76231",
+      "properties": {
+        "slots": [
+          "14槽"
+        ],
+        "reason": [
+          "符合需求，提供超过4个插槽"
+        ]
+      }
+    },
+    {
+      "id": "62604286-b233-48ae-aa7c-e05eae6fe32e",
+      "properties": {
+        "slots": [
+          "8槽"
+        ],
+        "reason": [
+          "符合需求，提供超过4个插槽"
+        ]
+      }
+    }
+  ]
+}

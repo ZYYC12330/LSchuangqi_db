@@ -1,0 +1,42 @@
+{
+    "exceptionType": "interrupt",
+    "input": {
+      "slots": [
+        {
+          "id": "b654a8f3-72cd-4b35-898c-041b3eb76231",
+          "slots": "14槽",
+          "reason": "符合需求，提供超过4个插槽"
+        },
+        {
+          "id": "b7c1232d-1aa2-45e8-97d9-bc3e1ac4511c",
+          "slots": "3个PCIe x4，1个PCIex16，8个PCI",
+          "reason": "符合需求，提供超过4个插槽"
+        },
+        {
+          "id": "62604286-b233-48ae-aa7c-e05eae6fe32e",
+          "slots": "8槽",
+          "reason": "符合需求，提供超过4个插槽"
+        },
+        {
+          "id": "b48bfa6c-92d5-4ce2-a01e-ecc0e312b26c",
+          "slots": "5个PCIe x1，2个PCIe x4，1个PCIex16，4个PCI",
+          "reason": "符合需求，提供超过4个插槽"
+        },
+        {
+          "id": "dd6762e2-0ccb-4b1d-aee1-21a8b9fa1c05",
+          "slots": "2个PCIe x1，2个PCIe×4，1个PCIex16，2个PC",
+          "reason": "总计7个插槽，符合需求"
+        },
+        {
+          "id": "588126a5-b115-4c84-9abe-8be13a2ce9ad",
+          "slots": "2个PCI+1个PCIe×4+1个PCIe×16扩展插槽",
+          "reason": "总计4个插槽，符合需求"
+        },
+        {
+          "id": "7b48c576-575f-449b-abfc-a5f41bd3e54e",
+          "slots": "1个PCIe x1，1个PCIe x4，1个PCIex16，4个PCI",
+          "reason": "符合需求，提供超过4个插槽"
+        }
+      ]
+    }
+  }

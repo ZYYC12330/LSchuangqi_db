@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "simmachine_selection" ALTER COLUMN "cpu" DROP NOT NULL,
+ALTER COLUMN "hardDisk" DROP NOT NULL,
+ALTER COLUMN "memory" DROP NOT NULL,
+ALTER COLUMN "slots" DROP NOT NULL;

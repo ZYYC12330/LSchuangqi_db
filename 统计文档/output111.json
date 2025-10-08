@@ -1,0 +1,36 @@
+{
+    "prefect_match": {
+      "id": "dd6762e2-0ccb-4b1d-aee1-21a8b9fa1c05",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.7,
+          "reason": "是八核Intel Corei9系列，但主频为3.6GHz，略低于需求的4.0GHz。核心数达标但频率不达标。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "Intel Corei9-9900K 3.6GHz八核处理器，运行实时操作系统"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 1,
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "1TB SATA硬盘"
+        },
+        {
+          "category": "Memory",
+          "score": 1,
+          "reason": "符合需求，内存为16GB。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "16G DDR4 SDRAM"
+        },
+        {
+          "category": "Slots",
+          "score": 1,
+          "reason": "共提供7个插槽，符合需求",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "2个PCIe x1，2个PCIe×4，1个PCIex16，2个PC"
+        }
+      ],
+      "total_score": 3.7
+    }
+  }

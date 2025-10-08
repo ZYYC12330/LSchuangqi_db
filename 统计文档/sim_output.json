@@ -1,0 +1,686 @@
+{
+  "MergedResults": [
+    {
+      "id": "7fc612e2-bee7-44ec-a8b5-7dfd7da11d6a",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.6,
+          "reason": "虽然是八核处理器，满足核心数量要求（≥8核），但主频只有3.0GHz，低于需求的4.0GHz。核心数权重高，但频率不达标影响整体评分。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "海光3350八核处理器，主频3.0GHz，三级缓存16MB，运行实时操作系统"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 0.3,
+          "reason": "不符合需求，因为硬盘容量小于1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "512G吧"
+        },
+        {
+          "category": "Memory",
+          "score": 1,
+          "reason": "符合需求，内存为16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "16GB"
+        },
+        {
+          "category": "Slots",
+          "score": 0,
+          "reason": "仅提供3个插槽，少于所需的4个",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "1个PCIe×16，1个PCIe×4，1个PCIe×1"
+        }
+      ],
+      "total_score": 1.9
+    },
+    {
+      "id": "b654a8f3-72cd-4b35-898c-041b3eb76231",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0,
+          "reason": "没有提供CPU信息，无法判断是否满足核心数或频率要求，完全不匹配。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": ""
+        },
+        {
+          "category": "Hard Disk",
+          "score": 0,
+          "reason": "不符合需求，因为没有提供硬盘信息",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": ""
+        },
+        {
+          "category": "Memory",
+          "score": 0,
+          "reason": "不符合需求，内存信息缺失。",
+          "original": "3.  内存：16G及以上；",
+          "memory": ""
+        },
+        {
+          "category": "Slots",
+          "score": 1,
+          "reason": "符合需求，提供超过4个插槽",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "14槽"
+        }
+      ],
+      "total_score": 1
+    },
+    {
+      "id": "e68f9a80-c8d4-4f5d-986c-dd2b493038d8",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.2,
+          "reason": "只有四核，未达到八核要求；主频2.0GHz远低于4.0GHz。两项关键指标均不达标，匹配度极低。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "i7-6822EQ，四核处理器2.0GHz"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 0.2,
+          "reason": "不符合需求，因为硬盘容量小于1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "500GB 固态盘"
+        },
+        {
+          "category": "Memory",
+          "score": 0,
+          "reason": "不符合需求，内存小于16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "8GB内存"
+        },
+        {
+          "category": "Slots",
+          "score": 0,
+          "reason": "描述表明该设备占用而非提供插槽，不符合需求",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "占用两个槽位"
+        }
+      ],
+      "total_score": 0.4
+    },
+    {
+      "id": "3028f947-38ec-4085-81b4-9a5ff6ba51e8",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.3,
+          "reason": "只有四核，未达到八核要求；主频2.8GHz低于4.0GHz。两项关键指标均不达标，匹配度较低。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "i7-6820EQ，四核处理器2.8GHz"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 0.2,
+          "reason": "不符合需求，因为硬盘容量小于1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "500GB 固态盘"
+        },
+        {
+          "category": "Memory",
+          "score": 1,
+          "reason": "符合需求，内存为16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "16GB内存"
+        },
+        {
+          "category": "Slots",
+          "score": 0,
+          "reason": "描述表明该设备占用而非提供插槽，不符合需求",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "占用两个槽位"
+        }
+      ],
+      "total_score": 1.5
+    },
+    {
+      "id": "19673800-c9b3-422a-a4aa-6343f81d2edc",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.1,
+          "reason": "只有双核，未达到八核要求；主频2.5GHz远低于4.0GHz。两项关键指标均不达标，匹配度极低。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "第三代Intel Core i7-3555LE双核处理器 2.5GHz"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 0.2,
+          "reason": "不符合需求，因为硬盘容量小于1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "500GB 固态盘"
+        },
+        {
+          "category": "Memory",
+          "score": 0,
+          "reason": "不符合需求，内存小于16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "8GB DDR3-1600内存"
+        },
+        {
+          "category": "Slots",
+          "score": 0,
+          "reason": "未明确给出插槽信息，无法判断是否满足需求",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "未明确给出"
+        }
+      ],
+      "total_score": 0.3
+    },
+    {
+      "id": "b7c1232d-1aa2-45e8-97d9-bc3e1ac4511c",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.5,
+          "reason": "虽然主频为4.2GHz，高于需求的4.0GHz，但只有四核，未达到八核要求。主频达标，但核心数不达标，匹配度一般。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 1,
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "1TB SATA硬盘"
+        },
+        {
+          "category": "Memory",
+          "score": 1,
+          "reason": "符合需求，内存为16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "16G DDR4 SDRAM"
+        },
+        {
+          "category": "Slots",
+          "score": 1,
+          "reason": "符合需求，总共提供12个插槽",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "3个PCIe x4，1个PCIex16，8个PCI"
+        }
+      ],
+      "total_score": 3.5
+    },
+    {
+      "id": "f41502de-8488-4106-a5ff-543b51cbb67f",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.9,
+          "reason": "总共16核，远超八核要求；单颗处理器主频为3.9GHz，接近需求的4.0GHz。综合来看，基本满足需求。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "2颗英特尔® 至强® Gold 3.9GHz八核处理器，共计16核，运行实时操作系统"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 1,
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "1TB SATA硬盘（up to 4TB）"
+        },
+        {
+          "category": "Memory",
+          "score": 1,
+          "reason": "符合需求，内存大于16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "64G DDR4 SDRAM（up to 256G）"
+        },
+        {
+          "category": "Slots",
+          "score": 0,
+          "reason": "仅提供3个插槽，少于所需的4个",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "CPU1：2个PCIe×8，1个PCIe×16"
+        }
+      ],
+      "total_score": 2.9
+    },
+    {
+      "id": "62604286-b233-48ae-aa7c-e05eae6fe32e",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0,
+          "reason": "没有提供CPU信息，无法判断是否满足核心数或频率要求，完全不匹配。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": ""
+        },
+        {
+          "category": "Hard Disk",
+          "score": 0,
+          "reason": "不符合需求，因为没有提供硬盘信息",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": ""
+        },
+        {
+          "category": "Memory",
+          "score": 0,
+          "reason": "不符合需求，内存信息缺失。",
+          "original": "3.  内存：16G及以上；",
+          "memory": ""
+        },
+        {
+          "category": "Slots",
+          "score": 1,
+          "reason": "符合需求，提供超过4个插槽",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "8槽"
+        }
+      ],
+      "total_score": 1
+    },
+    {
+      "id": "b48bfa6c-92d5-4ce2-a01e-ecc0e312b26c",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.5,
+          "reason": "虽然主频为4.2GHz，高于需求的4.0GHz，但只有四核，未达到八核要求。主频达标，但核心数不达标，匹配度一般。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 1,
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "1TB SATA硬盘"
+        },
+        {
+          "category": "Memory",
+          "score": 1,
+          "reason": "符合需求，内存为16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "16G DDR4 SDRAM"
+        },
+        {
+          "category": "Slots",
+          "score": 1,
+          "reason": "符合需求，提供的插槽数量超过4个",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "5个PCIe x1，2个PCIe x4，1个PCIex16，4个PCI"
+        }
+      ],
+      "total_score": 3.5
+    },
+    {
+      "id": "dd6762e2-0ccb-4b1d-aee1-21a8b9fa1c05",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.8,
+          "reason": "是八核Intel Corei9处理器，满足核心数量要求（≥8核）；主频3.6GHz接近需求的4.0GHz。综合来看，基本满足需求。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "Intel Corei9-9900K 3.6GHz八核处理器，运行实时操作系统"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 1,
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "1TB SATA硬盘"
+        },
+        {
+          "category": "Memory",
+          "score": 1,
+          "reason": "符合需求，内存为16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "16G DDR4 SDRAM"
+        },
+        {
+          "category": "Slots",
+          "score": 0.8,
+          "reason": "共7个插槽，但'2个PC'未指明插槽类型，保守判断为非插槽",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "2个PCIe x1，2个PCIe×4，1个PCIex16，2个PC"
+        }
+      ],
+      "total_score": 3.6
+    },
+    {
+      "id": "588126a5-b115-4c84-9abe-8be13a2ce9ad",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.5,
+          "reason": "虽然主频为4.2GHz，高于需求的4.0GHz，但只有四核，未达到八核要求。主频达标，但核心数不达标，匹配度一般。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 1,
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "1TB SATA硬盘"
+        },
+        {
+          "category": "Memory",
+          "score": 1,
+          "reason": "符合需求，内存为16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "16GB DDR4 SDRAM（up to 32GB）"
+        },
+        {
+          "category": "Slots",
+          "score": 0,
+          "reason": "只提供了3个扩展插槽，少于所需4个插槽",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "2个PCI+1个PCIe×4+1个PCIe×16扩展插槽"
+        }
+      ],
+      "total_score": 2.5
+    },
+    {
+      "id": "7b48c576-575f-449b-abfc-a5f41bd3e54e",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.5,
+          "reason": "虽然主频为4.2GHz，高于需求的4.0GHz，但只有四核，未达到八核要求。主频达标，但核心数不达标，匹配度一般。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 1,
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "1TB SATA硬盘"
+        },
+        {
+          "category": "Memory",
+          "score": 1,
+          "reason": "符合需求，内存为16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "16G DDR4 SDRAM"
+        },
+        {
+          "category": "Slots",
+          "score": 1,
+          "reason": "符合需求，提供的插槽数量超过4个",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "1个PCIe x1，1个PCIe x4，1个PCIex16，4个PCI"
+        }
+      ],
+      "total_score": 3.5
+    },
+    {
+      "id": "a245668c-9617-40b0-bcec-8d99a465e562",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.7,
+          "reason": "总共36核，远超八核要求；单颗处理器主频为3.0GHz，低于需求的4.0GHz。虽非Core i9系列，但属于Intel高端服务器级处理器，性能优于i9。综合来看，尽管频率不达标，但核心数和整体性能超出需求。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "2颗英特尔® 至强® 金牌 3.0GHz十八核处理器，共计36核，运行实时操作系统"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 1,
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "1TB SATA硬盘（up to 4TB）"
+        },
+        {
+          "category": "Memory",
+          "score": 1,
+          "reason": "符合需求，内存大于16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "64G DDR4 SDRAM（up to 256G）"
+        },
+        {
+          "category": "Slots",
+          "score": 0,
+          "reason": "仅提供3个插槽，少于所需的4个",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "CPU1：2个PCIe×8，1个PCIe×16"
+        }
+      ],
+      "total_score": 2.7
+    }
+  ],
+  "GoodMatch": [
+    {
+      "id": "dd6762e2-0ccb-4b1d-aee1-21a8b9fa1c05",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.8,
+          "reason": "是八核Intel Corei9处理器，满足核心数量要求（≥8核）；主频3.6GHz接近需求的4.0GHz。综合来看，基本满足需求。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "Intel Corei9-9900K 3.6GHz八核处理器，运行实时操作系统"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 1,
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "1TB SATA硬盘"
+        },
+        {
+          "category": "Memory",
+          "score": 1,
+          "reason": "符合需求，内存为16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "16G DDR4 SDRAM"
+        },
+        {
+          "category": "Slots",
+          "score": 0.8,
+          "reason": "共7个插槽，但'2个PC'未指明插槽类型，保守判断为非插槽",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "2个PCIe x1，2个PCIe×4，1个PCIex16，2个PC"
+        }
+      ],
+      "total_score": 3.6
+    },
+    {
+      "id": "b7c1232d-1aa2-45e8-97d9-bc3e1ac4511c",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.5,
+          "reason": "虽然主频为4.2GHz，高于需求的4.0GHz，但只有四核，未达到八核要求。主频达标，但核心数不达标，匹配度一般。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 1,
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "1TB SATA硬盘"
+        },
+        {
+          "category": "Memory",
+          "score": 1,
+          "reason": "符合需求，内存为16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "16G DDR4 SDRAM"
+        },
+        {
+          "category": "Slots",
+          "score": 1,
+          "reason": "符合需求，总共提供12个插槽",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "3个PCIe x4，1个PCIex16，8个PCI"
+        }
+      ],
+      "total_score": 3.5
+    },
+    {
+      "id": "b48bfa6c-92d5-4ce2-a01e-ecc0e312b26c",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.5,
+          "reason": "虽然主频为4.2GHz，高于需求的4.0GHz，但只有四核，未达到八核要求。主频达标，但核心数不达标，匹配度一般。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 1,
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "1TB SATA硬盘"
+        },
+        {
+          "category": "Memory",
+          "score": 1,
+          "reason": "符合需求，内存为16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "16G DDR4 SDRAM"
+        },
+        {
+          "category": "Slots",
+          "score": 1,
+          "reason": "符合需求，提供的插槽数量超过4个",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "5个PCIe x1，2个PCIe x4，1个PCIex16，4个PCI"
+        }
+      ],
+      "total_score": 3.5
+    },
+    {
+      "id": "7b48c576-575f-449b-abfc-a5f41bd3e54e",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.5,
+          "reason": "虽然主频为4.2GHz，高于需求的4.0GHz，但只有四核，未达到八核要求。主频达标，但核心数不达标，匹配度一般。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 1,
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "1TB SATA硬盘"
+        },
+        {
+          "category": "Memory",
+          "score": 1,
+          "reason": "符合需求，内存为16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "16G DDR4 SDRAM"
+        },
+        {
+          "category": "Slots",
+          "score": 1,
+          "reason": "符合需求，提供的插槽数量超过4个",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "1个PCIe x1，1个PCIe x4，1个PCIex16，4个PCI"
+        }
+      ],
+      "total_score": 3.5
+    },
+    {
+      "id": "f41502de-8488-4106-a5ff-543b51cbb67f",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.9,
+          "reason": "总共16核，远超八核要求；单颗处理器主频为3.9GHz，接近需求的4.0GHz。综合来看，基本满足需求。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "2颗英特尔® 至强® Gold 3.9GHz八核处理器，共计16核，运行实时操作系统"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 1,
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "1TB SATA硬盘（up to 4TB）"
+        },
+        {
+          "category": "Memory",
+          "score": 1,
+          "reason": "符合需求，内存大于16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "64G DDR4 SDRAM（up to 256G）"
+        },
+        {
+          "category": "Slots",
+          "score": 0,
+          "reason": "仅提供3个插槽，少于所需的4个",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "CPU1：2个PCIe×8，1个PCIe×16"
+        }
+      ],
+      "total_score": 2.9
+    },
+    {
+      "id": "a245668c-9617-40b0-bcec-8d99a465e562",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.7,
+          "reason": "总共36核，远超八核要求；单颗处理器主频为3.0GHz，低于需求的4.0GHz。虽非Core i9系列，但属于Intel高端服务器级处理器，性能优于i9。综合来看，尽管频率不达标，但核心数和整体性能超出需求。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "2颗英特尔® 至强® 金牌 3.0GHz十八核处理器，共计36核，运行实时操作系统"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 1,
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "1TB SATA硬盘（up to 4TB）"
+        },
+        {
+          "category": "Memory",
+          "score": 1,
+          "reason": "符合需求，内存大于16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "64G DDR4 SDRAM（up to 256G）"
+        },
+        {
+          "category": "Slots",
+          "score": 0,
+          "reason": "仅提供3个插槽，少于所需的4个",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "CPU1：2个PCIe×8，1个PCIe×16"
+        }
+      ],
+      "total_score": 2.7
+    },
+    {
+      "id": "588126a5-b115-4c84-9abe-8be13a2ce9ad",
+      "details": [
+        {
+          "category": "CPU",
+          "score": 0.5,
+          "reason": "虽然主频为4.2GHz，高于需求的4.0GHz，但只有四核，未达到八核要求。主频达标，但核心数不达标，匹配度一般。",
+          "original": "1.  CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器；",
+          "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统"
+        },
+        {
+          "category": "Hard Disk",
+          "score": 1,
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "2.  硬盘：1TB及以上；",
+          "hard_disk": "1TB SATA硬盘"
+        },
+        {
+          "category": "Memory",
+          "score": 1,
+          "reason": "符合需求，内存为16G。",
+          "original": "3.  内存：16G及以上；",
+          "memory": "16GB DDR4 SDRAM（up to 32GB）"
+        },
+        {
+          "category": "Slots",
+          "score": 0,
+          "reason": "只提供了3个扩展插槽，少于所需4个插槽",
+          "original": "4.  插槽：包含至少4个板卡插槽；",
+          "slots": "2个PCI+1个PCIe×4+1个PCIe×16扩展插槽"
+        }
+      ],
+      "total_score": 2.5
+    }
+  ]
+}

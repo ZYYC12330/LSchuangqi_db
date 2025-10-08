@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-py"
+  recursive_type_depth = 5
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model iocard_selection {
+  id              String      @id @default(uuid())
+  category        String?   
+  type            String?  
+  model           String?   
+  brief_description String  
+  detailed_description String 
+  brand           String  
+  price_cny        String  
+  quantity        Int     
+  total_amount_cny  String 
+  supported_series String 
+
+  
+  
+}
+
+model simmachine_selection {
+  id              String      @id @default(uuid())
+  category        String?  
+  type            String? 
+  model           String?   
+  brief_description String    
+  detailed_description String 
+  manufacturer    String   
+  price_cny        String   
+  quantity        Int     
+  total_amount_cny  String  
+  series          String 
+  cpu       String?   @default("default_cpu_value")
+  hard_disk  String?   @default("default_hard_disk_value")
+  memory    String?   @default("default_memory_value")
+  slots     String?   @default("default_slots_value")
+}
