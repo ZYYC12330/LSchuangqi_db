@@ -1,0 +1,220 @@
+generator client {
+  provider             = "prisma-client-py"
+  recursive_type_depth = 5
+  enable_experimental_decimal = true
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// IO卡选型表：用于存储各类IO模块（模拟量、数字量、电阻、通信等）的规格参数
+model iocard_selection {
+  id                    String    @id @default(uuid())
+
+  /// 分类（如“模拟量输入”、“数字量输出”等）
+  category              String?
+
+  /// 类型（可进一步细分，如“AI”、“AO”、“DI”、“DO”、“电阻卡”、“通信卡”等）
+  type                  String?
+
+  /// 型号
+  model                 String?
+
+  /// 简要描述
+  brief_description     String
+
+  /// 详细描述
+  detailed_description  String
+
+  /// 品牌
+  brand                 String
+
+  /// 单价（人民币，改为 Decimal 类型，单位：元，保留小数如 1200.00）
+  price_cny             Decimal
+
+  /// 采购数量
+  quantity              Int
+
+  /// 总金额（人民币，Decimal 类型）
+  total_amount_cny      Decimal
+
+  /// 支持的系列（如“PXIe-63xx”、“USB-600x”等）
+  supported_series      String
+
+
+  // ========== 模拟量相关参数 ==========
+
+  /// 分辨率（单位：位，如12位、16位）
+  resolution            Int?
+
+  /// 电流量程最小值（单位：A）
+  currentRangeMin       Float?
+
+  /// 电流量程最大值（单位：A）
+  currentRangeMax       Float?
+
+  /// 电压量程最小值（单位：V）
+  voltageRangeMin       Float?
+
+  /// 电压量程最大值（单位：V）
+  voltageRangeMax       Float?
+
+  /// 采样率（仅适用于模拟量输入模块，单位：Hz）
+  sampleRate            Float?
+
+  /// 是否为电流型（true=电流，false=电压；用于“电流/电压”二选一）
+  isCurrent             Boolean?
+
+  /// 是否为输出（true=输出，false=输入；用于“输入/输出”二选一）
+  isOutput              Boolean?
+
+  // ========== 数字量相关参数 ==========
+
+  /// 低电平最小电压（单位：V），例如 -1.0
+  lowLevelMinVoltage    Float?
+  
+  /// 低电平最大电压（单位：V），例如 1.0
+  lowLevelMaxVoltage    Float?
+  
+  /// 高电平最小电压（单位：V），例如 18.0
+  highLevelMinVoltage   Float?
+  
+  /// 高电平最大电压（单位：V），例如 36.0
+  highLevelMaxVoltage   Float?
+
+  /// 每通道支持 V/OPEN、V/GND 和 GND/OPEN 三种输入模式
+  supportsFlexibleInputModes Boolean?
+
+  // ========== 可编程电阻相关参数 ==========
+
+  /// 电阻分辨率（位数，如 8 位、12 位）
+  resistanceResolution   Int?
+
+  /// 电阻范围最小值（单位：Ω）
+  resistanceRangeMin     Float?
+
+  /// 电阻范围最大值（单位：Ω）
+  resistanceRangeMax     Float?
+
+  // ========== 通信协议相关参数 ==========
+
+  /// 是否支持 RS-232
+  supportsRS232         Boolean? @default(false)
+
+  /// 是否支持 RS-422
+  supportsRS422         Boolean? @default(false)
+
+  /// 是否支持 RS-485
+  supportsRS485         Boolean? @default(false)
+
+  /// 最高支持的波特率（单位：bps），例如 921600（即 921.6 Kbps）
+  maxBaudRate           Int?
+
+  /// 是否支持 CAN 2.0A/B 协议
+  supportsCAN20A_B      Boolean? @default(false) // 注意：字段名不能含斜杠 /
+
+  is_isolated           Boolean? 
+
+  // ========== 新增字段：基于通道数 ==========
+
+  /// 模拟量采集 (A/D) 通道数
+  analogInputChannels       Int?
+
+  /// 模拟量输出 (D/A) 通道数
+  analogOutputChannels      Int?
+
+  /// 数字量输入 (DI) 通道数
+  digitalInputChannels      Int?
+
+  /// 数字量输出 (DO) 通道数
+  digitalOutputChannels     Int?
+
+  /// 数字 I/O (DIO) 通道数
+  digitalIOChannels         Int?
+
+  /// 串口通信 (RS-232/422/485) 通道数（物理端口数）
+  serialPortChannels        Int?
+
+  /// CAN 总线 通道数
+  canBusChannels            Int?
+
+  /// PWM 输出 通道数
+  pwmOutputChannels         Int?
+
+  /// 编码器采集 (正交编码器) 通道数
+  encoderChannels           Int?
+
+  /// SSI 总线 通道数
+  ssiBusChannels            Int?
+
+  /// SPI 总线 通道数
+  spiBusChannels            Int?
+
+  /// I²C 总线 通道数
+  i2cBusChannels            Int?
+
+  /// PCM / LVDS 通讯 通道数
+  pcmLvdChannels            Int?
+
+  /// BISS-C 总线 通道数
+  bissCChannels             Int?
+
+  /// AFDX 接口 通道数
+  afdxChannels              Int?
+
+  /// PPS 秒脉冲 通道数
+  ppsPulseChannels          Int?
+
+  /// RTD 可编程电阻 通道数
+  rtdResistanceChannels     Int?
+
+}
+
+/// 仿真机选型表：用于存储仿真计算机或工控机的硬件配置
+model simmachine_selection {
+  id                    String    @id @default(uuid())
+
+  /// 分类（如“工控机”、“仿真服务器”等）
+  category              String?
+
+  /// 类型（如“台式”、“机架式”、“嵌入式”等）
+  type                  String?
+
+  /// 型号
+  model                 String?
+
+  /// 简要描述
+  brief_description     String
+
+  /// 详细描述
+  detailed_description  String
+
+  /// 制造商
+  manufacturer          String
+
+  /// 单价（人民币，Decimal 类型）
+  price_cny             Decimal
+
+  /// 采购数量
+  quantity              Int
+
+  /// 总金额（人民币，Decimal 类型）
+  total_amount_cny      Decimal
+
+  /// 所属系列（如“NI PXI”、“Advantech IPC”等）
+  series                String
+
+  /// CPU 型号或规格（默认值占位）
+  cpu                   String?   @default("default_cpu_value")
+
+  /// 硬盘容量或类型（如 “1TB SSD”）
+  hard_disk             String?   @default("default_hard_disk_value")
+
+  /// 内存容量（如 “16GB DDR4”）
+  memory                String?   @default("default_memory_value")
+
+  /// 扩展槽位数量或类型（如 “4×PCIe”）
+  slots                 String?   @default("default_slots_value")
+}

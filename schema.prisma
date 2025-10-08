@@ -1,6 +1,7 @@
 generator client {
-  provider = "prisma-client-py"
+  provider             = "prisma-client-py"
   recursive_type_depth = 5
+  enable_experimental_decimal = true
 }
 
 datasource db {
@@ -9,36 +10,84 @@ datasource db {
 }
 
 model iocard_selection {
-  id              String      @id @default(uuid())
-  category        String?   
-  type            String?  
-  model           String?   
-  brief_description String  
-  detailed_description String 
-  brand           String  
-  price_cny        String  
-  quantity        Int     
-  total_amount_cny  String 
-  supported_series String 
+  id                    String    @id @default(uuid())
 
-  
-  
+  category              String?
+  type                  String?
+  model                 String?
+  brief_description     String
+  detailed_description  String
+  brand                 String
+  price_cny             Int?
+  quantity              Int
+  total_amount_cny      Int?
+  supported_series      String
+
+  // ========== Analog Parameters ==========
+  resolution            Int?
+  currentRangeMin       Float?
+  currentRangeMax       Float?
+  voltageRangeMin       Float?
+  voltageRangeMax       Float?
+  sampleRate            Float?
+  isCurrent             Boolean?
+  isOutput              Boolean?
+
+  // ========== Digital Parameters ==========
+  lowLevelMinVoltage    Float?
+  lowLevelMaxVoltage    Float?
+  highLevelMinVoltage   Float?
+  highLevelMaxVoltage   Float?
+  supportsFlexibleInputModes Boolean?
+
+  // ========== Programmable Resistance Parameters ==========
+  resistanceResolution   Int?
+  resistanceRangeMin     Float?
+  resistanceRangeMax     Float?
+
+  // ========== Communication Protocol Parameters ==========
+  supportsRS232         Boolean? 
+  supportsRS422         Boolean? 
+  supportsRS485         Boolean?
+  maxBaudRate           Int?
+  supportsCAN20A_B      Boolean? 
+  is_isolated           Boolean?
+
+  // ========== Channel Count Fields ==========
+  analogInputChannels       Int?
+  analogOutputChannels      Int?
+  digitalInputChannels      Int?
+  digitalOutputChannels     Int?
+  digitalIOChannels         Int?
+  serialPortChannels        Int?
+  canBusChannels            Int?
+  pwmOutputChannels         Int?
+  encoderChannels           Int?
+  ssiBusChannels            Int?
+  spiBusChannels            Int?
+  i2cBusChannels            Int?
+  pcmLvdChannels            Int?
+  bissCChannels             Int?
+  afdxChannels              Int?
+  ppsPulseChannels          Int?
+  rtdResistanceChannels     Int?
 }
 
 model simmachine_selection {
-  id              String      @id @default(uuid())
-  category        String?  
-  type            String? 
-  model           String?   
-  brief_description String    
-  detailed_description String 
-  manufacturer    String   
-  price_cny        String   
-  quantity        Int     
-  total_amount_cny  String  
-  series          String 
-  cpu       String?   @default("default_cpu_value")
-  hard_disk  String?   @default("default_hard_disk_value")
-  memory    String?   @default("default_memory_value")
-  slots     String?   @default("default_slots_value")
+  id                    String    @id @default(uuid())
+
+  category              String?
+  type                  String?
+  model                 String?
+  brief_description     String
+  detailed_description  String
+  manufacturer          String
+  price_cny             Int?
+  quantity              Int
+  total_amount_cny      Int?
+  series                String
+  cpu                   String?   @default("default_cpu_value")
+  hard_disk             String?   @default("default_hard_disk_value")
+  memory                String?   @default("default_memory_value")
+  slots                 String?   @default("default_slots_value")
 }
