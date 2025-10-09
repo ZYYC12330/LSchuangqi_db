@@ -4,6 +4,7 @@ import openai
 import json
 import logging
 import os
+import asyncio
 from dotenv import load_dotenv
 from prisma import Prisma
 
@@ -122,7 +123,11 @@ def infer_missing_fields(brief_description, missing_fields):
         "bissCChannels": null,             // BISS-C 总线通道数
         "afdxChannels": null,              // AFDX 接口通道数
         "ppsPulseChannels": null,          // PPS 秒脉冲通道数
-        "rtdResistanceChannels": null      // RTD 可编程电阻通道数
+        "rtdResistanceChannels": null,     // RTD 可编程电阻通道数
+        "differentialInputChannels": null,  // 差分信号 输入 通道数
+        "milStd1553BChannels": null,        // 1553B 通道数
+        "timerCounterChannels": null,       // 定时/计数器 通道数
+        "relayOutputChannels": null        // 继电器输出 通道数
         }
         # 解析规则
 
@@ -146,6 +151,10 @@ def infer_missing_fields(brief_description, missing_fields):
         - **afdxChannels**：AFDX 接口通道数
         - **ppsPulseChannels**：秒脉冲（PPS）通道数
         - **rtdResistanceChannels**：RTD 可编程电阻通道数
+        - **differentialInputChannels**：差分信号 输入通道数
+        - **milStd1553BChannels**：1553B 通道数
+        - **timerCounterChannels**：定时/计数器 通道数
+        - **relayOutputChannels**：继电器输出 通道数
 
         示例："16路A/D并行采集，16路D/A并行输出，32路数字I/O线" 应填充为：
         - analogInputChannels: 16
@@ -185,9 +194,8 @@ def infer_missing_fields(brief_description, missing_fields):
 
         如"FIFO"、"UART 型号"、"精度"、"输入阻抗"、"拨码开关"等不在字段列表中的内容，不得映射或影响输出。
 
-        
         ###  示例
-
+        
         ##  输入：
         "16通道并行模拟量采集，16位分辨率，电压范围-10V～+10V，采样率200kHz"
 
@@ -231,7 +239,11 @@ def infer_missing_fields(brief_description, missing_fields):
         "bissCChannels": null,
         "afdxChannels": null,
         "ppsPulseChannels": null,
-        "rtdResistanceChannels": null
+        "rtdResistanceChannels": null,
+        "differentialInputChannels": null,
+        "milStd1553BChannels": null,
+        "timerCounterChannels": null,
+        "relayOutputChannels": null
         }
         请根据用户输入的模块描述，严格按照上述规则生成 完整 JSON 对象。只输出 JSON，不要任何额外文本、解释或 markdown。
     '''
@@ -250,94 +262,136 @@ def infer_missing_fields(brief_description, missing_fields):
     except:
         return {}
 
-db = Prisma()
-db.connect()
+async def main():
+    db = Prisma()
+    await db.connect()
 
-row_count = 0
+    row_count = 0
+    MAX_ROWS = None  # 处理所有行
 
-# 打开输出CSV文件并写入表头
-with open(output_file, 'w', encoding='utf-8', newline='') as outfile:
-    # 准备CSV表头（不包含id字段）
-    csv_fields = [f for f in schema_fields if f != 'id']
-    writer = csv.DictWriter(outfile, fieldnames=csv_fields)
-    writer.writeheader()
-    
-    with open(input_file, 'r', encoding='utf-8') as infile:
-        reader = csv.DictReader(infile)
+    # 打开输出CSV文件并写入表头
+    with open(output_file, 'w', encoding='utf-8', newline='') as outfile:
+        # 准备CSV表头（不包含id字段）
+        csv_fields = [f for f in schema_fields if f != 'id']
+        writer = csv.DictWriter(outfile, fieldnames=csv_fields)
+        writer.writeheader()
         
-        for row in reader:
-            row_count += 1
-            logging.info(f"处理第 {row_count} 行")
+        # 使用 utf-8-sig 编码自动处理BOM标记
+        with open(input_file, 'r', encoding='utf-8-sig') as infile:
+            reader = csv.DictReader(infile)
             
-            new_row = {field: None for field in schema_fields if field != 'id'}
-            
-            for input_key, value in row.items():
-                schema_key = header_mapping.get(input_key)
-                if schema_key:
-                    if schema_key in ['price_cny', 'total_amount_cny']:
-                        # 转换为整数（因为schema定义为Int?）
-                        if value:
+            for row in reader:
+                row_count += 1
+                
+                # 只处理前MAX_ROWS行（如果设置了限制）
+                if MAX_ROWS is not None and row_count > MAX_ROWS:
+                    logging.info(f"已处理 {MAX_ROWS} 行，停止处理")
+                    break
+                    
+                logging.info(f"处理第 {row_count} 行")
+                
+                # 生成UUID作为id
+                new_row = {field: None for field in schema_fields}
+                new_row['id'] = str(uuid.uuid4())
+                
+                for input_key, value in row.items():
+                    schema_key = header_mapping.get(input_key)
+                    if schema_key:
+                        # 跳过空值，避免覆盖数据库中已有的数据
+                        if value is None or (isinstance(value, str) and value.strip() == ''):
+                            continue
+                            
+                        if schema_key in ['price_cny', 'total_amount_cny']:
+                            # 转换为整数（因为schema定义为Int?）
                             cleaned_value = value.replace('￥', '').replace(',', '').strip()
                             new_row[schema_key] = int(float(cleaned_value)) if cleaned_value else None
-                        else:
-                            new_row[schema_key] = None
-                    elif schema_key == 'quantity':
-                        new_row[schema_key] = int(value) if value else None
-                    elif schema_key == 'is_isolated':
-                        # 处理布尔值：True, true, 1, yes 等
-                        if value:
+                        elif schema_key == 'quantity':
+                            new_row[schema_key] = int(value)
+                        elif schema_key == 'is_isolated':
+                            # 处理布尔值：True, true, 1, yes 等
                             value_lower = str(value).lower().strip()
                             new_row[schema_key] = value_lower in ['true', '1', 'yes', '是']
                         else:
-                            new_row[schema_key] = None
-                    else:
-                        new_row[schema_key] = value
-            
-            missing_fields = [f for f in schema_fields if f not in new_row or new_row[f] is None and f != 'id']
-            if missing_fields:
-                inferred = infer_missing_fields(new_row['brief_description'], missing_fields)
-                logging.info(f"行 {row_count} - Brief Description: {new_row['brief_description']}")
-                logging.info(f"模型推断的值: {json.dumps(inferred, ensure_ascii=False)}")
+                            new_row[schema_key] = value
                 
-                for f in missing_fields:
-                    val = inferred.get(f)
-                    if val is not None and val != 'null':
-                        if f in ['resolution', 'resistanceResolution', 'maxBaudRate',
-                                 'analogInputChannels', 'analogOutputChannels', 'digitalInputChannels',
-                                 'digitalOutputChannels', 'digitalIOChannels', 'serialPortChannels',
-                                 'canBusChannels', 'pwmOutputChannels', 'encoderChannels', 'ssiBusChannels',
-                                 'spiBusChannels', 'i2cBusChannels', 'pcmLvdChannels', 'bissCChannels',
-                                 'afdxChannels', 'ppsPulseChannels', 'rtdResistanceChannels',
-                                 'price_cny', 'total_amount_cny', 'quantity']:
-                            new_row[f] = int(val)
-                        elif f in ['currentRangeMin', 'currentRangeMax', 'voltageRangeMin', 'voltageRangeMax', 'sampleRate', 'lowLevelMinVoltage', 'lowLevelMaxVoltage', 'highLevelMinVoltage', 'highLevelMaxVoltage', 'resistanceRangeMin', 'resistanceRangeMax']:
-                            new_row[f] = float(val)
-                        elif f in ['isCurrent', 'isOutput', 'supportsFlexibleInputModes', 'supportsRS232', 'supportsRS422', 'supportsRS485', 'supportsCAN20A_B', 'is_isolated']:
-                            new_row[f] = bool(val)
+                missing_fields = [f for f in schema_fields if f not in new_row or new_row[f] is None and f != 'id']
+                if missing_fields:
+                    inferred = infer_missing_fields(new_row['brief_description'], missing_fields)
+                    logging.info(f"行 {row_count} - Brief Description: {new_row['brief_description']}")
+                    logging.info(f"模型推断的值: {json.dumps(inferred, ensure_ascii=False)}")
+                    
+                    for f in missing_fields:
+                        val = inferred.get(f)
+                        if val is not None and val != 'null':
+                            if f in ['resolution', 'resistanceResolution', 'maxBaudRate',
+                                     'analogInputChannels', 'analogOutputChannels', 'digitalInputChannels',
+                                     'digitalOutputChannels', 'digitalIOChannels', 'serialPortChannels',
+                                     'canBusChannels', 'pwmOutputChannels', 'encoderChannels', 'ssiBusChannels',
+                                     'spiBusChannels', 'i2cBusChannels', 'pcmLvdChannels', 'bissCChannels',
+                                     'afdxChannels', 'ppsPulseChannels', 'rtdResistanceChannels', 'milStd1553BChannels',
+                                     'timerCounterChannels', 'relayOutputChannels',
+                                     'price_cny', 'total_amount_cny', 'quantity']:
+                                new_row[f] = int(val)
+                            elif f in ['currentRangeMin', 'currentRangeMax', 'voltageRangeMin', 'voltageRangeMax', 'sampleRate', 'lowLevelMinVoltage', 'lowLevelMaxVoltage', 'highLevelMinVoltage', 'highLevelMaxVoltage', 'resistanceRangeMin', 'resistanceRangeMax']:
+                                new_row[f] = float(val)
+                            elif f in ['isCurrent', 'isOutput', 'supportsFlexibleInputModes', 'supportsRS232', 'supportsRS422', 'supportsRS485', 'supportsCAN20A_B', 'is_isolated']:
+                                new_row[f] = bool(val)
+                            else:
+                                new_row[f] = str(val)
                         else:
-                            new_row[f] = str(val)
+                            new_row[f] = None
+                
+                # 根据 model 字段查找并更新数据库记录
+                model_name = new_row.get('model')
+                if model_name:
+                    # 先查询是否存在
+                    existing = await db.iocard_selection.find_first(
+                        where={'model': model_name}
+                    )
+                    
+                    if existing:
+                        # 更新现有记录
+                        # 只更新那些不为 None 的字段，避免用 None 覆盖已有数据
+                        update_data = {k: v for k, v in new_row.items() if k != 'id' and v is not None}
+                        
+                        if update_data:  # 只有在有数据需要更新时才执行
+                            await db.iocard_selection.update(
+                                where={'id': existing.id},
+                                data=update_data
+                            )
+                            logging.info(f"行 {row_count} 已更新数据库记录 (model: {model_name})")
+                        else:
+                            logging.info(f"行 {row_count} 无需更新 (model: {model_name})")
                     else:
-                        new_row[f] = None
-            
-            # 插入到数据库
-            db.iocard_selection.create(data=new_row)
-            logging.info(f"行 {row_count} 已插入数据库")
-            
-            # 准备写入CSV的数据（将所有值转换为字符串）
-            csv_row = {}
-            for field in csv_fields:
-                value = new_row.get(field)
-                if value is None:
-                    csv_row[field] = ''
+                        # 如果不存在，则创建新记录
+                        # 创建时使用新的 UUID
+                        new_row['id'] = str(uuid.uuid4())
+                        await db.iocard_selection.create(data=new_row)
+                        logging.info(f"行 {row_count} 已！！创建！！新数据库记录 (model: {model_name})")
                 else:
-                    csv_row[field] = str(value)
-            
-            # 写入CSV文件
-            writer.writerow(csv_row)
-            logging.info(f"行 {row_count} 已写入CSV文件")
+                    logging.warning(f"行 {row_count} 缺少 model 字段，跳过数据库操作")
+                
+                # 准备写入CSV的数据（将所有值转换为字符串）
+                csv_row = {}
+                for field in csv_fields:
+                    value = new_row.get(field)
+                    if value is None:
+                        csv_row[field] = ''
+                    else:
+                        # 将换行符替换为空格，确保每条记录只占一行
+                        if field in ['brief_description', 'detailed_description']:
+                            csv_row[field] = str(value).replace('\n', ' ').replace('\r', ' ')
+                        else:
+                            csv_row[field] = str(value)
+                
+                # 写入CSV文件
+                writer.writerow(csv_row)
+                logging.info(f"行 {row_count} 已写入CSV文件")
 
-db.disconnect()
+    await db.disconnect()
 
-logging.info("处理完成")
+    logging.info(f"处理完成，共处理 {row_count} 行数据")
+    print(f"已处理 {row_count} 行数据，插入数据库并写入到 {output_file}")
 
-print(f"所有数据已插入数据库，并写入到 {output_file}")
+if __name__ == "__main__":
+    asyncio.run(main())

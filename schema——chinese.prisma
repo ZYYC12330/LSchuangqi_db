@@ -170,6 +170,19 @@ model iocard_selection {
   /// RTD 可编程电阻 通道数
   rtdResistanceChannels     Int?
 
+  /// 差分信号 输入 通道数
+  differentialInputChannels  Int?
+
+  /// 1553B 通道数
+  milStd1553BChannels: Int?
+
+  /// 定时/计数器 通道数
+  timerCounterChannels: Int?
+
+  /// 继电器输出 通道数
+  relayOutputChannels: Int?
+
+
 }
 
 /// 仿真机选型表：用于存储仿真计算机或工控机的硬件配置

@@ -71,6 +71,10 @@ model iocard_selection {
   afdxChannels              Int?
   ppsPulseChannels          Int?
   rtdResistanceChannels     Int?
+  differentialInputChannels Int?
+  milStd1553BChannels       Int?
+  timerCounterChannels      Int?
+  relayOutputChannels       Int?
 }
 
 model simmachine_selection {
