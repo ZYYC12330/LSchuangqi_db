@@ -1,0 +1,519 @@
+[
+  {
+    "id": "cc9f1c93-96d6-48ac-94e1-bf9b0f4d50f9",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "analogOutputChannels"
+    ]
+  },
+  {
+    "id": "47fad5a4-5097-4193-b4b3-35c4e2b5efa9",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "differentialInputChannels",
+      "analogOutputChannels"
+    ]
+  },
+  {
+    "id": "12163a5f-88c0-4421-9d5c-8babd7847b96",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogOutputChannels"
+    ]
+  },
+  {
+    "id": "8132be0c-6ec1-4a3d-bdc3-07ae1e33cc56",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "3efb5f94-4ed3-4e3b-a40b-01fb2619c738",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "bbce97ab-0ef2-41da-ae57-ba1b442c2095",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "ca4832ae-fa32-4ee2-b213-ae29ee40160b",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels"
+    ]
+  },
+  {
+    "id": "e441cce3-e10d-43b3-9fd6-536aecc3dbc9",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels"
+    ]
+  },
+  {
+    "id": "749fe5eb-52ad-4269-b0b2-7b99b41f10e1",
+    "not_satisfied": [
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "8dbc97f9-f94c-4c7d-ad0f-4a67a0a3eca6",
+    "not_satisfied": [
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "195c7875-b5b8-4d12-b524-10370aabe9ad",
+    "not_satisfied": [
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "c6699f7e-cdb5-41d0-9155-7610df66ef42",
+    "not_satisfied": [
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "c3418033-9eba-4c25-8a86-5ae19a61f8dd",
+    "not_satisfied": [
+      "serialPortChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "efa83220-6850-4792-a434-c38dbd462a46",
+    "not_satisfied": [
+      "serialPortChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "263362c6-ee7b-49f8-929d-4f029871501b",
+    "not_satisfied": [
+      "serialPortChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "83af9f28-0743-457e-9642-f78ae6a48a21",
+    "not_satisfied": [
+      "serialPortChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "25110b3a-2d29-46c6-a287-edb9e50f60ee",
+    "not_satisfied": [
+      "serialPortChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "257d14e0-dc9e-4d82-9483-790f21bd6421",
+    "not_satisfied": [
+      "serialPortChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "d1fe8aa8-5551-4c27-928a-c936d35567c5",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "362f45df-9a50-478f-99a6-e575398ae8d8",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "189a3eaf-a431-4777-bf14-aa9f9fdeae81",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "e05bc51b-ca37-459c-9284-317d3e497091",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "d5fa8240-a251-4689-bd65-8cad87cf0977",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "624ba57c-b9e4-4a29-a0f8-f5c8a5cf4a6b",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "0004b1fa-1229-4385-be2f-bb2fa3d634b6",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "cd057002-718b-421c-962e-0dc6db22dd08",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "243dda57-772c-4f24-ab12-781fd0fefc0d",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "6207d7f3-1339-428d-a02e-502bbf458776",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "f149cc55-526e-46f9-843c-a7fab5c7b16a",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "48bfb1d2-a21f-46c4-aff7-2a864a21830c",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "6107b9cc-4844-4769-a7c1-a3a0dbbac56a",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "dd727364-c847-48ee-b957-3ce2f3c7958a",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "75164c41-8f2f-4c4c-a6fc-cd33fb878979",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "digitalInputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "61dcb82e-f78a-418a-adc3-03ef23b8be0b",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "3088adea-e2c9-4557-b301-0ba146aa1af5",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "a30e77a0-4e47-4de2-9cb8-319e87e243de",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalOutputChannels"
+    ]
+  },
+  {
+    "id": "02f88e07-79ca-43db-80ac-5a491506bbff",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels"
+    ]
+  },
+  {
+    "id": "1e80172d-4540-44ad-9b30-d4cc98ecc345",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels"
+    ]
+  },
+  {
+    "id": "0c129aea-9549-4635-894d-701dd50c82a0",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels"
+    ]
+  },
+  {
+    "id": "97b8b5b5-54b6-4ce4-8f81-8f46c6babd9a",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels"
+    ]
+  },
+  {
+    "id": "669c7d0f-79c4-4daf-ac8e-e1a49ab7da6e",
+    "not_satisfied": [
+      "serialPortChannels",
+      "canBusChannels",
+      "pwmOutputChannels",
+      "encoderChannels",
+      "differentialInputChannels",
+      "analogInputChannels",
+      "analogOutputChannels",
+      "digitalInputChannels"
+    ]
+  }
+]

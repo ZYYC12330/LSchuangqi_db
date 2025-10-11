@@ -1,0 +1,212 @@
+{
+    "result_id": {
+      "success": true,
+      "message": "优化成功",
+      "total_cards": 42,
+      "requirements_summary": [
+        {
+          "index": 0,
+          "channel_type": "analogInputChannels",
+          "required": 8
+        },
+        {
+          "index": 1,
+          "channel_type": "analogOutputChannels",
+          "required": 8
+        },
+        {
+          "index": 2,
+          "channel_type": "digitalInputChannels",
+          "required": 8
+        },
+        {
+          "index": 3,
+          "channel_type": "digitalOutputChannels",
+          "required": 8
+        },
+        {
+          "index": 5,
+          "channel_type": "serialPortChannels",
+          "required": 16
+        },
+        {
+          "index": 6,
+          "channel_type": "canBusChannels",
+          "required": 2
+        },
+        {
+          "index": 7,
+          "channel_type": "pwmOutputChannels",
+          "required": 12
+        },
+        {
+          "index": 8,
+          "channel_type": "encoderChannels",
+          "required": 2
+        },
+        {
+          "index": 17,
+          "channel_type": "differentialInputChannels",
+          "required": 6
+        }
+      ],
+      "feasibility_checks": [
+        {
+          "channel_type": "analogInputChannels",
+          "required": 8,
+          "available_total": 224,
+          "max_single_card": 32,
+          "status": "OK"
+        },
+        {
+          "channel_type": "analogOutputChannels",
+          "required": 8,
+          "available_total": 154,
+          "max_single_card": 24,
+          "status": "OK"
+        },
+        {
+          "channel_type": "digitalInputChannels",
+          "required": 8,
+          "available_total": 368,
+          "max_single_card": 128,
+          "status": "OK"
+        },
+        {
+          "channel_type": "digitalOutputChannels",
+          "required": 8,
+          "available_total": 416,
+          "max_single_card": 128,
+          "status": "OK"
+        },
+        {
+          "channel_type": "serialPortChannels",
+          "required": 16,
+          "available_total": 48,
+          "max_single_card": 16,
+          "status": "OK"
+        },
+        {
+          "channel_type": "canBusChannels",
+          "required": 2,
+          "available_total": 24,
+          "max_single_card": 10,
+          "status": "OK"
+        },
+        {
+          "channel_type": "pwmOutputChannels",
+          "required": 12,
+          "available_total": 24,
+          "max_single_card": 12,
+          "status": "OK"
+        },
+        {
+          "channel_type": "encoderChannels",
+          "required": 2,
+          "available_total": 48,
+          "max_single_card": 8,
+          "status": "OK"
+        },
+        {
+          "channel_type": "differentialInputChannels",
+          "required": 6,
+          "available_total": 6,
+          "max_single_card": 6,
+          "status": "OK"
+        }
+      ],
+      "optimized_solution": [
+        {
+          "model": "Links-IPC-SER-01",
+          "quantity": 2,
+          "unit_price": 60,
+          "total_price": 120,
+          "id": "749fe5eb-52ad-4269-b0b2-7b99b41f10e1"
+        },
+        {
+          "model": "Links-IPC-CAN",
+          "quantity": 1,
+          "unit_price": 60,
+          "total_price": 60,
+          "id": "c3418033-9eba-4c25-8a86-5ae19a61f8dd"
+        },
+        {
+          "model": "Links-C3U-AO-01",
+          "quantity": 1,
+          "unit_price": 120,
+          "total_price": 120,
+          "id": "6107b9cc-4844-4769-a7c1-a3a0dbbac56a"
+        },
+        {
+          "model": "Links-IPC-DAQ-08",
+          "quantity": 1,
+          "unit_price": 90,
+          "total_price": 90,
+          "id": "cc9f1c93-96d6-48ac-94e1-bf9b0f4d50f9"
+        }
+      ],
+      "total_cost": 390,
+      "channel_satisfaction": [
+        {
+          "channel_type": "analogInputChannels",
+          "required": 8,
+          "satisfied": 8,
+          "status": "OK"
+        },
+        {
+          "channel_type": "analogOutputChannels",
+          "required": 8,
+          "satisfied": 8,
+          "status": "OK"
+        },
+        {
+          "channel_type": "digitalInputChannels",
+          "required": 8,
+          "satisfied": 8,
+          "status": "OK"
+        },
+        {
+          "channel_type": "digitalOutputChannels",
+          "required": 8,
+          "satisfied": 8,
+          "status": "OK"
+        },
+        {
+          "channel_type": "digitalIOChannels",
+          "required": 0,
+          "satisfied": 2,
+          "status": "OK"
+        },
+        {
+          "channel_type": "serialPortChannels",
+          "required": 16,
+          "satisfied": 16,
+          "status": "OK"
+        },
+        {
+          "channel_type": "canBusChannels",
+          "required": 2,
+          "satisfied": 2,
+          "status": "OK"
+        },
+        {
+          "channel_type": "pwmOutputChannels",
+          "required": 12,
+          "satisfied": 12,
+          "status": "OK"
+        },
+        {
+          "channel_type": "encoderChannels",
+          "required": 2,
+          "satisfied": 2,
+          "status": "OK"
+        },
+        {
+          "channel_type": "differentialInputChannels",
+          "required": 6,
+          "satisfied": 6,
+          "status": "OK"
+        }
+      ]
+    }
+  }
