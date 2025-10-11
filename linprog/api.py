@@ -87,6 +87,7 @@ class OptimizationResponse(BaseModel):
     optimized_solution: Optional[List[OptimizedCard]] = None
     total_cost: Optional[int] = None
     channel_satisfaction: Optional[List[ChannelSatisfaction]] = None
+    unsatisfied_requirements: List[dict] = []
 
 
 @app.get("/")
@@ -171,16 +172,12 @@ async def optimize_card_selection(request: OptimizationRequest):
         
         # 6. 需求可行性检查
         feasibility_checks = []
-        is_feasible = True
         
         for i, channel_type in enumerate(CHANNEL_TYPES):
             if b_requirements[i] > 0:
                 max_available = int(A[:, i].sum())
                 max_single_card = int(A[:, i].max())
                 status = "OK" if max_available >= b_requirements[i] else "不足"
-                
-                if status == "不足":
-                    is_feasible = False
                 
                 feasibility_checks.append(FeasibilityCheck(
                     channel_type=channel_type,
@@ -190,19 +187,27 @@ async def optimize_card_selection(request: OptimizationRequest):
                     status=status
                 ))
         
-        if not is_feasible:
-            return OptimizationResponse(
-                success=False,
-                message="需求无法满足：某些通道类型的库存不足",
-                total_cards=n_cards,
-                requirements_summary=requirements_summary,
-                feasibility_checks=feasibility_checks
-            )
+        # 7. 识别无法满足的需求并放松约束
+        unsatisfied_requirements = []
+        b_requirements_adjusted = b_requirements.copy()
         
-        # 7. 线性规划求解
+        for i, channel_type in enumerate(CHANNEL_TYPES):
+            if b_requirements[i] > 0:
+                max_available = A[:, i].sum()
+                if max_available < b_requirements[i]:
+                    # 记录无法满足的需求
+                    unsatisfied_requirements.append({
+                        "channel_type": channel_type,
+                        "required": int(b_requirements[i]),
+                        "available": int(max_available)
+                    })
+                    # 放松约束
+                    b_requirements_adjusted[i] = 0
+        
+        # 8. 线性规划求解（使用调整后的需求向量）
         c = prices
         A_ub = -A.T
-        b_ub = -b_requirements
+        b_ub = -b_requirements_adjusted
         bounds = [(0, None)] * n_cards
         
         result = linprog(
@@ -220,10 +225,11 @@ async def optimize_card_selection(request: OptimizationRequest):
                 message=f"优化求解失败: {result.message}",
                 total_cards=n_cards,
                 requirements_summary=requirements_summary,
-                feasibility_checks=feasibility_checks
+                feasibility_checks=feasibility_checks,
+                unsatisfied_requirements=unsatisfied_requirements
             )
         
-        # 8. 构建优化方案
+        # 9. 构建优化方案
         optimized_solution = []
         total_cost = 0
         
@@ -240,7 +246,7 @@ async def optimize_card_selection(request: OptimizationRequest):
                 ))
                 total_cost += cost
         
-        # 9. 计算实际满足的通道需求
+        # 10. 计算实际满足的通道需求
         satisfied_channels = A.T @ result.x
         channel_satisfaction = []
         
@@ -257,15 +263,22 @@ async def optimize_card_selection(request: OptimizationRequest):
                     status=status
                 ))
         
+        # 构建响应消息
+        if unsatisfied_requirements:
+            message = "优化成功（部分需求无法满足）"
+        else:
+            message = "优化成功"
+        
         return OptimizationResponse(
             success=True,
-            message="优化成功",
+            message=message,
             total_cards=n_cards,
             requirements_summary=requirements_summary,
             feasibility_checks=feasibility_checks,
             optimized_solution=optimized_solution,
             total_cost=int(total_cost),
-            channel_satisfaction=channel_satisfaction
+            channel_satisfaction=channel_satisfaction,
+            unsatisfied_requirements=unsatisfied_requirements
         )
         
     except HTTPException:

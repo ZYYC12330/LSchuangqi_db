@@ -1203,8 +1203,8 @@ requirements_input = [
       0,
       6,
       0,
-      0,
-      0
+      9,
+      5
     ]
 
 
@@ -1290,14 +1290,38 @@ for i, channel_type in enumerate(channel_types):
               f"可用总量 {max_available:4.0f}, 单卡最大 {max_single_card:3.0f}")
 print()
 
+# 识别无法满足的需求并放松约束
+unsatisfied_requirements = []
+b_requirements_adjusted = b_requirements.copy()
+
+for i, channel_type in enumerate(channel_types):
+    if b_requirements[i] > 0:
+        max_available = A[:, i].sum()
+        if max_available < b_requirements[i]:
+            # 记录无法满足的需求
+            unsatisfied_requirements.append({
+                "channel_type": channel_type,
+                "required": int(b_requirements[i]),
+                "available": int(max_available)
+            })
+            # 放松约束
+            b_requirements_adjusted[i] = 0
+
+if unsatisfied_requirements:
+    print("发现无法满足的需求，将自动放松约束:")
+    print("-" * 80)
+    for item in unsatisfied_requirements:
+        print(f"  [警告] {item['channel_type']:25s}: 需求 {item['required']:3d}, 最大可用 {item['available']:3d}")
+    print()
+
 # 目标函数：最小化成本
 c = prices
 
-# 约束条件：A.T @ x >= b_requirements
-# 即：sum(x[i] * A[i, j]) >= b_requirements[j] for all j
-# 转换为 linprog 格式：-A.T @ x <= -b_requirements
+# 约束条件：A.T @ x >= b_requirements_adjusted
+# 即：sum(x[i] * A[i, j]) >= b_requirements_adjusted[j] for all j
+# 转换为 linprog 格式：-A.T @ x <= -b_requirements_adjusted
 A_ub = -A.T
-b_ub = -b_requirements
+b_ub = -b_requirements_adjusted
 
 # 变量边界：每种板卡数量 x[i] >= 0（整数约束需要用 integrality 参数）
 bounds = [(0, None)] * n_cards
@@ -1316,6 +1340,14 @@ print("=" * 80)
 if result.success:
     print("[优化成功!]")
     print()
+    
+    # 显示无法满足的需求
+    if unsatisfied_requirements:
+        print("无法满足的需求:")
+        for item in unsatisfied_requirements:
+            print(f"  [警告] {item['channel_type']:25s}: 原始需求 {item['required']:3d}, 最大可用 {item['available']:3d}")
+        print()
+    
     print("最优采购方案:")
     total_cost = 0
     for i, quantity in enumerate(result.x):

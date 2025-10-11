@@ -1,5 +1,10 @@
 # 板卡选型优化 API
 
+docker build --network host .
+
+docker run -p 8019:8000 linprog-app
+
+
 基于线性规划的板卡最优采购方案计算 FastAPI 服务。
 
 ## 功能特性
