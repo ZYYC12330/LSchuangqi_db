@@ -43,19 +43,20 @@ CHANNEL_TYPES = [
     "differentialInputChannels",
     "milStd1553BChannels",
     "timerCounterChannels",
-    "relayOutputChannels"
+    "relayOutputChannels",
+    "sharedMemoryChannels"
 ]
 
 # 请求模型
 class CardInfo(BaseModel):
-    matrix: List[int] = Field(..., description="21个元素的数组，表示各通道类型的数量")
+    matrix: List[int] = Field(..., description="22个元素的数组，表示各通道类型的数量")
     model: str = Field(..., description="板卡型号")
     price_cny: int = Field(..., description="板卡价格（人民币）")
     id: str = Field(..., description="板卡唯一标识ID")
 
 class OptimizationRequest(BaseModel):
     input_data: List[CardInfo] = Field(..., description="板卡库存数据，直接是板卡数组")
-    requirements_input: List[int] = Field(..., description="21个元素的需求数组")
+    requirements_input: List[int] = Field(..., description="22个元素的需求数组")
 
 # 响应模型
 class OptimizedCard(BaseModel):
@@ -114,17 +115,17 @@ async def optimize_card_selection(request: OptimizationRequest):
     """
     板卡选型优化接口
     
-    - **input_data**: 板卡数组，每个板卡包含 matrix（21元素数组）、model（型号）、price_cny（价格）、id（唯一标识）
-    - **requirements_input**: 需求向量，21个元素对应21种通道类型
+    - **input_data**: 板卡数组，每个板卡包含 matrix（22元素数组）、model（型号）、price_cny（价格）、id（唯一标识）
+    - **requirements_input**: 需求向量，22个元素对应22种通道类型
     
     返回最优采购方案，包括总成本和每种板卡的采购数量
     """
     try:
         # 1. 数据验证
-        if len(request.requirements_input) != 21:
+        if len(request.requirements_input) != 22:
             raise HTTPException(
                 status_code=400,
-                detail=f"requirements_input 必须有 21 个元素，当前有 {len(request.requirements_input)} 个"
+                detail=f"requirements_input 必须有 22 个元素，当前有 {len(request.requirements_input)} 个"
             )
         
         # 2. 提取所有板卡数据
@@ -138,10 +139,10 @@ async def optimize_card_selection(request: OptimizationRequest):
         
         # 3. 验证每个板卡的 matrix 长度
         for idx, card in enumerate(all_cards):
-            if len(card.matrix) != 21:
+            if len(card.matrix) != 22:
                 raise HTTPException(
                     status_code=400,
-                    detail=f"板卡 [{idx}] {card.model} 的 matrix 必须有 21 个元素，当前有 {len(card.matrix)} 个"
+                    detail=f"板卡 [{idx}] {card.model} 的 matrix 必须有 22 个元素，当前有 {len(card.matrix)} 个"
                 )
         
         # 4. 构建资源矩阵
@@ -156,7 +157,7 @@ async def optimize_card_selection(request: OptimizationRequest):
             card_ids.append(card.id)
             resource_matrix.append(card.matrix)
         
-        A = np.array(resource_matrix)  # shape: (n_cards, 21)
+        A = np.array(resource_matrix)  # shape: (n_cards, 22)
         prices = np.array(prices)
         b_requirements = np.array(request.requirements_input)
         
