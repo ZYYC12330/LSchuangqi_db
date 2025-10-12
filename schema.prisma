@@ -75,6 +75,7 @@ model iocard_selection {
   milStd1553BChannels       Int?
   timerCounterChannels      Int?
   relayOutputChannels       Int?
+  sharedMemoryChannels      Int?
 }
 
 model simmachine_selection {

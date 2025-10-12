@@ -182,7 +182,8 @@ model iocard_selection {
   /// 继电器输出 通道数
   relayOutputChannels: Int?
 
-
+  /// 共享/反射内存 通道数
+  sharedMemoryChannels:     Int?
 }
 
 /// 仿真机选型表：用于存储仿真计算机或工控机的硬件配置
