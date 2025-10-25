@@ -7,7 +7,7 @@ services:
     volumes:
       - .:/app
     ports:
-      - '8000:8000'
+      - '8019:8000'
     environment:
       - PYTHONUNBUFFERED=1
     command: python api.py
