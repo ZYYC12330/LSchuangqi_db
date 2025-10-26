@@ -3,7 +3,7 @@
 docker build --network host .
 docker build --network host -t linprog-app .
 
-docker run -d -p 8483:8483 linprog-app
+docker run -d -p 8019:8000 linprog-app
 
 
 
@@ -37,6 +37,41 @@ python api.py
 ```
 
 服务将在 `http://localhost:8483` 启动。
+
+## 环境变量配置
+
+可以通过环境变量自定义服务配置：
+
+| 环境变量 | 默认值 | 说明 |
+|---------|--------|------|
+| `API_KEY` | `sk-6zvekr4931xm` | 文件服务器认证Token |
+| `FILE_SERVER_URL` | `http://10.120.120.6:3008` | 文件服务器URL，用于Excel文件上传 |
+
+### 使用方式
+
+#### 方式1：直接设置环境变量
+
+```bash
+# Linux/Mac
+export API_KEY=sk-your-api-key
+export FILE_SERVER_URL=https://your-server.com
+python api.py
+
+# Windows PowerShell
+$env:API_KEY="sk-your-api-key"
+$env:FILE_SERVER_URL="https://your-server.com"
+python api.py
+```
+
+#### 方式2：通过 docker-compose
+
+在 `docker-compose.yml` 中修改环境变量：
+
+```yaml
+environment:
+  - API_KEY=sk-your-api-key
+  - FILE_SERVER_URL=https://your-server.com
+```
 
 ## API 文档
 
@@ -178,20 +213,31 @@ python api.py
 **参数说明：**
 
 - `json_data`: 包含配置数据的JSON对象
-  - `array`: 设备数组
-    - `each_obj`: 设备对象
+  - `card` 或 `array`: 板卡设备数组（兼容两种格式）
+    - 支持扁平化格式（直接包含字段）或嵌套格式（`each_obj` 包裹）
+    - 字段说明：
       - `id`: 设备ID
       - `original`: 原始需求（用`<br>`分隔）
-      - `score`: 评分
+      - `match_degree` 或 `score`: 匹配度/评分
       - `reason`: 匹配原因（用`<br>`分隔）
       - `type`: 设备类型
       - `model`: 规格型号
-      - `brief_description`: 简要说明
+      - `description` 或 `brief_description`: 技术参数/简要说明
       - `manufacturer`: 制造商
       - `price_cny`: 单价（元）
       - `quantity`: 数量
-      - `total_amount_cny`: 小计（元）
-- `token`: 认证token（可选，默认为"sk-zzvwbcaxoss3"）
+      - `total_amount_cny`: 小计（元，可选，不提供时自动计算）
+  - `raw_sim`: 机箱/仿真器数组（可选）
+    - 字段说明：
+      - `id`: 设备ID
+      - `category`: 设备分类（如"机箱&CPU控制器"）
+      - `type`: 设备类型
+      - `model`: 规格型号
+      - `brief_description` 或 `detailed_description`: 技术参数
+      - `manufacturer`: 制造商
+      - `price_cny`: 单价（元）
+      - `quantity`: 数量
+- `token`: 认证token（可选，默认使用环境变量 `API_KEY`）
 
 **响应示例：**
 ```json
@@ -210,9 +256,39 @@ python api.py
 }
 ```
 
+**新格式示例（推荐）：**
+```json
+{
+  "card": [
+    {
+      "id": "efa83220-6850-4792-a434-c38dbd462a46",
+      "reason": "提供4通道CAN/CAN-FD...",
+      "price_cny": 80,
+      "description": "4通道CAN/CAN-FD卡，DB37接口...",
+      "match_degree": 1,
+      "model": "Links-IPC-CANFD-04",
+      "quantity": 1,
+      "original": "4路CAN，1Mbps，支持CAN2.0A/B"
+    }
+  ],
+  "raw_sim": [
+    {
+      "id": "e90d9355-fc82-4581-b18a-61eed6966b48",
+      "category": "机箱&CPU控制器",
+      "type": "实时仿真器",
+      "model": "Links-Box-04-S5",
+      "detailed_description": "CPU：Intel Corei9-9900K 3.6GHz八核处理器...",
+      "manufacturer": "灵思创奇",
+      "price_cny": 80000,
+      "quantity": 1
+    }
+  ]
+}
+```
+
 生成的Excel包含两个工作表：
-1. **报价单**：详细的设备报价信息
-2. **需求匹配预览**：需求与设备的匹配关系
+1. **报价单**：详细的设备报价信息（包含板卡和机箱）
+2. **需求匹配预览**：需求与设备的匹配关系（包含板卡和机箱）
 
 ## 通道类型索引
 

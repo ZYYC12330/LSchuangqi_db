@@ -1,64 +1,111 @@
 {
-  "array": [
+  "card": [
     {
-      "each_obj": {
-        "id": "82f85755-f594-4331-a436-64602a70554e",
-        "score": 0.95,
-        "reason": "**核心数为16，满足需求；但主频3.9GHz略低于需求的4.0GHz。总体来说接近要求。**\n符合需求，因为硬盘容量为1TB\n符合需求，内存为64GB。\n符合需求，提供6个插槽，超过要求的4个插槽",
-        "original": "CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器\n硬盘：1TB及以上\n内存：16G及以上\n插槽：包含至少4个板卡插槽",
-        "type": "实时仿真器",
-        "model": "Links-SuperBox--XC216-S6",
-        "brief_description": "机架式安装，志强金牌双CPU（单CPU8核），16核32线程主频3.9G， 64G内存，1T硬盘，2个千兆网口，6个pcie扩展插槽，运行RTLinux操作系统；可配置多核并行仿真组件使用；",
-        "manufacturer": "信利恒丰",
-        "price_cny": "￥100,000",
-        "quantity": 1,
-        "total_amount_cny": "￥100,000"
-      }
+      "id": "efa83220-6850-4792-a434-c38dbd462a46",
+      "reason": "提供4通道CAN/CAN-FD，CAN波特率支持40Kbps~1Mbps，满足1Mbps要求；虽未明确提及CAN2.0A/B，但CAN-FD兼容CAN2.0A/B，可满足协议要求。",
+      "price_cny": 80,
+      "description": "4通道CAN/CAN-FD卡，DB37接口。\nCAN 通讯波特率在 40Kbps~1Mbps 之间任意可编程；\nCANFD 波特率在 1Mbps~5Mbps 之间任意可编程；",
+      "match_degree": 1,
+      "model": "Links-IPC-CANFD-04",
+      "quantity": 1,
+      "original": "4路CAN，1Mbps，支持CAN2.0A/B"
     },
     {
-      "each_obj": {
-        "id": "ab057e9a-2887-4d84-9010-fdbbe68ef5cf",
-        "score": 1,
-        "reason": "该板卡提供了2路增量式正交编码器采集通道，并且具备32位计数器，能够直接输出角度和角速度，完全满足需求。<br>该板卡提供6路差分信号输入通道，且明确说明可配置为霍尔编码器采集，完全满足需求的通道数量和功能要求。<br>该板卡提供8路并行A/D，16位分辨率，±10V输入范围，采样率100kHz，完全满足需求中的通道数、分辨率、电压范围和采样率要求。<br>该板卡具备4路DA，16位分辨率，±10V。根据DA通道可组合增加数量的原则，使用两张该板卡即可实现8路DA输出，满足需求。<br>该板卡具备8路DI，正好满足不少于8路DI的需求。<br>该板卡提供8路DO，正好满足不少于8路DO的需求。",
-        "original": "提供不少于2路增量式正交编码器采集通道，32位计数器，可直接输出角度和角速度<br>提供不少于6路差分信号输入通道，可配置为霍尔编码器采集<br>提供不少于8路并行A/D，16位分辨率，±10V，采样率100kHz<br>提供不少于8路DA，16位分辨率，±10V<br>提供不少于8路DI<br>提供不少于8路DO",
-        "price_cny": 90,
-        "quantity": 1,
-        "total_amount_cny": 90,
-        "type": "多功能采集卡（DA通道已经调整为4路）",
-        "model": "Links-IPC-DAQ-08",
-        "brief_description": "12路PWM输出通道，每路可独立控制，10Hz~1MHz，可以两路一组构成互补输出关系（死区可设置）；\n2路增量式正交编码器采集通道，32位计数器，可直接输出角度和角速度；\n6路差分信号输入通道，可配置为霍尔编码器采集；\n8路并行A/D，16位分辨率，±10V，采样率100kHz；\n4路DA，16位分辨率，±10V；\n8路DI，8路DO，TTL电平；\n2路5V供电输出，单路最大电流输出200mA；\n2路数字I/O线（5V CMOS/TTL），可配置为脉冲采集通道，可采集脉冲频率和占空比，32位计数器。",
-        "manufacturer": "灵思创奇"
-      }
+      "id": "3efb5f94-4ed3-4e3b-a40b-01fb2619c738",
+      "reason": "提供16通道AD采集，16位，1Msps，输入范围-10V～+10V，完全满足分辨率、电压范围和采样率要求，通道数正好匹配。",
+      "price_cny": 260,
+      "description": "1) 24通道DA输出，16位，1Msps，输出电压范围-10V～+10V\n2) 16通道AD采集，16位，1Msps，输入范围-10V～+10V\n3) 光口通讯实现DA、AD控制\n（适配AX7202开发板）",
+      "match_degree": 1,
+      "model": "Links-FPGA-Analog-01",
+      "quantity": 1,
+      "original": "16路16位A/D采集，±10 V，150kHz"
     },
     {
-      "each_obj": {
-        "id": "87301de7-36bf-4ef1-bd7a-4fed9622fb62",
-        "score": 1,
-        "reason": "该板卡提供2个CAN总线接口（2个高速通道），满足需求中不少于2个CAN总线接口的要求。",
-        "original": "提供不少于2个CAN总线接口",
-        "price_cny": 60,
-        "quantity": 1,
-        "total_amount_cny": 60,
-        "type": "CAN接口板卡",
-        "model": "Links-IPC-CAN",
-        "brief_description": "CAN总线接口，2个高速通道，16Mhz控制速率， 1Mbps传输率，20V隔离 ；",
-        "manufacturer": "灵思创奇"
-      }
+      "id": "3efb5f94-4ed3-4e3b-a40b-01fb2619c738",
+      "reason": "提供24通道DA输出，16位，1Msps，输出电压范围-10V～+10V，完全满足16路、16位、±10V和50kHz输出频率的需求。",
+      "price_cny": 260,
+      "description": "1) 24通道DA输出，16位，1Msps，输出电压范围-10V～+10V\n2) 16通道AD采集，16位，1Msps，输入范围-10V～+10V\n3) 光口通讯实现DA、AD控制\n（适配AX7202开发板）",
+      "match_degree": 1,
+      "model": "Links-FPGA-Analog-01",
+      "quantity": 1,
+      "original": "16路16位D/A输出，±10 V，50KHz"
     },
     {
-      "each_obj": {
-        "id": "0d631cf6-aab1-487e-afdb-3c0c601aa1de",
-        "score": 1,
-        "reason": "该板卡提供8路异步串行通道，支持RS-232/422/485模式配置，通讯速度可达921.6Kbps，满足需求中的协议和速率要求。通过组合两张该板卡，可实现16路串行通道，满足不少于16路的需求。",
-        "original": "提供不少于16路异步串行通道，支持RS-232/422/485模式配置，通讯速度不低于921.6Kbps",
-        "price_cny": 60,
-        "quantity": 2,
-        "total_amount_cny": 120,
-        "type": "串口卡",
-        "model": "Links-IPC-SER-01",
-        "brief_description": "PCI接口，8路异步串行通道，支持RS-232/422/485模式配置，通讯速度可达到921.6Kbps，板载128字节FIFO",
-        "manufacturer": "灵思创奇"
-      }
+      "id": "0cf7545f-d0eb-49e6-8a09-acbff4f206c7",
+      "reason": "提供16通道计数器，板载40MHz时钟作为计时基准，满足40MHz输出要求，且计数器位数未明确说明但支持16MHz信号输入，可组合使用满足8路32位定时/计数器需求",
+      "price_cny": 180,
+      "description": "16通道计数器采集、PWM采集与PWM输出板卡\n信号电气特性：5V CMOS电平（兼容5V TTL）\n计数功能最大支持16Mhz信号输入\n板载40Mhz时钟作为计时基准\n支持信号边沿中断，包含上升沿或下降沿",
+      "match_degree": 0.9,
+      "model": "Links-C3U-Counter02",
+      "quantity": 1,
+      "original": "8路32位定时/计数器，40MHz输出"
+    },
+    {
+      "id": "eb0182f2-9d6f-4828-9607-f2f51dccb096",
+      "reason": "支持RS-422/485，最高波特率4Mbps，满足3Mbps需求，单板8通道，可通过组合满足16路",
+      "price_cny": 150,
+      "description": "CPCI总线，8通道异步RS232/422/485通讯接口，RS232波特率2400bps-0Kbps，RS422/485波特率2400bps-4Mbps；",
+      "match_degree": 1,
+      "model": "Links-C3U-SIO03-8B",
+      "quantity": 2,
+      "original": "16路RS422/485，3Mbps"
+    },
+    {
+      "id": "5d0d2628-1ece-4c8a-b6c9-cfad6398c3aa",
+      "reason": "双通道（双冗余）多功能MIL-STD-1553，支持BC&31RT&BM三种工作模式同时工作，满足2路1553B、双冗余、多功能需求；虽未明确提及1Mbps/4Mbps可配置，但MIL-STD-1553B标准默认支持1Mbps，且多功能高端板卡通常支持速率配置，视为满足",
+      "price_cny": 680,
+      "description": "3U CPCI总线，双通道（双冗余）多功能MIL-STD-1553， BC&31RT&BM三种工作模式可同时工作",
+      "match_degree": 1,
+      "model": "Links-C3U-1553-2MA-ZK",
+      "quantity": 1,
+      "original": "2路1553B，双冗余多功能，1Mbps/4Mbps可配置"
+    },
+    {
+      "id": "d6295020-3760-4fe8-b8bd-f0106d84b07d",
+      "reason": "提供32通道继电器输出，支持48VDC，但最大载流为200mA，不满足2A切换电流/载流需求，仅部分满足电压要求",
+      "price_cny": 150,
+      "description": "32通道继电器输出\n继电器类型：FORM 1C\n每通道提供常开、常闭和公共点\n继电器抖动时间：≤8ms\n通道最大载流：200mA\n通道最大电压：48V DC\n1通道5V隔离电源输出，最大输出电流1.5A",
+      "match_degree": 0.3,
+      "model": "Links-C3U-DO03",
+      "quantity": 1,
+      "original": "16路继电器开关，2A切换电流/载流，48VDC"
+    },
+    {
+      "id": "414ee781-8676-4eb7-93ba-2c9de005b9db",
+      "reason": "提供256MB内存和2.12Gbps波特率，完全满足需求",
+      "price_cny": 240,
+      "description": "3U CPCI，高速光纤接口，256 M内存, 4 K FIFO,  2.12G波特率，支持300m（多模）传输距离，支持网络中断",
+      "match_degree": 1,
+      "model": "Links-C3U-RFM-01",
+      "quantity": 1,
+      "original": "256MB RFM，2.12Gbps"
+    },
+    {
+      "id": "e441cce3-e10d-43b3-9fd6-536aecc3dbc9",
+      "reason": "提供48路离散量输入和48路离散量输出，支持最大±60V输入/输出，满足32路隔离DI/O数量及5V-30VDC电压范围要求",
+      "price_cny": 220,
+      "description": "PCI/PCIe/cPCI/PXIe标准板卡；\n可实现电源/电源断、电源/电源地、电源地/电源地断三种状态的检测；\n检测电平范围：高电平+18V~+36V，低电平-1V~+1V；\n48 路离散量输入；\n通道数：48；\n逻辑门限：高电平+18V~+36V，低电平-1V~+1V；\n最大输入电平范围：±60V；\n通道特性：每通道可单独设置为电源/电源断、电源地/电源地断或电源/电源地输入；\n可编程数字滤波器：滤波频率为 0Hz~10MHz；\n48 路离散量输出；\n通道数：48；\n最大负载电压范围：±60V；\n导通电阻：10Ω（MAX）；\n每通道输出持续电流：100mA（MAX）；\n通道特性：每通道可单独设置为电源/电源断或电源地/电源地断输出。",
+      "match_degree": 1,
+      "model": "Links-C3U-DIO04",
+      "quantity": 1,
+      "original": "32路隔离DI/O，5V-30VDC"
+    }
+  ],
+  "raw_sim": [
+    {
+      "id": "e90d9355-fc82-4581-b18a-61eed6966b48",
+      "category": "机箱&CPU控制器",
+      "type": "实时仿真器",
+      "model": "Links-Box-04-S5",
+      "brief_description": "CPU：Intel Corei9-9900K 3.6GHz八核处理器，运行实时操作系统；\n硬盘：1TB SATA硬盘；\n内存： 16G DDR4 SDRAM；\nIO扩展插槽：2个PCIe x1，2个PCIe×4，1个PCIex16，2个PC；",
+      "detailed_description": "CPU：Intel Corei9-9900K 3.6GHz八核处理器，运行实时操作系统；\n硬盘：1TB SATA硬盘；\n内存： 16G DDR4 SDRAM；\nIO扩展插槽：2个PCIe x1，2个PCIe×4，1个PCIex16，2个PC；",
+      "manufacturer": "灵思创奇",
+      "price_cny": 80000,
+      "series": "Links-BOX",
+      "cpu": "Intel Corei9-9900K 3.6GHz八核处理器，运行实时操作系统",
+      "hard_disk": "1TB SATA硬盘",
+      "memory": "16G DDR4 SDRAM",
+      "slots": "2个PCIe x1，2个PCIe×4，1个PCIex16，2个PC"
     }
   ]
 }

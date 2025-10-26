@@ -10,4 +10,6 @@ services:
       - '8019:8000'
     environment:
       - PYTHONUNBUFFERED=1
+      - API_KEY=sk-6zvekr4931xm
+      - FILE_SERVER_URL=http://10.120.120.6:3008
     command: python api.py
