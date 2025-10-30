@@ -3,7 +3,17 @@
 docker build --network host .
 docker build --network host -t linprog-app .
 
-docker run -d -p 8019:8000 linprog-app
+```bash
+docker run -d \
+  --name linprog-api \
+  --network host \
+  --dns 8.8.8.8 \
+  -e FILE_SERVER_URL=https://demo.langcore.cn \
+  -e API_KEY=sk-zzvwbcaxoss3 \
+  linprog-app
+```
+
+docker run -d -p 8020:8000 linprog-app
 
 
 

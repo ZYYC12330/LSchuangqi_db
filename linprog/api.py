@@ -14,11 +14,12 @@ from datetime import datetime
 import requests
 
 # 配置环境变量
-# API_KEY = os.getenv('API_KEY', 'sk-zzvwbcaxoss3')
-# FILE_SERVER_URL = os.getenv('FILE_SERVER_URL', 'https://demo.langcore.cn')
+API_KEY = os.getenv('API_KEY', 'sk-zzvwbcaxoss3')
+FILE_SERVER_URL = os.getenv('FILE_SERVER_URL', 'https://demo.langcore.cn')
 
-API_KEY = os.getenv('API_KEY', 'sk-6zvekr4931xm')
-FILE_SERVER_URL = os.getenv('FILE_SERVER_URL', 'http://10.120.120.6:3008')
+
+# API_KEY = os.getenv('API_KEY', 'sk-6zvekr4931xm')
+# FILE_SERVER_URL = os.getenv('FILE_SERVER_URL', 'http://10.120.120.6:3008')
 
 
 app = FastAPI(
@@ -335,9 +336,9 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
     ws1 = wb.active
     ws1.title = "报价单"
     
-    # 定义安全写入单元格的函数
+    # 定义安全写入单元格的函数（默认上下左右居中）
     def safe_cell_write(ws, row, col, value):
-        """安全地写入单元格值，避免合并单元格错误"""
+        """安全地写入单元格值，避免合并单元格错误，并统一设置居中"""
         try:
             cell = ws.cell(row=row, column=col)
             # 检查单元格类型
@@ -345,13 +346,44 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
                 # 如果是合并单元格，跳过写入
                 return None
             cell.value = value
+            cell.alignment = Alignment(horizontal='center', vertical='center')
             return cell
         except Exception as e:
             print(f"警告：无法写入单元格 ({row}, {col}): {e}")
             return None
 
-    # 处理报价单数据
-    start_row = 13
+    # 自动识别模板表头位置
+    def detect_header_positions(ws):
+        """在前50行内寻找包含关键表头的一行，返回该行号及列映射"""
+        required_headers = ["设备类别", "型号", "数量", "单价", "总价"]
+        optional_headers = ["序号", "税率", "应税", "总金额"]
+        header_row = None
+        header_map = {}
+
+        max_rows = min(ws.max_row, 50)
+        max_cols = min(ws.max_column, 30)
+
+        for r in range(1, max_rows + 1):
+            current_map = {}
+            for c in range(1, max_cols + 1):
+                v = ws.cell(row=r, column=c).value
+                if isinstance(v, str):
+                    text = v.strip()
+                else:
+                    text = v
+                if text in required_headers + optional_headers:
+                    current_map[text] = c
+            # 至少匹配3个必需表头才认为找到
+            if sum(1 for h in required_headers if h in current_map) >= 3:
+                header_row = r
+                header_map = current_map
+                break
+
+        return header_row, header_map
+
+    # 处理报价单数据（自动识别新模板表头）
+    header_row, header_map = detect_header_positions(ws1)
+    start_row = (header_row + 1) if header_row else 13
     # 兼容多种格式：card、array
     result_items = json_data.get('card', json_data.get('array', []))
     raw_sim_items = json_data.get('raw_sim', [])
@@ -432,16 +464,17 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
     current_row = start_row
     total_amount = 0
 
-    # 处理 card 板卡数据（已经合并过）
+    # 处理 card 板卡数据（已合并）——适配新模板：只写“序号/设备类别/型号/数量/单价/总价”
+    running_index = 1
     for each_obj in result_items:
         item_id = each_obj.get('id', '')
         price_cny = each_obj.get('price_cny', 0)
         quantity = each_obj.get('quantity', 1)
-        
+
         # 计算总金额
         total_amount_cny = price_cny * quantity
 
-        # 转换价格为数字格式
+        # 转数字
         try:
             if isinstance(price_cny, str):
                 price_cny = float(price_cny.replace('￥', '').replace(',', ''))
@@ -454,98 +487,34 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
         # 累加总价
         total_amount += total_amount_cny
 
-        # 检查是否有details数组
-        if 'details' in each_obj and each_obj['details']:
-            for detail in each_obj['details']:
-                # 处理无序列表格式
-                original_lines = detail.get('original', '').split('<br>')
-                original_text = '• ' + '\n• '.join(line.strip() for line in original_lines if line.strip())
+        # 列索引（优先表头映射，回退旧模板列位）
+        col_index = {
+            '序号': header_map.get('序号', 2),
+            '设备类别': header_map.get('设备类别', 2),
+            '型号': header_map.get('型号', 7),
+            '数量': header_map.get('数量', 11),
+            '单价': header_map.get('单价', 10),
+            '总价': header_map.get('总价', 12)
+        }
 
-                reason_lines = detail.get('reason', '').split('<br>')
-                reason_text = '• ' + '\n• '.join(line.strip() for line in reason_lines if line.strip())
+        if col_index['序号']:
+            safe_cell_write(ws1, current_row, col_index['序号'], running_index)
+        if col_index['设备类别']:
+            safe_cell_write(ws1, current_row, col_index['设备类别'], each_obj.get('type', ''))
+        if col_index['型号']:
+            safe_cell_write(ws1, current_row, col_index['型号'], each_obj.get('model', each_obj.get('type', '')))
+        if col_index['数量']:
+            safe_cell_write(ws1, current_row, col_index['数量'], quantity)
+        if col_index['单价']:
+            safe_cell_write(ws1, current_row, col_index['单价'], price_cny)
+        if col_index['总价']:
+            safe_cell_write(ws1, current_row, col_index['总价'], total_amount_cny)
 
-                # 设置单元格值并启用自动换行
-                # 兼容字段映射：match_degree -> score, description -> brief_description
-                cell_item_id = safe_cell_write(ws1, current_row, 2, item_id)
-                cell_original = safe_cell_write(ws1, current_row, 3, original_text)
-                cell_score = safe_cell_write(ws1, current_row, 4, each_obj.get('match_degree', each_obj.get('score', '')))
-                cell_reason = safe_cell_write(ws1, current_row, 5, reason_text)
-                cell_type = safe_cell_write(ws1, current_row, 6, each_obj.get('type', ''))
-                cell_model = safe_cell_write(ws1, current_row, 7, each_obj.get('model', ''))
-                cell_brief = safe_cell_write(ws1, current_row, 8, each_obj.get('description', each_obj.get('brief_description', '')))
-                cell_manufacturer = safe_cell_write(ws1, current_row, 9, each_obj.get('manufacturer', ''))
-                cell_price = safe_cell_write(ws1, current_row, 10, price_cny)
-                cell_quantity = safe_cell_write(ws1, current_row, 11, quantity)
-                cell_total = safe_cell_write(ws1, current_row, 12, total_amount_cny)
+        ws1.row_dimensions[current_row].height = None
+        current_row += 1
+        running_index += 1
 
-                # 为包含多行文本的单元格设置自动换行
-                # 原始需求列
-                if original_text and cell_original:
-                    cell_original.alignment = Alignment(wrap_text=True, vertical='top')
-                
-                # 匹配度列（合并后可能包含多行）
-                match_degree_text = each_obj.get('match_degree', each_obj.get('score', ''))
-                if match_degree_text and cell_score and '\n' in str(match_degree_text):
-                    cell_score.alignment = Alignment(wrap_text=True, vertical='top')
-                
-                # 原因列
-                if reason_text and cell_reason:
-                    cell_reason.alignment = Alignment(wrap_text=True, vertical='top')
-                
-                # 技术参数列
-                brief_desc = each_obj.get('description', each_obj.get('brief_description', ''))
-                if brief_desc and cell_brief:
-                    cell_brief.alignment = Alignment(wrap_text=True, vertical='top')
-
-                # 设置行高为自动
-                ws1.row_dimensions[current_row].height = None  # 自动行高
-
-                current_row += 1
-        else:
-            # 合并后的数据，id、original、match_degree、reason已经是换行连接的字符串
-            # 不需要添加无序列表符号，直接使用原始内容
-            original_text = each_obj.get('original', '')
-            reason_text = each_obj.get('reason', '')
-
-            # 设置单元格值并启用自动换行
-            # 兼容字段映射：match_degree -> score, description -> brief_description
-            cell_item_id = safe_cell_write(ws1, current_row, 2, item_id)
-            cell_original = safe_cell_write(ws1, current_row, 3, original_text)
-            cell_score = safe_cell_write(ws1, current_row, 4, each_obj.get('match_degree', each_obj.get('score', '')))
-            cell_reason = safe_cell_write(ws1, current_row, 5, reason_text)
-            cell_type = safe_cell_write(ws1, current_row, 6, each_obj.get('type', ''))
-            cell_model = safe_cell_write(ws1, current_row, 7, each_obj.get('model', ''))
-            cell_brief = safe_cell_write(ws1, current_row, 8, each_obj.get('description', each_obj.get('brief_description', '')))
-            cell_manufacturer = safe_cell_write(ws1, current_row, 9, each_obj.get('manufacturer', ''))
-            cell_price = safe_cell_write(ws1, current_row, 10, price_cny)
-            cell_quantity = safe_cell_write(ws1, current_row, 11, quantity)
-            cell_total = safe_cell_write(ws1, current_row, 12, total_amount_cny)
-
-            # 为包含多行文本的单元格设置自动换行
-            # 原始需求列（合并后包含多行）
-            if original_text and cell_original:
-                cell_original.alignment = Alignment(wrap_text=True, vertical='top')
-            
-            # 匹配度列（合并后包含多行）
-            match_degree_text = each_obj.get('match_degree', each_obj.get('score', ''))
-            if match_degree_text and cell_score and '\n' in str(match_degree_text):
-                cell_score.alignment = Alignment(wrap_text=True, vertical='top')
-            
-            # 原因列（合并后包含多行）
-            if reason_text and cell_reason:
-                cell_reason.alignment = Alignment(wrap_text=True, vertical='top')
-            
-            # 技术参数列
-            brief_desc = each_obj.get('description', each_obj.get('brief_description', ''))
-            if brief_desc and cell_brief:
-                cell_brief.alignment = Alignment(wrap_text=True, vertical='top')
-
-            # 设置行高为自动
-            ws1.row_dimensions[current_row].height = None  # 自动行高
-
-            current_row += 1
-
-    # 处理 raw_sim 机箱数据
+    # 处理 raw_sim 机箱数据（同样写到新模板列）
     for item in raw_sim_items:
         sim_id = item.get('id', '')
         price_cny = item.get('price_cny', 0)
@@ -567,24 +536,28 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
         # 累加总价
         total_amount += total_amount_cny
         
-        # 设置单元格值
-        safe_cell_write(ws1, current_row, 2, sim_id)
-        safe_cell_write(ws1, current_row, 3, item.get('category', ''))  # 使用category作为原始需求
-        safe_cell_write(ws1, current_row, 4, '1')  # 机箱匹配度设为1
-        safe_cell_write(ws1, current_row, 5, '')  # reason留空
-        safe_cell_write(ws1, current_row, 6, item.get('type', ''))
-        safe_cell_write(ws1, current_row, 7, item.get('model', ''))
-        
-        # 使用detailed_description或brief_description
-        description = item.get('detailed_description', item.get('brief_description', ''))
-        cell_brief = safe_cell_write(ws1, current_row, 8, description)
-        if description and cell_brief:
-            cell_brief.alignment = Alignment(wrap_text=True, vertical='top')
-        
-        safe_cell_write(ws1, current_row, 9, item.get('manufacturer', ''))
-        safe_cell_write(ws1, current_row, 10, price_cny)
-        safe_cell_write(ws1, current_row, 11, quantity)
-        safe_cell_write(ws1, current_row, 12, total_amount_cny)
+        # 列索引
+        col_index = {
+            '序号': header_map.get('序号', 2),
+            '设备类别': header_map.get('设备类别', 2),
+            '型号': header_map.get('型号', 7),
+            '数量': header_map.get('数量', 11),
+            '单价': header_map.get('单价', 10),
+            '总价': header_map.get('总价', 12)
+        }
+
+        if col_index['序号']:
+            safe_cell_write(ws1, current_row, col_index['序号'], running_index)
+        if col_index['设备类别']:
+            safe_cell_write(ws1, current_row, col_index['设备类别'], item.get('type', ''))
+        if col_index['型号']:
+            safe_cell_write(ws1, current_row, col_index['型号'], item.get('model', item.get('type', '')))
+        if col_index['数量']:
+            safe_cell_write(ws1, current_row, col_index['数量'], quantity)
+        if col_index['单价']:
+            safe_cell_write(ws1, current_row, col_index['单价'], price_cny)
+        if col_index['总价']:
+            safe_cell_write(ws1, current_row, col_index['总价'], total_amount_cny)
         
         # 设置行高为自动
         ws1.row_dimensions[current_row].height = None
@@ -594,19 +567,24 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
     subtotal_row = None
     total_row = None
 
-    # 遍历所有行，寻找"小计"和"总计"
+    # 遍历所有行，寻找"小计"和"总计"（适配任意列）
     for row in range(1, ws1.max_row + 1):
         try:
-            cell_f = ws1.cell(row=row, column=6)  # F列
-            if cell_f.value == "小计":
+            found_text = None
+            for col in range(1, ws1.max_column + 1):
+                val = ws1.cell(row=row, column=col).value
+                if val in ("小计", "总计"):
+                    found_text = val
+                    break
+            if found_text == "小计":
                 subtotal_row = row
-                safe_cell_write(ws1, row, 12, total_amount)  # L列写入总金额
-                # 设置行高为自动
+                write_col = header_map.get('总金额') or header_map.get('总价') or 12
+                safe_cell_write(ws1, row, write_col, total_amount)
                 ws1.row_dimensions[row].height = None
-            elif cell_f.value == "总计":
+            elif found_text == "总计":
                 total_row = row
-                safe_cell_write(ws1, row, 12, total_amount)  # L列写入总金额
-                # 设置行高为自动
+                write_col = header_map.get('总金额') or header_map.get('总价') or 12
+                safe_cell_write(ws1, row, write_col, total_amount)
                 ws1.row_dimensions[row].height = None
         except Exception as e:
             print(f"警告：处理第{row}行时出错: {e}")
@@ -722,39 +700,40 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
             cell.fill = row_fill
             cell.border = data_border
 
-            # 设置对齐方式
-            if col in [1, 8, 9, 10, 11]:  # 数字列
-                cell.alignment = Alignment(horizontal="center", vertical="center")
-            elif col in [2, 3, 5, 6, 7]:  # 文本列
-                cell.alignment = Alignment(horizontal="left", vertical="center", wrap_text=True)
-            else:  # 其他列
-                cell.alignment = Alignment(horizontal="left", vertical="center")
+            # 全部统一上下左右居中
+            cell.alignment = Alignment(horizontal="center", vertical="center")
 
-        # 为包含多行文本的单元格设置自动换行
-        cell_demand = ws2.cell(row=current_row, column=2)
-        cell_reason = ws2.cell(row=current_row, column=3)
-        cell_brief = ws2.cell(row=current_row, column=7)
-
-        # 原始需求列（合并后包含多行）
-        if '\n' in demand:
-            cell_demand.alignment = Alignment(wrap_text=True, vertical='top')
-
-        # 选择原因列（合并后包含多行）
-        if reason and '\n' in reason:
-            cell_reason.alignment = Alignment(wrap_text=True, vertical='top')
-
-        # 技术参数列
-        if tech_desc:
-            cell_brief.alignment = Alignment(wrap_text=True, vertical='top')
+        # 对可能的多行文本开启换行，但保持居中
+        ws2.cell(row=current_row, column=2).alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+        ws2.cell(row=current_row, column=3).alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+        ws2.cell(row=current_row, column=7).alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
 
         # 设置行高为自动
         ws2.row_dimensions[current_row].height = None
         current_row += 1
 
-    # 优化列宽
+    # 优化列宽，对ws1主报价单表自适应
+    for col in range(1, ws1.max_column + 1):
+        maxlen = 8
+        for row in range(1, ws1.max_row + 1):
+            val = ws1.cell(row=row, column=col).value
+            if val is None:
+                val = ""
+            else:
+                val = str(val)
+            # 中文字符宽度更大，按比例增大
+            try:
+                chinese_count = sum(1 for ch in val if ord(ch)>127)
+                eff_len = len(val) + chinese_count  # 中文计宽加权
+            except:
+                eff_len = len(val)
+            if eff_len > maxlen:
+                maxlen = eff_len
+        ws1.column_dimensions[get_column_letter(col)].width = min(max(8, maxlen*1.8), 35)
+
+    # ws2需求匹配预览表还是用固定列宽
     column_widths = [8, 35, 35, 25, 20, 18, 35, 15, 10, 15, 15]
     column_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K']
-
     for i, (width, col_name) in enumerate(zip(column_widths, column_names)):
         ws2.column_dimensions[col_name].width = width
 
@@ -936,5 +915,5 @@ async def health_check():
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
 
