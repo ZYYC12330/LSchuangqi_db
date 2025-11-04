@@ -355,7 +355,7 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
     # 自动识别模板表头位置
     def detect_header_positions(ws):
         """在前50行内寻找包含关键表头的一行，返回该行号及列映射"""
-        required_headers = ["设备类别", "型号", "数量", "单价", "总价"]
+        required_headers = ["型号", "数量", "单价", "总价"]
         optional_headers = ["序号", "税率", "应税", "总金额"]
         header_row = None
         header_map = {}
@@ -464,7 +464,7 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
     current_row = start_row
     total_amount = 0
 
-    # 处理 card 板卡数据（已合并）——适配新模板：只写“序号/设备类别/型号/数量/单价/总价”
+    # 处理 card 板卡数据（已合并）——适配新模板：只写“序号/型号/数量/单价/总价”
     running_index = 1
     for each_obj in result_items:
         item_id = each_obj.get('id', '')
@@ -490,7 +490,6 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
         # 列索引（优先表头映射，回退旧模板列位）
         col_index = {
             '序号': header_map.get('序号', 2),
-            '设备类别': header_map.get('设备类别', 2),
             '型号': header_map.get('型号', 7),
             '数量': header_map.get('数量', 11),
             '单价': header_map.get('单价', 10),
@@ -499,8 +498,6 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
 
         if col_index['序号']:
             safe_cell_write(ws1, current_row, col_index['序号'], running_index)
-        if col_index['设备类别']:
-            safe_cell_write(ws1, current_row, col_index['设备类别'], each_obj.get('type', ''))
         if col_index['型号']:
             safe_cell_write(ws1, current_row, col_index['型号'], each_obj.get('model', each_obj.get('type', '')))
         if col_index['数量']:
@@ -539,7 +536,6 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
         # 列索引
         col_index = {
             '序号': header_map.get('序号', 2),
-            '设备类别': header_map.get('设备类别', 2),
             '型号': header_map.get('型号', 7),
             '数量': header_map.get('数量', 11),
             '单价': header_map.get('单价', 10),
@@ -548,8 +544,6 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
 
         if col_index['序号']:
             safe_cell_write(ws1, current_row, col_index['序号'], running_index)
-        if col_index['设备类别']:
-            safe_cell_write(ws1, current_row, col_index['设备类别'], item.get('type', ''))
         if col_index['型号']:
             safe_cell_write(ws1, current_row, col_index['型号'], item.get('model', item.get('type', '')))
         if col_index['数量']:
