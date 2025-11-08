@@ -12,6 +12,8 @@ from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 import os
 from datetime import datetime
 import requests
+import uuid
+from process_dnf import BoardProcessor, CHANNEL_COUNT_FIELDS
 
 # 配置环境变量
 API_KEY = os.getenv('API_KEY', 'sk-zzvwbcaxoss3')
@@ -37,48 +39,35 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 通道类型名称（固定顺序）
-CHANNEL_TYPES = [
-    "analogInputChannels",
-    "analogOutputChannels",
-    "digitalInputChannels",
-    "digitalOutputChannels",
-    "digitalIOChannels",
-    "serialPortChannels",
-    "canBusChannels",
-    "pwmOutputChannels",
-    "encoderChannels",
-    "ssiBusChannels",
-    "spiBusChannels",
-    "i2cBusChannels",
-    "pcmLvdChannels",
-    "bissCChannels",
-    "afdxChannels",
-    "ppsPulseChannels",
-    "rtdResistanceChannels",
-    "differentialInputChannels",
-    "milStd1553BChannels",
-    "timerCounterChannels",
-    "relayOutputChannels",
-    "sharedMemoryChannels",
-    "lvdtRvdtSyncChannels"
-]
+# 通道类型：直接使用 process_dnf.py 中的 CHANNEL_COUNT_FIELDS（39个字段）
+CHANNEL_TYPES = CHANNEL_COUNT_FIELDS
 
-# 通道类型数量（自动根据 CHANNEL_TYPES 长度计算）
-CHANNEL_COUNT = len(CHANNEL_TYPES)
+# 通道类型数量（39个）
+CHANNEL_COUNT = len(CHANNEL_COUNT_FIELDS)
 
 # 请求模型
+
+
 class CardInfo(BaseModel):
-    matrix: List[int] = Field(..., description=f"{CHANNEL_COUNT}个元素的数组，表示各通道类型的数量")
+    matrix_channel_count: List[int] = Field(
+        ..., description=f"{CHANNEL_COUNT}个元素的数组，表示各通道类型的数量（对应CHANNEL_COUNT_FIELDS的顺序）")
     model: str = Field(..., description="板卡型号")
     price_cny: int = Field(..., description="板卡价格（人民币）")
     id: str = Field(..., description="板卡唯一标识ID")
+    original: Optional[List[str]] = Field(
+        None, description="原始需求描述列表（可选，来自process_dnf输出）")
+
 
 class OptimizationRequest(BaseModel):
-    input_data: List[CardInfo] = Field(..., description="板卡库存数据，直接是板卡数组")
-    requirements_input: List[int] = Field(..., description=f"{CHANNEL_COUNT}个元素的需求数组")
+    """优化请求模型，直接使用 process_dnf 输出格式"""
+    linprog_input_data: List[Dict[str, Any]] = Field(
+        ..., description="process_dnf输出的板卡数据（包含id, matrix_channel_count, model, price_cny, original）")
+    linprog_requiremnets: List[int] = Field(
+        ..., description=f"process_dnf输出的需求数组（{CHANNEL_COUNT}个元素）")
 
 # 响应模型
+
+
 class OptimizedCard(BaseModel):
     model: str
     quantity: int
@@ -86,11 +75,13 @@ class OptimizedCard(BaseModel):
     total_price: int
     id: str
 
+
 class ChannelSatisfaction(BaseModel):
     channel_type: str
     required: int
     satisfied: int
     status: str
+
 
 class FeasibilityCheck(BaseModel):
     channel_type: str
@@ -98,6 +89,7 @@ class FeasibilityCheck(BaseModel):
     available_total: int
     max_single_card: int
     status: str
+
 
 class OptimizationResponse(BaseModel):
     success: bool
@@ -134,72 +126,83 @@ async def get_channel_types():
 async def optimize_card_selection(request: OptimizationRequest):
     """
     板卡选型优化接口
-    
-    - **input_data**: 板卡数组，每个板卡包含 matrix（{CHANNEL_COUNT}元素数组）、model（型号）、price_cny（价格）、id（唯一标识）
-    - **requirements_input**: 需求向量，{CHANNEL_COUNT}个元素对应{CHANNEL_COUNT}种通道类型
-    
+
+    直接使用 process_dnf 输出格式：
+    - **linprog_input_data**: process_dnf输出的板卡数据数组（包含id, matrix_channel_count, model, price_cny, original）
+    - **linprog_requiremnets**: process_dnf输出的需求数组（{CHANNEL_COUNT}个元素）
+
     返回最优采购方案，包括总成本和每种板卡的采购数量
     """
     try:
         # 1. 数据验证
-        if len(request.requirements_input) != CHANNEL_COUNT:
+        if len(request.linprog_requiremnets) != CHANNEL_COUNT:
             raise HTTPException(
                 status_code=400,
-                detail=f"requirements_input 必须有 {CHANNEL_COUNT} 个元素，当前有 {len(request.requirements_input)} 个"
+                detail=f"linprog_requiremnets 必须有 {CHANNEL_COUNT} 个元素，当前有 {len(request.linprog_requiremnets)} 个"
             )
-        
-        # 2. 提取所有板卡数据
-        # input_data 现在直接是板卡数组，不再需要 each_card 这一层
-        all_cards = request.input_data
-        
-        if len(all_cards) == 0:
-            raise HTTPException(status_code=400, detail="input_data 中没有板卡数据")
-        
+
+        if len(request.linprog_input_data) == 0:
+            raise HTTPException(
+                status_code=400, detail="linprog_input_data 中没有板卡数据")
+
+        # 2. 转换输入数据格式
+        all_cards = []
+        for item in request.linprog_input_data:
+            all_cards.append(CardInfo(
+                id=str(item.get('id', '')),
+                matrix_channel_count=item.get('matrix_channel_count', []),
+                model=item.get('model', ''),
+                price_cny=item.get('price_cny', 0),
+                original=item.get('original', None)
+            ))
+
+        requirements = request.linprog_requiremnets
+
         n_cards = len(all_cards)
-        
-        # 3. 验证每个板卡的 matrix 长度
+
+        # 3. 验证每个板卡的 matrix_channel_count 长度
         for idx, card in enumerate(all_cards):
-            if len(card.matrix) != CHANNEL_COUNT:
+            if len(card.matrix_channel_count) != CHANNEL_COUNT:
                 raise HTTPException(
                     status_code=400,
-                    detail=f"板卡 [{idx}] {card.model} 的 matrix 必须有 {CHANNEL_COUNT} 个元素，当前有 {len(card.matrix)} 个"
+                    detail=f"板卡 [{idx}] {card.model} 的 matrix_channel_count 必须有 {CHANNEL_COUNT} 个元素，当前有 {len(card.matrix_channel_count)} 个"
                 )
-        
+
         # 4. 构建资源矩阵
         resource_matrix = []
         prices = []
         models = []
         card_ids = []
-        
+
         for card in all_cards:
             models.append(card.model)
             prices.append(card.price_cny)
             card_ids.append(card.id)
-            resource_matrix.append(card.matrix)
-        
+            resource_matrix.append(card.matrix_channel_count)
+
         A = np.array(resource_matrix)  # shape: (n_cards, CHANNEL_COUNT)
         prices = np.array(prices)
-        b_requirements = np.array(request.requirements_input)
-        
+        b_requirements = np.array(requirements)
+
         # 5. 生成需求摘要
         requirements_summary = []
-        for i, (req, ch_type) in enumerate(zip(request.requirements_input, CHANNEL_TYPES)):
+        for i, (req, ch_type) in enumerate(zip(requirements, CHANNEL_TYPES)):
             if req > 0:
                 requirements_summary.append({
                     "index": i,
                     "channel_type": ch_type,
                     "required": req
                 })
-        
+
         # 6. 需求可行性检查
         feasibility_checks = []
-        
+
         for i, channel_type in enumerate(CHANNEL_TYPES):
             if b_requirements[i] > 0:
                 max_available = int(A[:, i].sum())
                 max_single_card = int(A[:, i].max())
                 status = "OK" if max_available >= b_requirements[i] else "不足"
-                
+
                 feasibility_checks.append(FeasibilityCheck(
                     channel_type=channel_type,
                     required=int(b_requirements[i]),
@@ -207,11 +210,11 @@ async def optimize_card_selection(request: OptimizationRequest):
                     max_single_card=max_single_card,
                     status=status
                 ))
-        
+
         # 7. 识别无法满足的需求并放松约束
         unsatisfied_requirements = []
         b_requirements_adjusted = b_requirements.copy()
-        
+
         for i, channel_type in enumerate(CHANNEL_TYPES):
             if b_requirements[i] > 0:
                 max_available = A[:, i].sum()
@@ -224,13 +227,13 @@ async def optimize_card_selection(request: OptimizationRequest):
                     })
                     # 放松约束
                     b_requirements_adjusted[i] = 0
-        
+
         # 8. 线性规划求解（使用调整后的需求向量）
         c = prices
         A_ub = -A.T
         b_ub = -b_requirements_adjusted
         bounds = [(0, None)] * n_cards
-        
+
         result = linprog(
             c=c,
             A_ub=A_ub,
@@ -239,7 +242,7 @@ async def optimize_card_selection(request: OptimizationRequest):
             method='highs',
             integrality=[1] * n_cards
         )
-        
+
         if not result.success:
             return OptimizationResponse(
                 success=False,
@@ -249,11 +252,11 @@ async def optimize_card_selection(request: OptimizationRequest):
                 feasibility_checks=feasibility_checks,
                 unsatisfied_requirements=unsatisfied_requirements
             )
-        
+
         # 9. 构建优化方案
         optimized_solution = []
         total_cost = 0
-        
+
         for i, quantity in enumerate(result.x):
             if quantity > 0.01:
                 qty = int(quantity)
@@ -266,30 +269,30 @@ async def optimize_card_selection(request: OptimizationRequest):
                     id=card_ids[i]
                 ))
                 total_cost += cost
-        
+
         # 10. 计算实际满足的通道需求
         satisfied_channels = A.T @ result.x
         channel_satisfaction = []
-        
+
         for i, channel_type in enumerate(CHANNEL_TYPES):
             if b_requirements[i] > 0 or satisfied_channels[i] > 0.01:
                 satisfied = int(satisfied_channels[i])
                 required = int(b_requirements[i])
                 status = "OK" if satisfied >= required else "不足"
-                
+
                 channel_satisfaction.append(ChannelSatisfaction(
                     channel_type=channel_type,
                     required=required,
                     satisfied=satisfied,
                     status=status
                 ))
-        
+
         # 构建响应消息
         if unsatisfied_requirements:
             message = "优化成功（部分需求无法满足）"
         else:
             message = "优化成功"
-        
+
         return OptimizationResponse(
             success=True,
             message=message,
@@ -301,11 +304,232 @@ async def optimize_card_selection(request: OptimizationRequest):
             channel_satisfaction=channel_satisfaction,
             unsatisfied_requirements=unsatisfied_requirements
         )
-        
+
     except HTTPException:
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"服务器错误: {str(e)}")
+
+
+# ================= process_dnf 接口 =================
+
+class RequirementItem(BaseModel):
+    """需求项模型"""
+    id: Optional[str] = Field(None, description="需求ID")
+    original: str = Field(..., description="原始需求描述")
+    DNF: str = Field(..., description="DNF逻辑表达式")
+
+
+class ProcessDNFRequest(BaseModel):
+    """process_dnf 请求模型"""
+    require: List[RequirementItem] = Field(...,
+                                           description="需求列表，每个需求包含 original 和 DNF 字段")
+
+
+class ProcessDNFResponse(BaseModel):
+    """process_dnf 响应模型"""
+    success: bool
+    message: str
+    timestamp: str
+    linprog_input_data: List[Dict[str, Any]]
+    linprog_requiremnets: List[int]
+    matched_boards: List[Dict[str, Any]]
+    total_candidates: int
+    total_matches: int
+    processing_info: Dict[str, Any]
+
+
+@app.post("/process-dnf", response_model=ProcessDNFResponse)
+async def process_dnf_requirements(request: ProcessDNFRequest):
+    """
+    处理DNF逻辑表达式，查询数据库，生成板卡匹配结果
+
+    - **require**: 需求列表，每个需求包含：
+      - **original**: 原始需求描述
+      - **DNF**: DNF逻辑表达式（如: "AD_channel_count_single_ended ≥ 16 and DA_channel_count ≥ 16"）
+      - **id**: 可选的需求ID
+
+    返回匹配的板卡数据和线性规划输入数据
+    """
+    try:
+        # 创建 BoardProcessor 实例
+        processor = BoardProcessor()
+
+        # 设置日志（使用内存缓冲区，不写文件）
+        import logging
+        import io
+        log_buffer = io.StringIO()
+        handler = logging.StreamHandler(log_buffer)
+        handler.setLevel(logging.DEBUG)
+        formatter = logging.Formatter('%(message)s')
+        handler.setFormatter(formatter)
+        processor.logger = logging.getLogger('BoardProcessor')
+        processor.logger.setLevel(logging.DEBUG)
+        processor.logger.handlers = []
+        processor.logger.addHandler(handler)
+
+        # 构建输入数据格式（模拟 input.json 格式）
+        input_data = {
+            'require': [
+                {
+                    'id': req.id if req.id else f"req_{idx}_{uuid.uuid4().hex[:8]}",
+                    'original': req.original,
+                    'DNF': req.DNF
+                }
+                for idx, req in enumerate(request.require)
+            ]
+        }
+
+        # 获取所有板卡数据
+        all_boards = processor.query_board_data()
+
+        # 用于存储结果
+        linprog_input_data = []
+        matched_boards = []
+        board_original_map = {}
+        all_candidate_ids = set()
+        all_match_ids = set()
+        requirement_channel_counts = {}
+
+        # 处理每个需求
+        for req_index, req in enumerate(request.require):
+            req_id = req.id if req.id else f"req_{req_index}_{uuid.uuid4().hex[:8]}"
+            original = req.original
+            dnf = req.DNF
+
+            if not dnf or not dnf.strip():
+                continue
+
+            # 提取字段
+            fields = processor.extract_fields_from_dnf(dnf)
+
+            # 提取requirement_specification
+            req_spec = processor.extract_requirement_specification(dnf)
+
+            # 查找所有逻辑表达式中字段有值的板卡
+            boards_with_values = processor.find_boards_with_values(
+                fields, exclude_board_ids=None)
+
+            # 对所有有值的板卡进行匹配打分
+            for board in boards_with_values:
+                board_id = str(board.get('id', ''))
+
+                # 记录该板卡满足的需求
+                if board_id not in board_original_map:
+                    board_original_map[board_id] = []
+                if original not in board_original_map[board_id]:
+                    board_original_map[board_id].append(original)
+
+                # 提取board_specification
+                board_spec = processor.extract_board_specification(
+                    board, fields, req_spec)
+
+                # 构建compliance
+                compliance = processor.build_compliance(board, dnf)
+
+                # 计算match_percentage
+                match_percentage = processor.calculate_match_percentage(
+                    compliance)
+
+                # 添加到matched_boards
+                matched_boards.append({
+                    'id': board_id,
+                    'requirement_id': req_id,
+                    'model': board.get('model', ''),
+                    'description': board.get('brief_description', '') or board.get('detailed_description', ''),
+                    'original': original,
+                    'match_percentage': match_percentage,
+                    'requirement_specification': req_spec,
+                    'board_specification': board_spec,
+                    'compliance': compliance
+                })
+
+                # 统计所有有值的板卡和完全匹配的板卡
+                all_candidate_ids.add(board_id)
+                if match_percentage == 100:
+                    all_match_ids.add(board_id)
+
+            # 更新requirement_channel_counts
+            for field in fields:
+                field_lower = field.lower()
+                if field_lower in [f.lower() for f in CHANNEL_COUNT_FIELDS]:
+                    if field_lower in req_spec:
+                        req_info = req_spec[field_lower]
+                        req_value = req_info.get('value') if isinstance(
+                            req_info, dict) else req_info
+                        if isinstance(req_value, (int, float)) and req_value > 0:
+                            if field_lower not in requirement_channel_counts:
+                                requirement_channel_counts[field_lower] = 0
+                            requirement_channel_counts[field_lower] = max(
+                                requirement_channel_counts[field_lower],
+                                int(req_value)
+                            )
+
+        # 构建linprog_input_data（从matched_boards中提取match_percentage=100的板卡）
+        perfect_match_board_ids = all_match_ids
+
+        board_dict = {}
+        for board in all_boards:
+            board_id = str(board.get('id', ''))
+            if board_id and board_id in perfect_match_board_ids:
+                board_dict[board_id] = board
+
+        for board_id, board in board_dict.items():
+            matrix = processor.build_matrix_channel_count(board)
+            original_list = board_original_map.get(board_id, [])
+
+            linprog_input_data.append({
+                'id': board_id,
+                'matrix_channel_count': matrix,
+                'model': board.get('model', ''),
+                'price_cny': board.get('price_cny'),
+                'original': original_list
+            })
+
+        # 构建linprog_requiremnets
+        linprog_requiremnets = []
+        for field in CHANNEL_COUNT_FIELDS:
+            field_lower = field.lower()
+            value = requirement_channel_counts.get(field_lower, 0)
+            linprog_requiremnets.append(value)
+
+        # 构建输出数据
+        output_data = {
+            'timestamp': datetime.now().isoformat(),
+            'linprog_input_data': linprog_input_data,
+            'linprog_requiremnets': linprog_requiremnets,
+            'matched_boards': matched_boards,
+            'total_candidates': len(all_candidate_ids),
+            'total_matches': len(all_match_ids),
+            'processing_info': {
+                'requirements_processed': len(request.require),
+                'boards_found': len(linprog_input_data),
+                'matches_made': len(matched_boards)
+            }
+        }
+
+        # 转换 Decimal 为 float
+        output_data = processor.convert_decimal_to_float(output_data)
+
+        # 关闭数据库连接
+        processor.close_connection()
+
+        return ProcessDNFResponse(
+            success=True,
+            message="处理成功",
+            timestamp=output_data['timestamp'],
+            linprog_input_data=output_data['linprog_input_data'],
+            linprog_requiremnets=output_data['linprog_requiremnets'],
+            matched_boards=output_data['matched_boards'],
+            total_candidates=output_data['total_candidates'],
+            total_matches=output_data['total_matches'],
+            processing_info=output_data['processing_info']
+        )
+
+    except Exception as e:
+        import traceback
+        error_detail = f"处理失败: {str(e)}\n{traceback.format_exc()}"
+        raise HTTPException(status_code=500, detail=error_detail)
 
 
 # ================= Excel 生成功能 =================
@@ -335,7 +559,7 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
     # 重命名第一个工作表为"报价单"
     ws1 = wb.active
     ws1.title = "报价单"
-    
+
     # 定义安全写入单元格的函数（默认上下左右居中）
     def safe_cell_write(ws, row, col, value):
         """安全地写入单元格值，避免合并单元格错误，并统一设置居中"""
@@ -387,24 +611,24 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
     # 兼容多种格式：card、array
     result_items = json_data.get('card', json_data.get('array', []))
     raw_sim_items = json_data.get('raw_sim', [])
-    
+
     # ========== 根据ID进行去重和合并 ==========
     def merge_items_by_id(items):
         """根据板卡ID对数据进行去重和合并（同一张卡满足多个需求）"""
         merged_dict = {}
-        
+
         for item in items:
             # 兼容新旧两种格式
             if 'each_obj' in item:
                 each_obj = item.get('each_obj', {})
             else:
                 each_obj = item
-            
+
             item_id = each_obj.get('id', '')
             if not item_id:
                 # 如果没有ID，直接跳过
                 continue
-            
+
             if item_id not in merged_dict:
                 # 第一次遇到这个ID，初始化
                 merged_dict[item_id] = {
@@ -420,24 +644,25 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
                     'quantity': each_obj.get('quantity', 1),  # 取第一条记录的数量
                     'details': []
                 }
-            
+
             # 收集需要合并的字段（同一张卡的多个需求）
             original = each_obj.get('original', '')
             if original:
                 merged_dict[item_id]['originals'].append(original)
-            
-            match_degree = each_obj.get('match_degree', each_obj.get('score', ''))
+
+            match_degree = each_obj.get(
+                'match_degree', each_obj.get('score', ''))
             if match_degree:
                 merged_dict[item_id]['match_degrees'].append(str(match_degree))
-            
+
             reason = each_obj.get('reason', '')
             if reason:
                 merged_dict[item_id]['reasons'].append(reason)
-            
+
             # 处理details（如果存在）
             if 'details' in each_obj and each_obj['details']:
                 merged_dict[item_id]['details'].extend(each_obj['details'])
-        
+
         # 将合并后的数据转换为列表
         merged_list = []
         for item_id, data in merged_dict.items():
@@ -455,12 +680,12 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
                 'details': data['details'] if data['details'] else None
             }
             merged_list.append(merged_item)
-        
+
         return merged_list
-    
+
     # 对 card 数据根据ID进行合并
     result_items = merge_items_by_id(result_items)
-    
+
     current_row = start_row
     total_amount = 0
 
@@ -479,7 +704,8 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
             if isinstance(price_cny, str):
                 price_cny = float(price_cny.replace('￥', '').replace(',', ''))
             if isinstance(total_amount_cny, str):
-                total_amount_cny = float(total_amount_cny.replace('￥', '').replace(',', ''))
+                total_amount_cny = float(
+                    total_amount_cny.replace('￥', '').replace(',', ''))
         except (ValueError, AttributeError):
             price_cny = 0
             total_amount_cny = 0
@@ -499,13 +725,15 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
         if col_index['序号']:
             safe_cell_write(ws1, current_row, col_index['序号'], running_index)
         if col_index['型号']:
-            safe_cell_write(ws1, current_row, col_index['型号'], each_obj.get('model', each_obj.get('type', '')))
+            safe_cell_write(ws1, current_row, col_index['型号'], each_obj.get(
+                'model', each_obj.get('type', '')))
         if col_index['数量']:
             safe_cell_write(ws1, current_row, col_index['数量'], quantity)
         if col_index['单价']:
             safe_cell_write(ws1, current_row, col_index['单价'], price_cny)
         if col_index['总价']:
-            safe_cell_write(ws1, current_row, col_index['总价'], total_amount_cny)
+            safe_cell_write(ws1, current_row,
+                            col_index['总价'], total_amount_cny)
 
         ws1.row_dimensions[current_row].height = None
         current_row += 1
@@ -516,23 +744,24 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
         sim_id = item.get('id', '')
         price_cny = item.get('price_cny', 0)
         quantity = item.get('quantity', 1)
-        
+
         # 计算总金额
         total_amount_cny = price_cny * quantity
-        
+
         # 转换价格为数字格式
         try:
             if isinstance(price_cny, str):
                 price_cny = float(price_cny.replace('￥', '').replace(',', ''))
             if isinstance(total_amount_cny, str):
-                total_amount_cny = float(total_amount_cny.replace('￥', '').replace(',', ''))
+                total_amount_cny = float(
+                    total_amount_cny.replace('￥', '').replace(',', ''))
         except (ValueError, AttributeError):
             price_cny = 0
             total_amount_cny = 0
-        
+
         # 累加总价
         total_amount += total_amount_cny
-        
+
         # 列索引
         col_index = {
             '序号': header_map.get('序号', 2),
@@ -545,14 +774,16 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
         if col_index['序号']:
             safe_cell_write(ws1, current_row, col_index['序号'], running_index)
         if col_index['型号']:
-            safe_cell_write(ws1, current_row, col_index['型号'], item.get('model', item.get('type', '')))
+            safe_cell_write(ws1, current_row, col_index['型号'], item.get(
+                'model', item.get('type', '')))
         if col_index['数量']:
             safe_cell_write(ws1, current_row, col_index['数量'], quantity)
         if col_index['单价']:
             safe_cell_write(ws1, current_row, col_index['单价'], price_cny)
         if col_index['总价']:
-            safe_cell_write(ws1, current_row, col_index['总价'], total_amount_cny)
-        
+            safe_cell_write(ws1, current_row,
+                            col_index['总价'], total_amount_cny)
+
         # 设置行高为自动
         ws1.row_dimensions[current_row].height = None
         current_row += 1
@@ -597,10 +828,11 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
     ]
 
     # 美化表头
-    header_fill = PatternFill(start_color="4F81BD", end_color="4F81BD", fill_type="solid")
+    header_fill = PatternFill(start_color="4F81BD",
+                              end_color="4F81BD", fill_type="solid")
     header_font = Font(bold=True, color="FFFFFF", size=12)
     border = Border(left=Side(style='thin'), right=Side(style='thin'),
-                   top=Side(style='thin'), bottom=Side(style='thick'))
+                    top=Side(style='thin'), bottom=Side(style='thick'))
 
     # 写入表头
     for col_num, header in enumerate(headers, 1):
@@ -655,9 +887,11 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
         ws2.cell(row=current_row, column=5, value=device.get('type', ''))
         ws2.cell(row=current_row, column=6, value=device.get('model', ''))
         # 兼容字段：description -> detailed_description -> brief_description
-        tech_desc = device.get('description', device.get('detailed_description', device.get('brief_description', '')))
+        tech_desc = device.get('description', device.get(
+            'detailed_description', device.get('brief_description', '')))
         ws2.cell(row=current_row, column=7, value=tech_desc)
-        ws2.cell(row=current_row, column=8, value=device.get('manufacturer', ''))
+        ws2.cell(row=current_row, column=8,
+                 value=device.get('manufacturer', ''))
         ws2.cell(row=current_row, column=9, value=device.get('quantity', 1))
 
         # 计算单价
@@ -669,7 +903,8 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
         # 小计 - 如果没有total_amount_cny，则计算
         total_amount_cny = device.get('total_amount_cny', 0)
         if isinstance(total_amount_cny, str):
-            total_amount_cny = float(total_amount_cny.replace('￥', '').replace(',', ''))
+            total_amount_cny = float(
+                total_amount_cny.replace('￥', '').replace(',', ''))
         elif total_amount_cny == 0:
             # 如果没有提供total_amount_cny，则计算
             total_amount_cny = price_cny * device.get('quantity', 1)
@@ -677,13 +912,15 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
 
         # 美化数据行样式
         data_border = Border(left=Side(style='thin'), right=Side(style='thin'),
-                           top=Side(style='thin'), bottom=Side(style='thin'))
+                             top=Side(style='thin'), bottom=Side(style='thin'))
 
         # 隔行换色
         if current_row % 2 == 0:
-            row_fill = PatternFill(start_color="F2F2F2", end_color="F2F2F2", fill_type="solid")
+            row_fill = PatternFill(start_color="F2F2F2",
+                                   end_color="F2F2F2", fill_type="solid")
         else:
-            row_fill = PatternFill(start_color="FFFFFF", end_color="FFFFFF", fill_type="solid")
+            row_fill = PatternFill(start_color="FFFFFF",
+                                   end_color="FFFFFF", fill_type="solid")
 
         data_font = Font(size=11)
 
@@ -698,9 +935,12 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
             cell.alignment = Alignment(horizontal="center", vertical="center")
 
         # 对可能的多行文本开启换行，但保持居中
-        ws2.cell(row=current_row, column=2).alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
-        ws2.cell(row=current_row, column=3).alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
-        ws2.cell(row=current_row, column=7).alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+        ws2.cell(row=current_row, column=2).alignment = Alignment(
+            horizontal='center', vertical='center', wrap_text=True)
+        ws2.cell(row=current_row, column=3).alignment = Alignment(
+            horizontal='center', vertical='center', wrap_text=True)
+        ws2.cell(row=current_row, column=7).alignment = Alignment(
+            horizontal='center', vertical='center', wrap_text=True)
 
         # 设置行高为自动
         ws2.row_dimensions[current_row].height = None
@@ -717,13 +957,14 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
                 val = str(val)
             # 中文字符宽度更大，按比例增大
             try:
-                chinese_count = sum(1 for ch in val if ord(ch)>127)
+                chinese_count = sum(1 for ch in val if ord(ch) > 127)
                 eff_len = len(val) + chinese_count  # 中文计宽加权
             except:
                 eff_len = len(val)
             if eff_len > maxlen:
                 maxlen = eff_len
-        ws1.column_dimensions[get_column_letter(col)].width = min(max(8, maxlen*1.8), 35)
+        ws1.column_dimensions[get_column_letter(
+            col)].width = min(max(8, maxlen*1.8), 35)
 
     # ws2需求匹配预览表还是用固定列宽
     column_widths = [8, 35, 35, 25, 20, 18, 35, 15, 10, 15, 15]
@@ -757,8 +998,10 @@ def generate_excel_from_json_string(json_string: str, template_content: bytes) -
 
         # 生成唯一的文件名
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
-        temp_template_path = os.path.join(project_temp_dir, f"template_{timestamp}.xlsx")
-        output_path = os.path.join(project_temp_dir, f"output_{timestamp}.xlsx")
+        temp_template_path = os.path.join(
+            project_temp_dir, f"template_{timestamp}.xlsx")
+        output_path = os.path.join(
+            project_temp_dir, f"output_{timestamp}.xlsx")
 
         # 写入模板文件
         with open(temp_template_path, 'wb') as f:
@@ -766,7 +1009,8 @@ def generate_excel_from_json_string(json_string: str, template_content: bytes) -
 
         try:
             # 生成Excel文件
-            result_path, total_amount = generate_combined_excel(json_data, temp_template_path, output_path)
+            result_path, total_amount = generate_combined_excel(
+                json_data, temp_template_path, output_path)
             return result_path, total_amount
         finally:
             # 清理临时模板文件
@@ -870,7 +1114,8 @@ async def generate_excel(json_data: Dict[str, Any], token: str = API_KEY):
         json_string = json.dumps(json_data)
 
         # 生成Excel文件
-        output_path, total_amount = generate_excel_from_json_string(json_string, template_content)
+        output_path, total_amount = generate_excel_from_json_string(
+            json_string, template_content)
 
         # 上传文件到服务器
         upload_result = await upload_file_to_server(output_path, token)
@@ -910,4 +1155,3 @@ async def health_check():
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
-
