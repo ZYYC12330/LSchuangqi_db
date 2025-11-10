@@ -1,0 +1,109 @@
+{
+  "require": [
+    {
+      "original": "提供不少于16路异步串行通道，支持RS-232/422模式配置，通讯速度不低于111921.6Kbps",
+      "category": "通信协议",
+      "type": "串口板卡",
+      "attribute": {
+        "uart_channel_count": 16,
+        "uart_interface_types_supported": [
+          "RS-232",
+          "RS-422"
+        ],
+        "uart_max_baud_rate_bps": 111921600
+      },
+      "DNF": "(uart_channel_count ≥ 16) ∧ (uart_interface_types_supported⊇ {\"RS-232\", \"RS-422\"}) ∧ (uart_max_baud_rate_bps ≥ 111921600)"
+    },
+    {
+      "original": "提供不少于2个CAN总线接口",
+      "category": "通信协议",
+      "type": "CAN接口板卡",
+      "attribute": {
+        "can_channel_count": 2
+      },
+      "DNF": "(can_channel_count ≥ 2)"
+    },
+    {
+      "original": "提供不少于12路PWM输出通道，每路可独立控制，10Hz~1MHz，可以两路一组构成互补输出关系（死区可设置）",
+      "category": "数字量",
+      "type": "计数器/PWM板卡",
+      "attribute": {
+        "pwm_output_channel_count": 12,
+        "pwm_frequency_min_hz": 10,
+        "pwm_frequency_max_hz": 1000000,
+        "pwm_complementary_output_support": true,
+        "pwm_dead_zone_configurable": true
+      },
+      "DNF": "(pwm_output_channel_count ≥ 12) ∧ (pwm_frequency_min_hz ≤ 10) ∧ (pwm_frequency_max_hz ≥ 1000000) ∧ (pwm_complementary_output_support = true) ∧ (pwm_dead_zone_configurable = true)"
+    },
+    {
+      "original": "提供不少于2路增量式正交编码器采集通道，32位计数器，可直接输出角度和角速度",
+      "category": "PWM和编码器",
+      "type": "正交编码信号采集板卡",
+      "attribute": {
+        "encoder_quadrature_channel_count": 2,
+        "encoder_counter_bits": 32
+      },
+      "DNF": "(encoder_quadrature_channel_count ≥ 2) ∧ (encoder_counter_bits ≥ 32)"
+    },
+    {
+      "original": "提供不少于6路差分信号输入通道，可配置为霍尔编码器采集",
+      "category": "PWM和编码器",
+      "type": "正交编码信号采集板卡",
+      "attribute": {
+        "encoder_channel_count_differential": 6
+      },
+      "DNF": "(encoder_channel_count_differential ≥ 6)"
+    },
+    {
+      "original": "提供不少于8路并行A/D，16位分辨率，±10V，采样率100kHz",
+      "category": "模拟量",
+      "type": "同步模拟量采集板卡",
+      "attribute": {
+        "ad_channel_count_single_ended": 8,
+        "ad_resolution_bits": 16,
+        "ad_input_voltage_range_min_v": -10,
+        "ad_input_voltage_range_max_v": 10,
+        "ad_sampling_rate_hz": 100000
+      },
+      "DNF": "(ad_channel_count_single_ended ≥ 8) ∧ (ad_resolution_bits ≥ 16) ∧ (ad_input_voltage_range_min_v ≤ -10) ∧ (ad_input_voltage_range_max_v ≥ 10) ∧ (ad_sampling_rate_hz ≥ 100000)"
+    },
+    {
+      "original": "提供不少于8路DA，16位分辨率，±10V",
+      "category": "模拟量",
+      "type": "模拟量输出板卡",
+      "attribute": {
+        "da_channel_count": 8,
+        "da_resolution_bits": 16,
+        "da_output_voltage_min_v": -10,
+        "da_output_voltage_max_v": 10
+      },
+      "DNF": "(da_channel_count ≥ 8) ∧ (da_resolution_bits ≥ 16) ∧ (da_output_voltage_min_v ≤ -10) ∧ (da_output_voltage_max_v ≥ 10)"
+    },
+    {
+      "original": "提供不少于8路DI",
+      "category": "数字量",
+      "type": "开关量输入板卡",
+      "attribute": {
+        "di_channel_count": 8
+      },
+      "DNF": "(di_channel_count ≥ 8)"
+    },
+    {
+      "original": "提供不少于8路DO",
+      "category": "数字量",
+      "type": "开关量输出板卡",
+      "attribute": {
+        "do_channel_count": 8
+      },
+      "DNF": "(do_channel_count ≥ 8)"
+    },
+    {
+      "original": "提供不少于8路DADCO",
+      "category": "",
+      "type": "",
+      "attribute": {},
+      "DNF": ""
+    }
+  ]
+}

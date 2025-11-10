@@ -555,7 +555,7 @@ class BoardProcessor:
             cur.execute("""
                 SELECT column_name 
                 FROM information_schema.columns 
-                WHERE table_name = 'hardware_specifications' 
+                WHERE table_name = 'hardware_specifications_1109' 
                 AND column_name NOT IN ('created_at')
                 ORDER BY ordinal_position
             """)
@@ -564,7 +564,8 @@ class BoardProcessor:
 
             # 构建查询语句
             column_list = ', '.join(columns)
-            cur.execute(f"SELECT {column_list} FROM hardware_specifications")
+            cur.execute(
+                f"SELECT {column_list} FROM hardware_specifications_1109")
 
             rows = cur.fetchall()
             cur.close()
@@ -811,26 +812,130 @@ class BoardProcessor:
         """
         spec = {}
 
+        # 字段名映射：需求中的字段名 -> 数据库中的实际字段名
+        field_name_mapping = {
+            'uart_interface_types': 'UART_interface_types_supported',
+            'encoder_signal_types': 'Encoder_signal_types_supported',
+            'mil1553_operation_modes': 'MIL1553_operation_modes_supported',
+        }
+
+        def find_field_value(field_name: str) -> Any:
+            """查找字段值，支持多种字段名格式"""
+            # 1. 尝试直接使用字段名（小写）
+            field_lower = field_name.lower()
+            value = board.get(field_lower)
+            if value is not None:
+                return value, field_lower
+
+            # 2. 尝试字段名映射
+            if field_name in field_name_mapping:
+                db_field = field_name_mapping[field_name]
+                value = board.get(db_field)
+                if value is not None:
+                    return value, db_field
+                # 也尝试小写版本
+                value = board.get(db_field.lower())
+                if value is not None:
+                    return value, db_field.lower()
+
+            # 3. 尝试大小写不敏感匹配
+            field_lower = field_name.lower()
+            for key in board.keys():
+                if key.lower() == field_lower:
+                    return board[key], key
+                # 也尝试匹配带 _supported 后缀的
+                if key.lower() == field_lower + '_supported':
+                    return board[key], key
+
+            return None, None
+
         if requirement_spec:
             for field in requirement_spec.keys():
-                field_lower = field.lower()
-                value = board.get(field_lower)
+                value, matched_key = find_field_value(field)
                 if value is not None:
-                    spec[field] = {
-                        'value': value
-                    }
+                    # 处理数组类型字段：确保返回列表格式
+                    if isinstance(value, list):
+                        # 已经是列表，直接使用
+                        spec[field] = {
+                            'value': value
+                        }
+                    elif isinstance(value, str):
+                        # 如果是字符串，尝试解析为数组
+                        # 检查是否是 PostgreSQL 数组格式 {item1,item2,item3}
+                        if value.startswith('{') and value.endswith('}'):
+                            # PostgreSQL 数组格式
+                            items = value[1:-1].split(',')
+                            items = [item.strip().strip('"').strip("'")
+                                     for item in items if item.strip()]
+                            spec[field] = {
+                                'value': items
+                            }
+                        elif '/' in value:
+                            # 斜杠分隔格式 "RS-232/422/485"
+                            items = [item.strip()
+                                     for item in value.split('/') if item.strip()]
+                            spec[field] = {
+                                'value': items
+                            }
+                        elif ',' in value:
+                            # 逗号分隔格式
+                            items = [item.strip()
+                                     for item in value.split(',') if item.strip()]
+                            spec[field] = {
+                                'value': items
+                            }
+                        else:
+                            # 单个值，转换为列表
+                            spec[field] = {
+                                'value': [value.strip()] if value.strip() else []
+                            }
+                    else:
+                        # 其他类型，直接使用
+                        spec[field] = {
+                            'value': value
+                        }
                     self.log_debug(
-                        f"[DEBUG] 提取板卡规格 - 字段: {field}, 值: {value} (类型: {type(value).__name__})")
+                        f"[DEBUG] 提取板卡规格 - 字段: {field} -> {matched_key}, 值: {spec[field]['value']} (类型: {type(spec[field]['value']).__name__})")
         else:
             for field in sorted(fields):
-                field_lower = field.lower()
-                value = board.get(field_lower)
+                value, matched_key = find_field_value(field)
                 if value is not None:
-                    spec[field] = {
-                        'value': value
-                    }
+                    # 处理数组类型字段
+                    if isinstance(value, list):
+                        spec[field] = {
+                            'value': value
+                        }
+                    elif isinstance(value, str):
+                        # 字符串格式处理
+                        if value.startswith('{') and value.endswith('}'):
+                            items = value[1:-1].split(',')
+                            items = [item.strip().strip('"').strip("'")
+                                     for item in items if item.strip()]
+                            spec[field] = {
+                                'value': items
+                            }
+                        elif '/' in value:
+                            items = [item.strip()
+                                     for item in value.split('/') if item.strip()]
+                            spec[field] = {
+                                'value': items
+                            }
+                        elif ',' in value:
+                            items = [item.strip()
+                                     for item in value.split(',') if item.strip()]
+                            spec[field] = {
+                                'value': items
+                            }
+                        else:
+                            spec[field] = {
+                                'value': [value.strip()] if value.strip() else []
+                            }
+                    else:
+                        spec[field] = {
+                            'value': value
+                        }
                     self.log_debug(
-                        f"[DEBUG] 提取板卡规格 - 字段: {field}, 值: {value} (类型: {type(value).__name__})")
+                        f"[DEBUG] 提取板卡规格 - 字段: {field} -> {matched_key}, 值: {spec[field]['value']} (类型: {type(spec[field]['value']).__name__})")
 
         return spec
 
@@ -985,6 +1090,7 @@ class BoardProcessor:
         board_original_map = {}
         all_candidate_ids = set()  # 所有有值的板卡ID（去重后）
         all_match_ids = set()  # 完全匹配的板卡ID（match_percentage=100，去重后）
+        unsatisfied_requirements = []  # 无法处理的需求（DNF为空或处理失败）
 
         # 用于计算linprog_requiremnets
         requirement_channel_counts = {}
@@ -996,6 +1102,11 @@ class BoardProcessor:
             dnf = req.get('DNF', '')
 
             if not dnf or not dnf.strip():
+                # 记录无法处理的需求（DNF为空）
+                if original:
+                    unsatisfied_requirements.append({
+                        'original': original
+                    })
                 continue
 
             # 提取字段
@@ -1106,12 +1217,14 @@ class BoardProcessor:
             'linprog_input_data': linprog_input_data,
             'linprog_requiremnets': linprog_requiremnets,
             'matched_boards': matched_boards,
+            'unsatisfied_requirements': unsatisfied_requirements,
             'total_candidates': len(all_candidate_ids),
             'total_matches': len(all_match_ids),
             'processing_info': {
                 'requirements_processed': len(requirements),
                 'boards_found': len(linprog_input_data),
-                'matches_made': len(matched_boards)
+                'matches_made': len(matched_boards),
+                'unsatisfied_count': len(unsatisfied_requirements)
             }
         }
 
@@ -1127,6 +1240,7 @@ class BoardProcessor:
         print(f"  - 找到 {len(linprog_input_data)} 个完全匹配的板卡（用于线性规划）")
         print(f"  - 完全匹配了 {len(all_match_ids)} 个板卡（去重后）")
         print(f"  - 生成了 {len(matched_boards)} 个匹配记录（包含所有有值的板卡）")
+        print(f"  - 无法处理的需求: {len(unsatisfied_requirements)} 个（DNF为空）")
         print(f"  - 输出文件: {output_file}")
         if self.log_file:
             print(f"  - 日志文件: {self.log_file}")
