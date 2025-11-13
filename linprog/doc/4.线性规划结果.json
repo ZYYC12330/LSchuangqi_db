@@ -1,246 +1,185 @@
 {
-  "StatusCode": 200,
-  "Headers": {
-    "content-length": "3845",
-    "content-type": "application/json",
-    "date": "Thu, 13 Nov 2025 17:33:10 GMT",
-    "server": "uvicorn"
-  },
-  "Body": {
-    "success": true,
-    "message": "优化成功",
-    "total_cards": 51,
-    "requirements_summary": [
-      {
-        "index": 0,
-        "channel_type": "AD_channel_count_single_ended",
-        "required": 8
-      },
-      {
-        "index": 2,
-        "channel_type": "DA_channel_count",
-        "required": 8
-      },
-      {
-        "index": 4,
-        "channel_type": "DI_channel_count",
-        "required": 8
-      },
-      {
-        "index": 5,
-        "channel_type": "DO_channel_count",
-        "required": 8
-      },
-      {
-        "index": 6,
-        "channel_type": "PWM_output_channel_count",
-        "required": 12
-      },
-      {
-        "index": 7,
-        "channel_type": "Encoder_quadrature_channel_count",
-        "required": 2
-      },
-      {
-        "index": 9,
-        "channel_type": "Encoder_channel_count_differential",
-        "required": 6
-      },
-      {
-        "index": 12,
-        "channel_type": "CAN_channel_count",
-        "required": 2
-      },
-      {
-        "index": 13,
-        "channel_type": "UART_channel_count",
-        "required": 16
-      }
-    ],
-    "feasibility_checks": [
-      {
-        "channel_type": "AD_channel_count_single_ended",
-        "required": 8,
-        "available_total": 268,
-        "max_single_card": 32,
-        "status": "OK"
-      },
-      {
-        "channel_type": "DA_channel_count",
-        "required": 8,
-        "available_total": 152,
-        "max_single_card": 24,
-        "status": "OK"
-      },
-      {
-        "channel_type": "DI_channel_count",
-        "required": 8,
-        "available_total": 388,
-        "max_single_card": 128,
-        "status": "OK"
-      },
-      {
-        "channel_type": "DO_channel_count",
-        "required": 8,
-        "available_total": 452,
-        "max_single_card": 128,
-        "status": "OK"
-      },
-      {
-        "channel_type": "PWM_output_channel_count",
-        "required": 12,
-        "available_total": 32,
-        "max_single_card": 12,
-        "status": "OK"
-      },
-      {
-        "channel_type": "Encoder_quadrature_channel_count",
-        "required": 2,
-        "available_total": 40,
-        "max_single_card": 8,
-        "status": "OK"
-      },
-      {
-        "channel_type": "Encoder_channel_count_differential",
-        "required": 6,
-        "available_total": 17,
-        "max_single_card": 8,
-        "status": "OK"
-      },
-      {
-        "channel_type": "CAN_channel_count",
-        "required": 2,
-        "available_total": 24,
-        "max_single_card": 10,
-        "status": "OK"
-      },
-      {
-        "channel_type": "UART_channel_count",
-        "required": 16,
-        "available_total": 96,
-        "max_single_card": 16,
-        "status": "OK"
-      }
-    ],
-    "optimized_solution": [
-      {
-        "model": "Links-IPC-SER-01",
-        "quantity": 2,
-        "unit_price": 60,
-        "total_price": 120,
-        "id": "10",
-        "original": [
-          "提供不少于16路异步串行通道，支持RS-232/422/485模式配置，通讯速度不低于921.6Kbps"
-        ]
-      },
-      {
-        "model": "Links-IPC-CAN",
-        "quantity": 1,
-        "unit_price": 60,
-        "total_price": 60,
-        "id": "13",
-        "original": [
-          "提供不少于2个CAN总线接口"
-        ]
-      },
-      {
-        "model": "Links-IPC-DAQ-08",
-        "quantity": 2,
-        "unit_price": 90,
-        "total_price": 180,
-        "id": "4",
-        "original": [
-          "提供不少于12路PWM输出通道，每路可独立控制，10Hz~1MHz，可以两路一组构成互补输出关系（死区可设置）",
-          "提供不少于2路增量式正交编码器采集通道，32位计数器，可直接输出角度和角速度",
-          "提供不少于6路差分信号输入通道，可配置为霍尔编码器采集",
-          "提供不少于8路并行A/D，16位分辨率，±10V，采样率100kHz",
-          "提供不少于8路DA，16位分辨率，±10V",
-          "提供不少于8路DI",
-          "提供不少于8路DO"
-        ]
-      }
-    ],
-    "total_cost": 360,
-    "channel_satisfaction": [
-      {
-        "channel_type": "AD_channel_count_single_ended",
-        "required": 8,
-        "satisfied": 16,
-        "status": "OK"
-      },
-      {
-        "channel_type": "DA_channel_count",
-        "required": 8,
-        "satisfied": 8,
-        "status": "OK"
-      },
-      {
-        "channel_type": "DIO_total_channel_count",
-        "required": 0,
-        "satisfied": 4,
-        "status": "OK"
-      },
-      {
-        "channel_type": "DI_channel_count",
-        "required": 8,
-        "satisfied": 16,
-        "status": "OK"
-      },
-      {
-        "channel_type": "DO_channel_count",
-        "required": 8,
-        "satisfied": 16,
-        "status": "OK"
-      },
-      {
-        "channel_type": "PWM_output_channel_count",
-        "required": 12,
-        "satisfied": 24,
-        "status": "OK"
-      },
-      {
-        "channel_type": "Encoder_quadrature_channel_count",
-        "required": 2,
-        "satisfied": 4,
-        "status": "OK"
-      },
-      {
-        "channel_type": "Encoder_hall_channel_count",
-        "required": 0,
-        "satisfied": 12,
-        "status": "OK"
-      },
-      {
-        "channel_type": "Encoder_channel_count_differential",
-        "required": 6,
-        "satisfied": 12,
-        "status": "OK"
-      },
-      {
-        "channel_type": "Counter_channel_count",
-        "required": 0,
-        "satisfied": 4,
-        "status": "OK"
-      },
-      {
-        "channel_type": "CAN_channel_count",
-        "required": 2,
-        "satisfied": 2,
-        "status": "OK"
-      },
-      {
-        "channel_type": "UART_channel_count",
-        "required": 16,
-        "satisfied": 16,
-        "status": "OK"
-      },
-      {
-        "channel_type": "Power_output_channel_count",
-        "required": 0,
-        "satisfied": 4,
-        "status": "OK"
-      }
-    ],
-    "unsatisfied_requirements": []
-  }
+  "success": true,
+  "message": "优化成功",
+  "total_cards": 50,
+  "requirements_summary": [
+    {
+      "index": 0,
+      "channel_type": "AD_channel_count_single_ended",
+      "required": 8
+    },
+    {
+      "index": 1,
+      "channel_type": "AD_channel_count_differential",
+      "required": 100
+    },
+    {
+      "index": 2,
+      "channel_type": "DA_channel_count",
+      "required": 8
+    },
+    {
+      "index": 4,
+      "channel_type": "DI_channel_count",
+      "required": 8
+    },
+    {
+      "index": 5,
+      "channel_type": "DO_channel_count",
+      "required": 8
+    },
+    {
+      "index": 6,
+      "channel_type": "PWM_output_channel_count",
+      "required": 12
+    },
+    {
+      "index": 12,
+      "channel_type": "CAN_channel_count",
+      "required": 2
+    },
+    {
+      "index": 13,
+      "channel_type": "UART_channel_count",
+      "required": 16
+    }
+  ],
+  "feasibility_checks": [],
+  "optimized_solution": [
+    {
+      "model": "Links-IPC-SER-01",
+      "quantity": 2,
+      "unit_price": 60,
+      "total_price": 120,
+      "id": "10",
+      "original": [
+        "提供不少于16路异步串行通道，支持RS-232/422模式配置，通讯速度不低于921.6Kbps"
+      ]
+    },
+    {
+      "model": "Links-IPC-CAN",
+      "quantity": 1,
+      "unit_price": 60,
+      "total_price": 60,
+      "id": "13",
+      "original": [
+        "提供不少于2个CAN总线接口"
+      ]
+    },
+    {
+      "model": "Links-IPC-DAQ-07",
+      "quantity": 7,
+      "unit_price": 90,
+      "total_price": 630,
+      "id": "3",
+      "original": [
+        "提供不少于100路差分信号输入通道，可配置为霍尔编码器采集",
+        "提供不少于8路并行A/D，16位分辨率，±10V，采样率100kHz",
+        "提供不少于8路DI",
+        "提供不少于8路DO"
+      ]
+    },
+    {
+      "model": "Links-IPC-DAQ-08",
+      "quantity": 2,
+      "unit_price": 90,
+      "total_price": 180,
+      "id": "4",
+      "original": [
+        "提供不少于12路PWM输出通道，每路可独立控制，10Hz~1MHz，可以两路一组构成互补输出关系（死区可设置）",
+        "提供不少于8路并行A/D，16位分辨率，±10V，采样率100kHz",
+        "提供不少于8路DA，16位分辨率，±10V",
+        "提供不少于8路DI",
+        "提供不少于8路DO"
+      ]
+    }
+  ],
+  "total_cost": 990,
+  "channel_satisfaction": [
+    {
+      "channel_type": "AD_channel_count_single_ended",
+      "required": 8,
+      "satisfied": 240,
+      "status": "OK"
+    },
+    {
+      "channel_type": "AD_channel_count_differential",
+      "required": 100,
+      "satisfied": 112,
+      "status": "OK"
+    },
+    {
+      "channel_type": "DA_channel_count",
+      "required": 8,
+      "satisfied": 8,
+      "status": "OK"
+    },
+    {
+      "channel_type": "DIO_total_channel_count",
+      "required": 0,
+      "satisfied": 4,
+      "status": "OK"
+    },
+    {
+      "channel_type": "DI_channel_count",
+      "required": 8,
+      "satisfied": 128,
+      "status": "OK"
+    },
+    {
+      "channel_type": "DO_channel_count",
+      "required": 8,
+      "satisfied": 128,
+      "status": "OK"
+    },
+    {
+      "channel_type": "PWM_output_channel_count",
+      "required": 12,
+      "satisfied": 24,
+      "status": "OK"
+    },
+    {
+      "channel_type": "Encoder_quadrature_channel_count",
+      "required": 0,
+      "satisfied": 4,
+      "status": "OK"
+    },
+    {
+      "channel_type": "Encoder_hall_channel_count",
+      "required": 0,
+      "satisfied": 12,
+      "status": "OK"
+    },
+    {
+      "channel_type": "Encoder_channel_count_differential",
+      "required": 0,
+      "satisfied": 12,
+      "status": "OK"
+    },
+    {
+      "channel_type": "Counter_channel_count",
+      "required": 0,
+      "satisfied": 11,
+      "status": "OK"
+    },
+    {
+      "channel_type": "CAN_channel_count",
+      "required": 2,
+      "satisfied": 2,
+      "status": "OK"
+    },
+    {
+      "channel_type": "UART_channel_count",
+      "required": 16,
+      "satisfied": 16,
+      "status": "OK"
+    },
+    {
+      "channel_type": "Power_output_channel_count",
+      "required": 0,
+      "satisfied": 4,
+      "status": "OK"
+    }
+  ],
+  "unsatisfied_requirements": []
 }

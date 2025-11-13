@@ -13,6 +13,10 @@ import requests
 import uuid
 from process_dnf import BoardProcessor, CHANNEL_COUNT_FIELDS, process_dnf_requirements_core
 from optimize import optimize_card_selection_core
+import sys
+# 添加路径以导入query_sim
+sys.path.insert(0, os.path.dirname(__file__))
+from query_sim import query_all_sim_machines, generate_output_format
 
 # 配置环境变量
 API_KEY = os.getenv('API_KEY', 'sk-zzvwbcaxoss3')
@@ -253,6 +257,69 @@ async def process_dnf_requirements(request: ProcessDNFRequest):
     except Exception as e:
         import traceback
         error_detail = f"处理失败: {str(e)}\n{traceback.format_exc()}"
+        raise HTTPException(status_code=500, detail=error_detail)
+
+
+# ================= query_sim 接口 =================
+
+class SimRequirementItem(BaseModel):
+    """仿真机需求项模型"""
+    original: str = Field(..., description="原始需求描述")
+    attribute: Dict[str, Any] = Field(..., description="需求属性字典")
+
+
+class QuerySimRequest(BaseModel):
+    """查询仿真机请求模型"""
+    require: List[SimRequirementItem] = Field(..., description="需求列表，每个需求包含 original 和 attribute 字段")
+
+
+class QuerySimResponse(BaseModel):
+    """查询仿真机响应模型"""
+    success: bool
+    message: str
+    result_id: Dict[str, Any] = Field(..., description="最佳匹配仿真机的详细信息")
+    sim_raw_data: List[Dict[str, Any]] = Field(..., description="最佳匹配仿真机的原始数据")
+    sim_pick_list: List[Dict[str, Any]] = Field(..., description="按需求分类的仿真机列表")
+
+
+@app.post("/query-sim", response_model=QuerySimResponse)
+async def query_sim_machines(request: QuerySimRequest):
+    """
+    查询满足条件的仿真机
+
+    - **require**: 需求列表，每个需求包含：
+      - **original**: 原始需求描述（如："CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器"）
+      - **attribute**: 需求属性字典（如：{"cpu_cores": 8, "cpu_frequency_value": 4, ...}）
+
+    返回最佳匹配的仿真机及其详细信息
+    """
+    try:
+        # 构建输入数据格式（转换为字典列表）
+        require_list = [
+            {
+                'original': req.original,
+                'attribute': req.attribute
+            }
+            for req in request.require
+        ]
+
+        # 查询所有仿真机
+        all_machines = query_all_sim_machines()
+        
+        # 生成输出格式
+        output_data = generate_output_format(all_machines, require_list)
+
+        return QuerySimResponse(
+            success=True,
+            message="查询成功",
+            result_id=output_data.get('result_id', {}),
+            sim_raw_data=output_data.get('sim_raw_data', []),
+            sim_pick_list=output_data.get('sim_pick_list', [])
+        )
+
+    except Exception as e:
+        import traceback
+        error_detail = f"查询失败: {str(e)}\n{traceback.format_exc()}"
         raise HTTPException(status_code=500, detail=error_detail)
 
 
