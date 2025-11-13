@@ -490,6 +490,29 @@ class BoardProcessor:
 
             elif operator == '=':
                 value = condition_dict['value']
+                
+                # 处理布尔值比较
+                def normalize_bool(val):
+                    """将各种布尔值表示转换为 Python bool"""
+                    if isinstance(val, bool):
+                        return val
+                    if isinstance(val, str):
+                        val_lower = val.strip().lower()
+                        if val_lower in ('true', '1', 'yes', 'on'):
+                            return True
+                        elif val_lower in ('false', '0', 'no', 'off', ''):
+                            return False
+                    return None
+                
+                field_bool = normalize_bool(field_value)
+                value_bool = normalize_bool(value)
+                if field_bool is not None and value_bool is not None:
+                    result = field_bool == value_bool
+                    self.log_debug(f"[DEBUG] 字段 '{field}': 布尔值比较 {field_value} (类型: {type(field_value).__name__}, 转换后: {field_bool}) "
+                                   f"{operator} {value} (类型: {type(value).__name__}, 转换后: {value_bool}) -> 结果: {result}")
+                    return result
+                
+                # 尝试数值比较
                 field_float = to_float(field_value)
                 value_float = to_float(value)
                 if field_float is not None and value_float is not None:
@@ -498,6 +521,8 @@ class BoardProcessor:
                                    f"{operator} {value} (类型: {type(value).__name__}, 转换后: {value_float}) "
                                    f"-> 结果: {result} (差值: {abs(field_float - value_float)})")
                     return result
+                
+                # 字符串比较
                 result = str(field_value).strip() == str(value).strip()
                 self.log_debug(
                     f"[DEBUG] 字段 '{field}': 字符串比较 '{field_value}' {operator} '{value}' -> 结果: {result}")
@@ -570,12 +595,20 @@ class BoardProcessor:
             rows = cur.fetchall()
             cur.close()
 
-            # 转换为字典列表
+            # 转换为字典列表，并处理布尔值类型
             result = []
             for i, row in enumerate(rows):
                 board_dict = {}
                 for j, col in enumerate(columns):
-                    board_dict[col] = row[j]
+                    value = row[j]
+                    # 确保布尔值类型正确（PostgreSQL 布尔值可能被转换为字符串）
+                    if isinstance(value, str) and value.lower() in ('true', 'false', 't', 'f', '1', '0'):
+                        # 尝试转换为布尔值
+                        if value.lower() in ('true', 't', '1'):
+                            value = True
+                        elif value.lower() in ('false', 'f', '0', ''):
+                            value = False
+                    board_dict[col] = value
                 result.append(board_dict)
 
             self.all_boards = result
@@ -592,6 +625,17 @@ class BoardProcessor:
         根据逻辑表达式查找匹配的板卡
         返回: (匹配的板卡列表, 状态信息)
         """
+        # 如果输入为空字符串或None，直接返回空列表
+        if not logic_str or not logic_str.strip():
+            return [], {
+                "condition_status": {},
+                "satisfied_ratio": 0.0,
+                "matched_with": [],
+                "total_conditions": 0,
+                "matched_conditions_count": 0,
+                "condition_mapping": {}
+            }
+        
         # 步骤1：解析逻辑表达式为DNF形式
         dnf_parts = self.parse_logical_expression(logic_str)
 
@@ -1026,14 +1070,14 @@ class BoardProcessor:
             pass
 
         # 计算匹配百分比
-        match_percentage = self.calculate_match_percentage(compliance)
+        match_degree = self.calculate_match_percentage(compliance)
         satisfied_count = sum(1 for item in compliance.values()
                               if isinstance(item, dict) and item.get('value') is True)
         total_count = len(compliance)
 
         self.log_debug(f"[DEBUG] ========== 板卡合规性评估完成 ==========")
         self.log_debug(
-            f"[DEBUG] 匹配程度: {match_percentage}% (满足 {satisfied_count}/{total_count} 个条件)")
+            f"[DEBUG] 匹配程度: {match_degree}% (满足 {satisfied_count}/{total_count} 个条件)")
         self.log_debug("-" * 80 + "\n")
         return compliance
 
@@ -1089,7 +1133,7 @@ class BoardProcessor:
         matched_boards = []
         board_original_map = {}
         all_candidate_ids = set()  # 所有有值的板卡ID（去重后）
-        all_match_ids = set()  # 完全匹配的板卡ID（match_percentage=100，去重后）
+        all_match_ids = set()  # 完全匹配的板卡ID（match_degree=100，去重后）
         unsatisfied_requirements = []  # 无法处理的需求（DNF为空或处理失败）
 
         # 用于计算linprog_requiremnets
@@ -1130,12 +1174,6 @@ class BoardProcessor:
                 self.log_debug(
                     f"\n[DEBUG] 【处理板卡 ({idx}/{len(boards_with_values)})】ID: {board_id}, 型号: {board_model}")
 
-                # 记录该板卡满足的需求
-                if board_id not in board_original_map:
-                    board_original_map[board_id] = []
-                if original not in board_original_map[board_id]:
-                    board_original_map[board_id].append(original)
-
                 # 提取board_specification
                 board_spec = self.extract_board_specification(
                     board, fields, req_spec)
@@ -1143,8 +1181,8 @@ class BoardProcessor:
                 # 构建compliance
                 compliance = self.build_compliance(board, dnf)
 
-                # 计算match_percentage
-                match_percentage = self.calculate_match_percentage(compliance)
+                # 计算match_degree
+                match_degree = self.calculate_match_percentage(compliance)
 
                 # 添加到matched_boards
                 # 使用 board_id 作为 id（与 linprog_input_data 保持一致）
@@ -1154,7 +1192,8 @@ class BoardProcessor:
                     'model': board.get('model', ''),
                     'description': board.get('brief_description', '') or board.get('detailed_description', ''),
                     'original': original,
-                    'match_percentage': match_percentage,
+                    'match_degree': match_degree,
+                    'price_cny': board.get('price_cny'),
                     'requirement_specification': req_spec,
                     'board_specification': board_spec,
                     'compliance': compliance
@@ -1162,8 +1201,13 @@ class BoardProcessor:
 
                 # 统计所有有值的板卡和完全匹配的板卡
                 all_candidate_ids.add(board_id)  # 所有有值的板卡
-                if match_percentage == 100:
+                if match_degree == 100:
                     all_match_ids.add(board_id)  # 完全匹配的板卡
+                    # 只有百分百匹配时，才记录该板卡满足的需求
+                    if board_id not in board_original_map:
+                        board_original_map[board_id] = []
+                    if original not in board_original_map[board_id]:
+                        board_original_map[board_id].append(original)
 
             # 更新requirement_channel_counts
             for field in fields:
@@ -1181,7 +1225,7 @@ class BoardProcessor:
                                 int(req_value)
                             )
 
-        # 4. 构建linprog_input_data（从matched_boards中提取match_percentage=100的板卡）
+        # 4. 构建linprog_input_data（从matched_boards中提取match_degree=100的板卡）
         # 按板卡去重，只保留完全匹配的板卡
         # 直接使用 all_match_ids，确保与统计一致
         perfect_match_board_ids = all_match_ids
@@ -1245,104 +1289,236 @@ class BoardProcessor:
         if self.log_file:
             print(f"  - 日志文件: {self.log_file}")
 
-    def main(self):
-        """主函数"""
-        # 设置输出编码为UTF-8（Windows兼容）
-        if sys.platform == 'win32':
-            try:
-                sys.stdout = io.TextIOWrapper(
-                    sys.stdout.buffer, encoding='utf-8', errors='replace')
-            except:
-                pass
+def process_dnf_requirements_core(
+    require: List[Dict[str, Any]]
+    ) -> Dict[str, Any]:
+    """
+    处理DNF逻辑表达式，查询数据库，生成板卡匹配结果（核心逻辑）
+    
+    Args:
+        require: 需求列表，每个需求包含：
+            - id: 可选的需求ID
+            - original: 原始需求描述
+            - DNF: DNF逻辑表达式
+    
+    Returns:
+        包含处理结果的字典，格式与 ProcessDNFResponse 对应
+    """
+    # 创建 BoardProcessor 实例
+    processor = BoardProcessor()
 
-        try:
-            if len(sys.argv) > 1 and not sys.argv[1].endswith('.json'):
-                arg = sys.argv[1]
-                if os.path.isfile(arg):
-                    with open(arg, 'r', encoding='utf-8') as f:
-                        input_logic = f.read().strip()
-                else:
-                    input_logic = arg
+    # 设置日志（使用内存缓冲区，不写文件）
+    import logging
+    import io
+    log_buffer = io.StringIO()
+    handler = logging.StreamHandler(log_buffer)
+    handler.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(message)s')
+    handler.setFormatter(formatter)
+    processor.logger = logging.getLogger('BoardProcessor')
+    processor.logger.setLevel(logging.DEBUG)
+    processor.logger.handlers = []
+    processor.logger.addHandler(handler)
 
-                print("=== 输入的逻辑表达式 ===")
-                print(input_logic)
-                print()
+    # 获取所有板卡数据
+    all_boards = processor.query_board_data()
 
-                try:
-                    boards, status = self.find_matching_boards(input_logic)
+    # 用于存储结果
+    linprog_input_data = []
+    matched_boards = []
+    board_original_map = {}
+    all_candidate_ids = set()
+    all_match_ids = set()
+    unsatisfied_requirements = []  # 无法处理的需求（DNF为空或没有百分百匹配的板卡）
+    requirement_channel_counts = {}
 
-                    print("=== 匹配的板卡 ===")
-                    if boards:
-                        print(f"共找到 {len(boards)} 个匹配的板卡:\n")
-                        for i, board in enumerate(boards, 1):
-                            print(f"板卡 {i}:")
-                            print(f"  ID: {board.get('id', 'N/A')}")
-                            print(f"  型号: {board.get('model', 'N/A')}")
-                            if 'price_cny' in board and board['price_cny']:
-                                print(f"  价格: {board['price_cny']} CNY")
-                            if board.get('brand'):
-                                print(f"  品牌: {board['brand']}")
-                            if board.get('type'):
-                                print(f"  类型: {board['type']}")
+    # 处理每个需求
+    for req_index, req in enumerate(require):
+        req_id = req.get('id') if req.get('id') else f"req_{req_index}_{uuid.uuid4().hex[:8]}"
+        original = req.get('original', '')
+        dnf = req.get('DNF', '')
 
-                            condition_fields = set()
-                            for cond in status.get('matched_with', []):
-                                for field_candidate in ['AD_', 'DA_', 'DI_', 'DO_', 'UART_', 'Counter_',
-                                                        'RTD_', 'PWM_', 'Motion_', 'A429_', 'LVDT_', 'RDC_']:
-                                    if field_candidate.lower() in cond.lower():
-                                        parts = cond.split('≥')[0].split('≤')[0].split(
-                                            '>')[0].split('<')[0].split('=')[0].split('⊇')[0]
-                                        if parts:
-                                            field = parts[0].strip()
-                                            condition_fields.add(field.lower())
+        if not dnf or not dnf.strip():
+            # 记录无法处理的需求（DNF为空）
+            if original:
+                unsatisfied_requirements.append({
+                    'original': original
+                })
+            continue
 
-                            for key, value in board.items():
-                                if value is not None and key in condition_fields:
-                                    print(f"  {key}: {value}")
-                            print()
-                    else:
-                        print("未找到匹配的板卡")
+        # 提取字段
+        fields = processor.extract_fields_from_dnf(dnf)
 
-                    print("\n=== 条件满足情况 ===")
-                    print(f"总条件数: {status.get('total_conditions', 0)}")
-                    print(
-                        f"满足条件数: {status.get('matched_conditions_count', 0)}")
-                    if status.get('total_conditions', 0) > 0:
-                        print(
-                            f"满足比例: {status.get('satisfied_ratio', 0.0):.2%}")
+        # 提取requirement_specification
+        req_spec = processor.extract_requirement_specification(dnf)
 
-                    if status.get('condition_status'):
-                        print("\n各条件状态:")
-                        for cond, satisfied in status.get('condition_status', {}).items():
-                            status_str = "[OK]" if satisfied else "[NO]"
-                            print(f"  {status_str} {cond}")
+        # 查找所有逻辑表达式中字段有值的板卡
+        boards_with_values = processor.find_boards_with_values(
+            fields, exclude_board_ids=None)
 
-                    if status.get('matched_with'):
-                        print(f"\n匹配时使用的条件:")
-                        for cond in status['matched_with']:
-                            print(f"  - {cond}")
+        # 跟踪当前需求是否有完全匹配的板卡
+        req_has_perfect_match = False
 
-                except Exception as e:
-                    print(f"错误: {e}")
-                    import traceback
-                    traceback.print_exc()
-            else:
-                input_file = os.path.join(
-                    os.path.dirname(__file__), 'input.json')
-                output_file = os.path.join(
-                    os.path.dirname(__file__), 'output.json')
+        # 对所有有值的板卡进行匹配打分
+        for board in boards_with_values:
+            board_id = str(board.get('id', ''))
 
-                if len(sys.argv) > 1:
-                    input_file = sys.argv[1]
-                if len(sys.argv) > 2:
-                    output_file = sys.argv[2]
+            # 提取board_specification
+            board_spec = processor.extract_board_specification(
+                board, fields, req_spec)
 
-                self.process_requirements(input_file, output_file)
+            # 构建compliance
+            compliance = processor.build_compliance(board, dnf)
 
-        finally:
-            self.close_connection()
+            # 计算match_degree
+            match_degree = processor.calculate_match_percentage(
+                compliance)
+
+            # 添加到matched_boards
+            matched_boards.append({
+                'id': board_id,
+                'requirement_id': req_id,
+                'model': board.get('model', ''),
+                'description': board.get('brief_description', '') or board.get('detailed_description', ''),
+                'original': original,
+                'match_degree': match_degree,
+                'price_cny': board.get('price_cny'),
+                'requirement_specification': req_spec,
+                'board_specification': board_spec,
+                'compliance': compliance
+            })
+
+            # 统计所有有值的板卡和完全匹配的板卡
+            all_candidate_ids.add(board_id)
+            if match_degree == 100:
+                all_match_ids.add(board_id)
+                req_has_perfect_match = True
+                # 只有百分百匹配时，才记录该板卡满足的需求
+                if board_id not in board_original_map:
+                    board_original_map[board_id] = []
+                if original not in board_original_map[board_id]:
+                    board_original_map[board_id].append(original)
+
+        # 如果当前需求没有完全匹配的板卡，添加到 unsatisfied_requirements
+        if not req_has_perfect_match and original:
+            unsatisfied_requirements.append({
+                'original': original
+            })
+        else:
+            # 只有当前需求有完全匹配的板卡时，才更新 requirement_channel_counts
+            # 如果需求在 unsatisfied_requirements 中，对应的通道数不计入 linprog_requiremnets
+            for field in fields:
+                field_lower = field.lower()
+                if field_lower in [f.lower() for f in CHANNEL_COUNT_FIELDS]:
+                    if field_lower in req_spec:
+                        req_info = req_spec[field_lower]
+                        req_value = req_info.get('value') if isinstance(
+                            req_info, dict) else req_info
+                        if isinstance(req_value, (int, float)) and req_value > 0:
+                            if field_lower not in requirement_channel_counts:
+                                requirement_channel_counts[field_lower] = 0
+                            requirement_channel_counts[field_lower] = max(
+                                requirement_channel_counts[field_lower],
+                                int(req_value)
+                            )
+
+    # 构建linprog_input_data（从matched_boards中提取match_degree=100的板卡）
+    perfect_match_board_ids = all_match_ids
+
+    board_dict = {}
+    for board in all_boards:
+        board_id = str(board.get('id', ''))
+        if board_id and board_id in perfect_match_board_ids:
+            board_dict[board_id] = board
+
+    for board_id, board in board_dict.items():
+        matrix = processor.build_matrix_channel_count(board)
+        original_list = board_original_map.get(board_id, [])
+
+        linprog_input_data.append({
+            'id': board_id,
+            'matrix_channel_count': matrix,
+            'model': board.get('model', ''),
+            'price_cny': board.get('price_cny'),
+            'original': original_list
+        })
+
+    # 构建linprog_requiremnets
+    linprog_requiremnets = []
+    for field in CHANNEL_COUNT_FIELDS:
+        field_lower = field.lower()
+        value = requirement_channel_counts.get(field_lower, 0)
+        linprog_requiremnets.append(value)
+
+    # 构建输出数据
+    output_data = {
+        'timestamp': datetime.now().isoformat(),
+        'linprog_input_data': linprog_input_data,
+        'linprog_requiremnets': linprog_requiremnets,
+        'matched_boards': matched_boards,
+        'total_candidates': len(all_candidate_ids),
+        'total_matches': len(all_match_ids),
+        'processing_info': {
+            'requirements_processed': len(require),
+            'boards_found': len(linprog_input_data),
+            'matches_made': len(matched_boards)
+        },
+        'unsatisfied_requirements': unsatisfied_requirements
+    }
+
+    # 转换 Decimal 为 float
+    output_data = processor.convert_decimal_to_float(output_data)
+
+    # 关闭数据库连接
+    processor.close_connection()
+
+    return output_data
 
 
 if __name__ == '__main__':
-    processor = BoardProcessor()
-    processor.main()
+    try:
+        require_list = {
+            "require": [
+                
+                {
+                "original": "提供不少于8路DADCO",
+                "category": "",
+                "type": "",
+                "attribute": {},
+                "DNF": ""
+                },
+                {
+                "original": "提供不少于16路异步串行通道，支持RS-232/422模式配置，通讯速度不低于111921.6Kbps",
+                "category": "通信协议",
+                "type": "串口板卡",
+                "attribute": {
+                    "uart_channel_count": 16,
+                    "uart_interface_types_supported": [
+                    "RS-232",
+                    "RS-422"
+                    ],
+                    "uart_max_baud_rate_bps": 111921600
+                },
+                "DNF": "(uart_channel_count ≥ 16) ∧ (uart_interface_types_supported⊇ {\"RS-232\", \"RS-422\"}) ∧ (uart_max_baud_rate_bps ≥ 111921600)"
+                }
+            ]
+        }
+
+        # 调用核心处理函数（与生产环境使用相同的函数）
+        # 注意：process_dnf_requirements_core 期望的是列表，不是包含 "require" 键的字典
+        output_data = process_dnf_requirements_core(require=require_list["require"])
+
+        print(output_data)
+        print(f"\n处理完成！")
+        print(f"  - 处理了 {output_data['processing_info']['requirements_processed']} 个需求")
+        print(f"  - 找到 {output_data['processing_info']['boards_found']} 个完全匹配的板卡（用于线性规划）")
+        print(f"  - 完全匹配了 {output_data['total_matches']} 个板卡（去重后）")
+        print(f"  - 生成了 {output_data['processing_info']['matches_made']} 个匹配记录（包含所有有值的板卡）")
+        print(f"  - 无法处理的需求: {output_data['processing_info'].get('unsatisfied_count', len(output_data.get('unsatisfied_requirements', [])))} 个")
+
+
+    except Exception as e:
+        print(f"错误: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)

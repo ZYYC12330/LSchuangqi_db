@@ -2,8 +2,6 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any
-import numpy as np
-from scipy.optimize import linprog
 import uvicorn
 import json
 from openpyxl import load_workbook, Workbook
@@ -13,7 +11,8 @@ import os
 from datetime import datetime
 import requests
 import uuid
-from process_dnf import BoardProcessor, CHANNEL_COUNT_FIELDS
+from process_dnf import BoardProcessor, CHANNEL_COUNT_FIELDS, process_dnf_requirements_core
+from optimize import optimize_card_selection_core
 
 # 配置环境变量
 API_KEY = os.getenv('API_KEY', 'sk-zzvwbcaxoss3')
@@ -74,6 +73,8 @@ class OptimizedCard(BaseModel):
     unit_price: int
     total_price: int
     id: str
+    original: Optional[List[str]] = Field(
+        None, description="原始需求描述列表（可选，来自process_dnf输出）")
 
 
 class ChannelSatisfaction(BaseModel):
@@ -134,177 +135,46 @@ async def optimize_card_selection(request: OptimizationRequest):
     返回最优采购方案，包括总成本和每种板卡的采购数量
     """
     try:
-        # 1. 数据验证
-        if len(request.linprog_requiremnets) != CHANNEL_COUNT:
-            raise HTTPException(
-                status_code=400,
-                detail=f"linprog_requiremnets 必须有 {CHANNEL_COUNT} 个元素，当前有 {len(request.linprog_requiremnets)} 个"
-            )
-
-        if len(request.linprog_input_data) == 0:
-            raise HTTPException(
-                status_code=400, detail="linprog_input_data 中没有板卡数据")
-
-        # 2. 转换输入数据格式
-        all_cards = []
-        for item in request.linprog_input_data:
-            all_cards.append(CardInfo(
-                id=str(item.get('id', '')),
-                matrix_channel_count=item.get('matrix_channel_count', []),
-                model=item.get('model', ''),
-                price_cny=item.get('price_cny', 0),
-                original=item.get('original', None)
-            ))
-
-        requirements = request.linprog_requiremnets
-
-        n_cards = len(all_cards)
-
-        # 3. 验证每个板卡的 matrix_channel_count 长度
-        for idx, card in enumerate(all_cards):
-            if len(card.matrix_channel_count) != CHANNEL_COUNT:
-                raise HTTPException(
-                    status_code=400,
-                    detail=f"板卡 [{idx}] {card.model} 的 matrix_channel_count 必须有 {CHANNEL_COUNT} 个元素，当前有 {len(card.matrix_channel_count)} 个"
-                )
-
-        # 4. 构建资源矩阵
-        resource_matrix = []
-        prices = []
-        models = []
-        card_ids = []
-
-        for card in all_cards:
-            models.append(card.model)
-            prices.append(card.price_cny)
-            card_ids.append(card.id)
-            resource_matrix.append(card.matrix_channel_count)
-
-        A = np.array(resource_matrix)  # shape: (n_cards, CHANNEL_COUNT)
-        prices = np.array(prices)
-        b_requirements = np.array(requirements)
-
-        # 5. 生成需求摘要
-        requirements_summary = []
-        for i, (req, ch_type) in enumerate(zip(requirements, CHANNEL_TYPES)):
-            if req > 0:
-                requirements_summary.append({
-                    "index": i,
-                    "channel_type": ch_type,
-                    "required": req
-                })
-
-        # 6. 需求可行性检查
-        feasibility_checks = []
-
-        for i, channel_type in enumerate(CHANNEL_TYPES):
-            if b_requirements[i] > 0:
-                max_available = int(A[:, i].sum())
-                max_single_card = int(A[:, i].max())
-                status = "OK" if max_available >= b_requirements[i] else "不足"
-
-                feasibility_checks.append(FeasibilityCheck(
-                    channel_type=channel_type,
-                    required=int(b_requirements[i]),
-                    available_total=max_available,
-                    max_single_card=max_single_card,
-                    status=status
-                ))
-
-        # 7. 识别无法满足的需求并放松约束
-        unsatisfied_requirements = []
-        b_requirements_adjusted = b_requirements.copy()
-
-        for i, channel_type in enumerate(CHANNEL_TYPES):
-            if b_requirements[i] > 0:
-                max_available = A[:, i].sum()
-                if max_available < b_requirements[i]:
-                    # 记录无法满足的需求
-                    unsatisfied_requirements.append({
-                        "channel_type": channel_type,
-                        "required": int(b_requirements[i]),
-                        "available": int(max_available)
-                    })
-                    # 放松约束
-                    b_requirements_adjusted[i] = 0
-
-        # 8. 线性规划求解（使用调整后的需求向量）
-        c = prices
-        A_ub = -A.T
-        b_ub = -b_requirements_adjusted
-        bounds = [(0, None)] * n_cards
-
-        result = linprog(
-            c=c,
-            A_ub=A_ub,
-            b_ub=b_ub,
-            bounds=bounds,
-            method='highs',
-            integrality=[1] * n_cards
+        # 调用核心优化函数
+        result = optimize_card_selection_core(
+            linprog_input_data=request.linprog_input_data,
+            linprog_requiremnets=request.linprog_requiremnets
         )
 
-        if not result.success:
-            return OptimizationResponse(
-                success=False,
-                message=f"优化求解失败: {result.message}",
-                total_cards=n_cards,
-                requirements_summary=requirements_summary,
-                feasibility_checks=feasibility_checks,
-                unsatisfied_requirements=unsatisfied_requirements
-            )
+        # 将字典结果转换为 Pydantic 模型
+        # 转换 feasibility_checks
+        feasibility_checks = [
+            FeasibilityCheck(**fc) for fc in result.get('feasibility_checks', [])
+        ]
 
-        # 9. 构建优化方案
-        optimized_solution = []
-        total_cost = 0
+        # 转换 optimized_solution
+        optimized_solution = None
+        if result.get('optimized_solution'):
+            optimized_solution = [
+                OptimizedCard(**card) for card in result['optimized_solution']
+            ]
 
-        for i, quantity in enumerate(result.x):
-            if quantity > 0.01:
-                qty = int(quantity)
-                cost = qty * prices[i]
-                optimized_solution.append(OptimizedCard(
-                    model=models[i],
-                    quantity=qty,
-                    unit_price=int(prices[i]),
-                    total_price=int(cost),
-                    id=card_ids[i]
-                ))
-                total_cost += cost
-
-        # 10. 计算实际满足的通道需求
-        satisfied_channels = A.T @ result.x
-        channel_satisfaction = []
-
-        for i, channel_type in enumerate(CHANNEL_TYPES):
-            if b_requirements[i] > 0 or satisfied_channels[i] > 0.01:
-                satisfied = int(satisfied_channels[i])
-                required = int(b_requirements[i])
-                status = "OK" if satisfied >= required else "不足"
-
-                channel_satisfaction.append(ChannelSatisfaction(
-                    channel_type=channel_type,
-                    required=required,
-                    satisfied=satisfied,
-                    status=status
-                ))
-
-        # 构建响应消息
-        if unsatisfied_requirements:
-            message = "优化成功（部分需求无法满足）"
-        else:
-            message = "优化成功"
+        # 转换 channel_satisfaction
+        channel_satisfaction = None
+        if result.get('channel_satisfaction'):
+            channel_satisfaction = [
+                ChannelSatisfaction(**cs) for cs in result['channel_satisfaction']
+            ]
 
         return OptimizationResponse(
-            success=True,
-            message=message,
-            total_cards=n_cards,
-            requirements_summary=requirements_summary,
+            success=result['success'],
+            message=result['message'],
+            total_cards=result['total_cards'],
+            requirements_summary=result['requirements_summary'],
             feasibility_checks=feasibility_checks,
             optimized_solution=optimized_solution,
-            total_cost=int(total_cost),
+            total_cost=result.get('total_cost'),
             channel_satisfaction=channel_satisfaction,
-            unsatisfied_requirements=unsatisfied_requirements
+            unsatisfied_requirements=result.get('unsatisfied_requirements', [])
         )
 
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
     except HTTPException:
         raise
     except Exception as e:
@@ -337,6 +207,8 @@ class ProcessDNFResponse(BaseModel):
     total_candidates: int
     total_matches: int
     processing_info: Dict[str, Any]
+    unsatisfied_requirements: List[Dict[str, Any]] = Field(
+        default_factory=list, description="无法处理的需求（DNF为空或没有百分百匹配的板卡）")
 
 
 @app.post("/process-dnf", response_model=ProcessDNFResponse)
@@ -352,167 +224,18 @@ async def process_dnf_requirements(request: ProcessDNFRequest):
     返回匹配的板卡数据和线性规划输入数据
     """
     try:
-        # 创建 BoardProcessor 实例
-        processor = BoardProcessor()
-
-        # 设置日志（使用内存缓冲区，不写文件）
-        import logging
-        import io
-        log_buffer = io.StringIO()
-        handler = logging.StreamHandler(log_buffer)
-        handler.setLevel(logging.DEBUG)
-        formatter = logging.Formatter('%(message)s')
-        handler.setFormatter(formatter)
-        processor.logger = logging.getLogger('BoardProcessor')
-        processor.logger.setLevel(logging.DEBUG)
-        processor.logger.handlers = []
-        processor.logger.addHandler(handler)
-
-        # 构建输入数据格式（模拟 input.json 格式）
-        input_data = {
-            'require': [
-                {
-                    'id': req.id if req.id else f"req_{idx}_{uuid.uuid4().hex[:8]}",
-                    'original': req.original,
-                    'DNF': req.DNF
-                }
-                for idx, req in enumerate(request.require)
-            ]
-        }
-
-        # 获取所有板卡数据
-        all_boards = processor.query_board_data()
-
-        # 用于存储结果
-        linprog_input_data = []
-        matched_boards = []
-        board_original_map = {}
-        all_candidate_ids = set()
-        all_match_ids = set()
-        requirement_channel_counts = {}
-
-        # 处理每个需求
-        for req_index, req in enumerate(request.require):
-            req_id = req.id if req.id else f"req_{req_index}_{uuid.uuid4().hex[:8]}"
-            original = req.original
-            dnf = req.DNF
-
-            if not dnf or not dnf.strip():
-                continue
-
-            # 提取字段
-            fields = processor.extract_fields_from_dnf(dnf)
-
-            # 提取requirement_specification
-            req_spec = processor.extract_requirement_specification(dnf)
-
-            # 查找所有逻辑表达式中字段有值的板卡
-            boards_with_values = processor.find_boards_with_values(
-                fields, exclude_board_ids=None)
-
-            # 对所有有值的板卡进行匹配打分
-            for board in boards_with_values:
-                board_id = str(board.get('id', ''))
-
-                # 记录该板卡满足的需求
-                if board_id not in board_original_map:
-                    board_original_map[board_id] = []
-                if original not in board_original_map[board_id]:
-                    board_original_map[board_id].append(original)
-
-                # 提取board_specification
-                board_spec = processor.extract_board_specification(
-                    board, fields, req_spec)
-
-                # 构建compliance
-                compliance = processor.build_compliance(board, dnf)
-
-                # 计算match_percentage
-                match_percentage = processor.calculate_match_percentage(
-                    compliance)
-
-                # 添加到matched_boards
-                matched_boards.append({
-                    'id': board_id,
-                    'requirement_id': req_id,
-                    'model': board.get('model', ''),
-                    'description': board.get('brief_description', '') or board.get('detailed_description', ''),
-                    'original': original,
-                    'match_percentage': match_percentage,
-                    'requirement_specification': req_spec,
-                    'board_specification': board_spec,
-                    'compliance': compliance
-                })
-
-                # 统计所有有值的板卡和完全匹配的板卡
-                all_candidate_ids.add(board_id)
-                if match_percentage == 100:
-                    all_match_ids.add(board_id)
-
-            # 更新requirement_channel_counts
-            for field in fields:
-                field_lower = field.lower()
-                if field_lower in [f.lower() for f in CHANNEL_COUNT_FIELDS]:
-                    if field_lower in req_spec:
-                        req_info = req_spec[field_lower]
-                        req_value = req_info.get('value') if isinstance(
-                            req_info, dict) else req_info
-                        if isinstance(req_value, (int, float)) and req_value > 0:
-                            if field_lower not in requirement_channel_counts:
-                                requirement_channel_counts[field_lower] = 0
-                            requirement_channel_counts[field_lower] = max(
-                                requirement_channel_counts[field_lower],
-                                int(req_value)
-                            )
-
-        # 构建linprog_input_data（从matched_boards中提取match_percentage=100的板卡）
-        perfect_match_board_ids = all_match_ids
-
-        board_dict = {}
-        for board in all_boards:
-            board_id = str(board.get('id', ''))
-            if board_id and board_id in perfect_match_board_ids:
-                board_dict[board_id] = board
-
-        for board_id, board in board_dict.items():
-            matrix = processor.build_matrix_channel_count(board)
-            original_list = board_original_map.get(board_id, [])
-
-            linprog_input_data.append({
-                'id': board_id,
-                'matrix_channel_count': matrix,
-                'model': board.get('model', ''),
-                'price_cny': board.get('price_cny'),
-                'original': original_list
-            })
-
-        # 构建linprog_requiremnets
-        linprog_requiremnets = []
-        for field in CHANNEL_COUNT_FIELDS:
-            field_lower = field.lower()
-            value = requirement_channel_counts.get(field_lower, 0)
-            linprog_requiremnets.append(value)
-
-        # 构建输出数据
-        output_data = {
-            'timestamp': datetime.now().isoformat(),
-            'linprog_input_data': linprog_input_data,
-            'linprog_requiremnets': linprog_requiremnets,
-            'matched_boards': matched_boards,
-            'total_candidates': len(all_candidate_ids),
-            'total_matches': len(all_match_ids),
-            'processing_info': {
-                'requirements_processed': len(request.require),
-                'boards_found': len(linprog_input_data),
-                'matches_made': len(matched_boards)
+        # 构建输入数据格式（转换为字典列表）
+        require_list = [
+            {
+                'id': req.id if req.id else f"req_{idx}_{uuid.uuid4().hex[:8]}",
+                'original': req.original,
+                'DNF': req.DNF
             }
-        }
+            for idx, req in enumerate(request.require)
+        ]
 
-        # 转换 Decimal 为 float
-        output_data = processor.convert_decimal_to_float(output_data)
-
-        # 关闭数据库连接
-        processor.close_connection()
+        # 调用核心处理函数
+        output_data = process_dnf_requirements_core(require=require_list)
 
         return ProcessDNFResponse(
             success=True,
@@ -523,7 +246,8 @@ async def process_dnf_requirements(request: ProcessDNFRequest):
             matched_boards=output_data['matched_boards'],
             total_candidates=output_data['total_candidates'],
             total_matches=output_data['total_matches'],
-            processing_info=output_data['processing_info']
+            processing_info=output_data['processing_info'],
+            unsatisfied_requirements=output_data.get('unsatisfied_requirements', [])
         )
 
     except Exception as e:

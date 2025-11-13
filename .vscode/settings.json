@@ -1,0 +1,6 @@
+{
+    "python.defaultInterpreterPath": "/Users/icemilk/miniconda3/envs/lscq/bin/python",
+    "python.terminal.activateEnvironment": true,
+    "python.terminal.activateEnvInCurrentTerminal": true
+}
+
