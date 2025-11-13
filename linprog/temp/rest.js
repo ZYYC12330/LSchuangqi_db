@@ -47,12 +47,21 @@ async function main(data) {
         }
       }
   
-      // 3. 避免除零或无效值（至少需要1张板卡）
-      if (boardValue <= 0) {
-        boardValue = 1;
+      // 3. 如果 board_specification 中没有通道数字段，尝试从描述中解析
+      if (boardValue <= 0 && bestMatch && bestMatch.description) {
+        // 尝试匹配 "X通道" 或 "X路" 的模式
+        const channelMatch = bestMatch.description.match(/(\d+)[通道路]/);
+        if (channelMatch) {
+          boardValue = parseInt(channelMatch[1], 10);
+        }
       }
   
-      // 4. 计算最少需要的板卡数量（向上取整）
+      // 4. 避免除零或无效值：如果仍然找不到，使用需求值（这样至少需要1张板卡）
+      if (boardValue <= 0) {
+        boardValue = requirementValue > 0 ? requirementValue : 1;
+      }
+  
+      // 5. 计算最少需要的板卡数量（向上取整）
       const quantity = Math.ceil(requirementValue / boardValue);
   
       // ======== 构造结果对象：无论是否匹配，都添加 quantity ========
@@ -76,6 +85,9 @@ async function main(data) {
       }
     }
   
-    return { "results_board": results_board };
+    return { 
+    "results_board": results_board, 
+    "matched_board": matched_boards 
+  };
   }
   

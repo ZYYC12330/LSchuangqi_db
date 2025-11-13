@@ -1,0 +1,88 @@
+ {
+    "card": [
+      {
+        "id": "13",
+        "model": "Links-IPC-CAN",
+        "description": "CAN总线接口，2个高速通道，16Mhz控制速率， 1Mbps传输率，20V隔离 ；",
+        "original": [
+          "提供不少于2个CAN总线接口"
+        ],
+        "match_degree": 100,
+        "price_cny": 60,
+        "quantity": 1,
+        "status": "combination"
+      },
+      {
+        "id": "4",
+        "model": "Links-IPC-DAQ-08",
+        "description": "12路PWM输出通道，每路可独立控制，10Hz~1MHz，可以两路一组构成互补输出关系（死区可设置）；\n2路增量式正交编码器采集通道，32位计数器，可直接输出角度和角速度；\n6路差分信号输入通道，可配置为霍尔编码器采集；\n8路并行A/D，16位分辨率，±10V，采样率100kHz；\n4路DA，16位分辨率，±10V；\n8路DI，8路DO，TTL电平；\n2路5V供电输出，单路最大电流输出200mA；\n2路数字I/O线（5V CMOS/TTL），可配置为脉冲采集通道，可采集脉冲频率和占空比，32位计数器。",
+        "original": [
+          "提供不少于12路PWM输出通道，每路可独立控制，10Hz~1MHz，可以两路一组构成互补输出关系（死区可设置）",
+          "提供不少于2路增量式正交编码器采集通道，32位计数器，可直接输出角度和角速度",
+          "提供不少于8路DA，16位分辨率，±10V",
+          "提供不少于8路DI",
+          "提供不少于8路DO"
+        ],
+        "match_degree": 100,
+        "price_cny": 90,
+        "quantity": 2,
+        "status": "combination"
+      },
+      {
+        "id": "10",
+        "requirement_id": "req_0_3dd84037",
+        "model": "Links-IPC-SER-01",
+        "description": "PCI接口，8路异步串行通道，支持RS-232/422/485模式配置，通讯速度可达到921.6Kbps，板载128字节FIFO",
+        "original": "提供不少于16路异步串行通道，支持RS-232/422/485模式配置，通讯速度不低于921.6Kbps",
+        "match_degree": 66,
+        "price_cny": 60,
+        "status": "single_choice",
+        "quantity": 2
+      },
+      {
+        "id": "49",
+        "requirement_id": "req_4_d041c154",
+        "model": "Links-C3U-DI01",
+        "description": "32通道数字量采集\n每通道V/OPEN、V/GND和GND/OPEN模式输入可选\n输入支持5V或定制电平信号（需外置电源，0～28V）\nV/GND模式下输入对地阻抗不小于100KΩ\nGND/OPEN模式下输入对电源阻抗不小于120KΩ\n输入端口具有过压保护，40V@1min",
+        "original": "提供不少于6路差分信号输入通道，可配置为霍尔编码器采集",
+        "match_degree": 50,
+        "price_cny": 110,
+        "status": "single_choice",
+        "quantity": 1
+      },
+      {
+        "id": "7",
+        "requirement_id": "req_5_78e0ccaa",
+        "model": "Links-IPC-AD-01",
+        "description": "16通道并行模拟量采集，16位分辨率\n每8通道一组，整组支持配置为电压采集或电流采集\n电压采集：精度0.1%（F.S.），范围-10V～+10V（可客制-30V～+30V）\n采样率：200kHz\n电流采集：精度0.1%（F.S.），范围-20mA～+20mA（可客制-100mA～+100mA）",
+        "original": "提供不少于8路并行A/D，16位分辨率，±10V，采样率100kHz",
+        "match_degree": 40,
+        "price_cny": 190,
+        "status": "single_choice",
+        "quantity": 8
+      },
+      {
+        "original": "提供不少于8路DADCO",
+        "description": "找不到相关板卡",
+        "status": "single_choice",
+        "quantity": 0
+      }
+    ],
+    "raw_sim": [
+      {
+        "id": "c5e409a4-64ce-4486-a50a-7f73c8015b91",
+        "category": "机箱&CPU控制器",
+        "type": "实时仿真器",
+        "model": "Links-SuperBox-01-S6",
+        "brief_description": "CPU：2颗英特尔® 至强® Gold 3.9GHz八核处理器，共计16核，运行实时操作系统；\n硬盘：1TB SATA硬盘（up to 4TB）；\n内存：64G DDR4 SDRAM（up to 256G）；\nIO扩展插槽：CPU1：2个PCIe×8，1个PCIe×16；CPU2：3个PCIe×16。",
+        "detailed_description": "CPU：2颗英特尔® 至强® Gold 3.9GHz八核处理器，共计16核，运行实时操作系统；\n硬盘：1TB SATA硬盘（up to 4TB）；\n内存：64G DDR4 SDRAM（up to 256G）；\nIO扩展插槽：CPU1：2个PCIe×8，1个PCIe×16；CPU2：3个PCIe×16。",
+        "manufacturer": "灵思创奇",
+        "price_cny": 120000,
+        "series": "Links-BOX",
+        "cpu": "2颗英特尔® 至强® Gold 3.9GHz八核处理器，共计16核，运行实时操作系统",
+        "hard_disk": "1TB SATA硬盘（up to 4TB）",
+        "memory": "64G DDR4 SDRAM（up to 256G）",
+        "slots": "2个PCIe×8，4个PCIe×16；"
+      }
+    ]
+  }

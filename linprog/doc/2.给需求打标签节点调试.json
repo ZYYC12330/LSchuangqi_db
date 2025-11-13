@@ -1,18 +1,19 @@
 {
   "require": [
     {
-      "original": "提供不少于16路异步串行通道，支持RS-232/422模式配置，通讯速度不低于111921.6Kbps",
+      "original": "提供不少于16路异步串行通道，支持RS-232/422/485模式配置，通讯速度不低于921.6Kbps",
       "category": "通信协议",
       "type": "串口板卡",
       "attribute": {
         "uart_channel_count": 16,
         "uart_interface_types_supported": [
           "RS-232",
-          "RS-422"
+          "RS-422",
+          "RS-485"
         ],
-        "uart_max_baud_rate_bps": 111921600
+        "uart_max_baud_rate_bps": 921600
       },
-      "DNF": "(uart_channel_count ≥ 16) ∧ (uart_interface_types_supported⊇ {\"RS-232\", \"RS-422\"}) ∧ (uart_max_baud_rate_bps ≥ 111921600)"
+      "DNF": "(uart_channel_count ≥ 16) ∧ (uart_interface_types_supported⊇ {\"RS-232\", \"RS-422\", \"RS-485\"}) ∧ (uart_max_baud_rate_bps ≥ 921600)"
     },
     {
       "original": "提供不少于2个CAN总线接口",
@@ -25,7 +26,7 @@
     },
     {
       "original": "提供不少于12路PWM输出通道，每路可独立控制，10Hz~1MHz，可以两路一组构成互补输出关系（死区可设置）",
-      "category": "数字量",
+      "category": "PWM和编码器",
       "type": "计数器/PWM板卡",
       "attribute": {
         "pwm_output_channel_count": 12,

@@ -370,8 +370,21 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
                 }
 
             # 收集需要合并的字段（同一张卡的多个需求）
-            original = each_obj.get('original', '')
-            if original:
+            # original 字段可能是列表或字符串格式
+            original = each_obj.get('original', [])
+            if isinstance(original, list) and original:
+                # 如果是列表，展开并添加到 originals 中，确保所有元素都是字符串
+                for item in original:
+                    if isinstance(item, str):
+                        merged_dict[item_id]['originals'].append(item)
+                    elif isinstance(item, list):
+                        # 如果是嵌套列表，递归展开（虽然不应该出现，但为了安全）
+                        merged_dict[item_id]['originals'].extend([str(x) for x in item])
+                    else:
+                        # 其他类型转换为字符串
+                        merged_dict[item_id]['originals'].append(str(item))
+            elif isinstance(original, str) and original:
+                # 如果是字符串，直接添加到 originals 中
                 merged_dict[item_id]['originals'].append(original)
 
             match_degree = each_obj.get(
@@ -390,9 +403,12 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
         # 将合并后的数据转换为列表
         merged_list = []
         for item_id, data in merged_dict.items():
+            # 确保 originals 中的所有元素都是字符串
+            originals_str = [str(item) if not isinstance(item, str) else item for item in data['originals']]
+            
             merged_item = {
                 'id': data['id'],
-                'original': '\n'.join(data['originals']),
+                'original': '\n'.join(originals_str),
                 'match_degree': '\n'.join(data['match_degrees']),
                 'reason': '\n'.join(data['reasons']),
                 'type': data['type'],
@@ -547,7 +563,7 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
 
     # 设置表头
     headers = [
-        "序号", "原始需求", "匹配依据", "匹配设备ID", "设备名称", "规格型号", "技术参数", "制造商",
+        "序号", "原始需求", "规格型号", "技术参数", "制造商",
         "数量", "单价(元)", "小计(元)"
     ]
 
@@ -606,23 +622,20 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
         # 写入数据行
         ws2.cell(row=current_row, column=1, value=idx)
         ws2.cell(row=current_row, column=2, value=demand)
-        ws2.cell(row=current_row, column=3, value=reason)
-        ws2.cell(row=current_row, column=4, value=device.get('id', ''))
-        ws2.cell(row=current_row, column=5, value=device.get('type', ''))
-        ws2.cell(row=current_row, column=6, value=device.get('model', ''))
+        ws2.cell(row=current_row, column=3, value=device.get('model', ''))
         # 兼容字段：description -> detailed_description -> brief_description
         tech_desc = device.get('description', device.get(
             'detailed_description', device.get('brief_description', '')))
-        ws2.cell(row=current_row, column=7, value=tech_desc)
-        ws2.cell(row=current_row, column=8,
+        ws2.cell(row=current_row, column=4, value=tech_desc)
+        ws2.cell(row=current_row, column=5,
                  value=device.get('manufacturer', ''))
-        ws2.cell(row=current_row, column=9, value=device.get('quantity', 1))
+        ws2.cell(row=current_row, column=6, value=device.get('quantity', 1))
 
         # 计算单价
         price_cny = device.get('price_cny', 0)
         if isinstance(price_cny, str):
             price_cny = float(price_cny.replace('￥', '').replace(',', ''))
-        ws2.cell(row=current_row, column=10, value=price_cny)
+        ws2.cell(row=current_row, column=7, value=price_cny)
 
         # 小计 - 如果没有total_amount_cny，则计算
         total_amount_cny = device.get('total_amount_cny', 0)
@@ -632,7 +645,7 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
         elif total_amount_cny == 0:
             # 如果没有提供total_amount_cny，则计算
             total_amount_cny = price_cny * device.get('quantity', 1)
-        ws2.cell(row=current_row, column=11, value=total_amount_cny)
+        ws2.cell(row=current_row, column=8, value=total_amount_cny)
 
         # 美化数据行样式
         data_border = Border(left=Side(style='thin'), right=Side(style='thin'),
@@ -649,7 +662,7 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
         data_font = Font(size=11)
 
         # 为每一列设置样式
-        for col in range(1, 12):
+        for col in range(1, 9):
             cell = ws2.cell(row=current_row, column=col)
             cell.font = data_font
             cell.fill = row_fill
@@ -661,9 +674,7 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
         # 对可能的多行文本开启换行，但保持居中
         ws2.cell(row=current_row, column=2).alignment = Alignment(
             horizontal='center', vertical='center', wrap_text=True)
-        ws2.cell(row=current_row, column=3).alignment = Alignment(
-            horizontal='center', vertical='center', wrap_text=True)
-        ws2.cell(row=current_row, column=7).alignment = Alignment(
+        ws2.cell(row=current_row, column=4).alignment = Alignment(
             horizontal='center', vertical='center', wrap_text=True)
 
         # 设置行高为自动
@@ -691,8 +702,8 @@ def generate_combined_excel(json_data: Dict[str, Any], template_path: str, outpu
             col)].width = min(max(8, maxlen*1.8), 35)
 
     # ws2需求匹配预览表还是用固定列宽
-    column_widths = [8, 35, 35, 25, 20, 18, 35, 15, 10, 15, 15]
-    column_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K']
+    column_widths = [8, 35, 18, 35, 15, 10, 15, 15]
+    column_names = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
     for i, (width, col_name) in enumerate(zip(column_widths, column_names)):
         ws2.column_dimensions[col_name].width = width
 
