@@ -303,6 +303,16 @@ async def query_sim_machines(request: QuerySimRequest):
             for req in request.require
         ]
 
+        # 如果输入为空，直接返回空输出
+        if not require_list:
+            return QuerySimResponse(
+                success=True,
+                message="查询成功",
+                result_id={},
+                sim_raw_data=[],
+                sim_pick_list=[]
+            )
+
         # 查询所有仿真机
         all_machines = query_all_sim_machines()
         

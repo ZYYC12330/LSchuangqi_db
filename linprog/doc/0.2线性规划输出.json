@@ -1,0 +1,152 @@
+{
+  "StatusCode": 200,
+  "Headers": {
+    "content-length": "2036",
+    "content-type": "application/json",
+    "date": "Fri, 14 Nov 2025 06:12:54 GMT",
+    "server": "uvicorn"
+  },
+  "Body": {
+    "success": true,
+    "message": "优化成功",
+    "total_cards": 40,
+    "requirements_summary": [
+      {
+        "index": 0,
+        "channel_type": "AD_channel_count_single_ended",
+        "required": 8
+      },
+      {
+        "index": 12,
+        "channel_type": "CAN_channel_count",
+        "required": 4
+      },
+      {
+        "index": 13,
+        "channel_type": "UART_channel_count",
+        "required": 16
+      },
+      {
+        "index": 14,
+        "channel_type": "MIL1553_channel_count",
+        "required": 1
+      },
+      {
+        "index": 29,
+        "channel_type": "RTD_channel_count",
+        "required": 10
+      }
+    ],
+    "feasibility_checks": [],
+    "optimized_solution": [
+      {
+        "model": "Links-C3U-SIO03-8C",
+        "quantity": 2,
+        "unit_price": 150,
+        "total_price": 300,
+        "id": "82",
+        "original": [
+          "16路RS422/485，3Mbps"
+        ]
+      },
+      {
+        "model": "ESI-210",
+        "quantity": 1,
+        "unit_price": 40,
+        "total_price": 40,
+        "id": "97",
+        "original": [
+          "双口1553B耦合器"
+        ]
+      },
+      {
+        "model": "Links-IPC-CAN",
+        "quantity": 2,
+        "unit_price": 60,
+        "total_price": 120,
+        "id": "13",
+        "original": [
+          "CAN总线接口，4个高速通道，16Mhz控制速率， 1Mbps传输率，10V隔离，支持CAN2.0A/B协议"
+        ]
+      },
+      {
+        "model": "Links-IPC-DAQ-07",
+        "quantity": 1,
+        "unit_price": 90,
+        "total_price": 90,
+        "id": "3",
+        "original": [
+          "高精度模拟量采集卡；通道数：8"
+        ]
+      },
+      {
+        "model": "Links-C3U-RTD01",
+        "quantity": 1,
+        "unit_price": 250,
+        "total_price": 250,
+        "id": "111",
+        "original": [
+          "PXI接口，10通道，12位分辨率，0Ω to 4kΩ，提供实时系统驱动"
+        ]
+      }
+    ],
+    "total_cost": 800,
+    "channel_satisfaction": [
+      {
+        "channel_type": "AD_channel_count_single_ended",
+        "required": 8,
+        "satisfied": 32,
+        "status": "OK"
+      },
+      {
+        "channel_type": "AD_channel_count_differential",
+        "required": 0,
+        "satisfied": 16,
+        "status": "OK"
+      },
+      {
+        "channel_type": "DI_channel_count",
+        "required": 0,
+        "satisfied": 16,
+        "status": "OK"
+      },
+      {
+        "channel_type": "DO_channel_count",
+        "required": 0,
+        "satisfied": 16,
+        "status": "OK"
+      },
+      {
+        "channel_type": "Counter_channel_count",
+        "required": 0,
+        "satisfied": 1,
+        "status": "OK"
+      },
+      {
+        "channel_type": "CAN_channel_count",
+        "required": 4,
+        "satisfied": 4,
+        "status": "OK"
+      },
+      {
+        "channel_type": "UART_channel_count",
+        "required": 16,
+        "satisfied": 16,
+        "status": "OK"
+      },
+      {
+        "channel_type": "MIL1553_channel_count",
+        "required": 1,
+        "satisfied": 2,
+        "status": "OK"
+      },
+      {
+        "channel_type": "RTD_channel_count",
+        "required": 10,
+        "satisfied": 10,
+        "status": "OK"
+      }
+    ],
+    "unsatisfied_requirements": []
+  }
+}

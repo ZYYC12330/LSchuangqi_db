@@ -581,6 +581,14 @@ def generate_output_format(all_machines: List[Dict[str, Any]], all_requirements:
     """
     生成新的输出格式
     """
+    # 如果需求为空，直接返回空输出
+    if not all_requirements:
+        return {
+            'result_id': {},
+            'sim_raw_data': [],
+            'sim_pick_list': []
+        }
+    
     # 1. 为每个仿真机计算每个需求的评分
     machine_scores = {}  # {machine_id: {req_index: score}}
     
@@ -757,6 +765,19 @@ def main():
         data = json.load(f)
     
     all_requirements = data.get('require', [])
+    
+    # 如果输入为空，直接返回空输出
+    if not all_requirements:
+        print("输入需求为空，返回空输出")
+        output_data = {
+            'result_id': {},
+            'sim_raw_data': [],
+            'sim_pick_list': []
+        }
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(output_data, f, ensure_ascii=False, indent=2)
+        print(f"结果已保存到: {output_file}")
+        return
     
     print(f"处理所有需求:")
     for i, req in enumerate(all_requirements, 1):
