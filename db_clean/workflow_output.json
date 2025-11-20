@@ -1,496 +1,2006 @@
 {
-    "qq": [
-        {
-            "output": "{\n  \"AD_channel_count_single_ended\": 16,\n  \"AD_resolution_bits\": 16,\n  \"AD_sampling_rate_Hz\": 100000.000,\n  \"AD_input_voltage_range_min_V\": -10.000,\n  \"AD_input_voltage_range_max_V\": 10.000,\n  \"custom_voltage_range_min_V\": -30.000,\n  \"custom_voltage_range_max_V\": 30.000,\n\n  \"DA_channel_count\": 16,\n  \"DA_resolution_bits\": 16,\n  \"DA_update_rate_Hz\": 100000.000,\n  \"DA_output_voltage_min_V\": -10.000,\n  \"DA_output_voltage_max_V\": 10.000,\n\n  \"DIO_total_channel_count\": 32,\n  \"DIO_logic_level\": \"5V CMOS/TTL\",\n  \"DIO_configurable_as_counter\": true,\n  \"DIO_configurable_as_pwm\": true,\n  \"Counter_channel_count\": 16,\n  \"Counter_bits\": 32\n}",
-            "id": 1
-        },
-        {
-            "output": "{\n  \"AD_channel_count_single_ended\": 32,\n  \"AD_channel_count_differential\": 16,\n  \"AD_resolution_bits\": 16,\n  \"AD_sampling_rate_Hz\": 0.000,\n  \"AD_input_voltage_range_min_V\": -10.000,\n  \"AD_input_voltage_range_max_V\": 10.000,\n  \"AD_input_voltage_programmable\": true,\n  \"DA_channel_count\": 4,\n  \"DA_resolution_bits\": 16,\n  \"DA_update_rate_Hz\": 2800000.000,\n  \"DA_output_voltage_min_V\": -10.000,\n  \"DA_output_voltage_max_V\": 10.000,\n  \"Counter_channel_count\": 4,\n  \"Counter_bits\": 32\n}",
-            "id": 2
-        },
-        {
-            "output": "{\n  \"AD_channel_count_single_ended\": 32,\n  \"AD_channel_count_differential\": 16,\n  \"AD_resolution_bits\": 16,\n  \"AD_sampling_rate_Hz\": 100000.000,\n  \"AD_input_voltage_range_min_V\": -10.000,\n  \"AD_input_voltage_range_max_V\": 10.000,\n  \"AD_input_voltage_programmable\": true,\n  \"DO_channel_count\": 16,\n  \"DI_channel_count\": 16,\n  \"DIO_isolation_voltage_V\": 20.000,\n  \"Counter_channel_count\": 1,\n  \"Counter_bits\": 32\n}",
-            "id": 3
-        },
-        {
-            "output": "{\n  \"PWM_output_channel_count\": 12,\n  \"PWM_frequency_min_Hz\": 10.000,\n  \"PWM_frequency_max_Hz\": 1000000.000,\n  \"PWM_complementary_output_support\": true,\n  \"PWM_dead_zone_configurable\": true,\n\n  \"Encoder_quadrature_channel_count\": 2,\n  \"Encoder_counter_bits\": 32,\n\n  \"Encoder_hall_channel_count\": 6,\n  \"Encoder_channel_count_differential\": 6,\n\n  \"AD_channel_count_single_ended\": 8,\n  \"AD_resolution_bits\": 16,\n  \"AD_input_voltage_range_min_V\": -10.000,\n  \"AD_input_voltage_range_max_V\": 10.000,\n  \"AD_sampling_rate_Hz\": 100000.000,\n\n  \"DA_channel_count\": 4,\n  \"DA_resolution_bits\": 16,\n  \"DA_output_voltage_min_V\": -10.000,\n  \"DA_output_voltage_max_V\": 10.000,\n\n  \"DI_channel_count\": 8,\n  \"DO_channel_count\": 8,\n  \"DIO_logic_level\": \"5V CMOS/TTL\",\n\n  \"Power_output_channel_count\": 2,\n  \"Power_output_voltage_V\": 5.000000,\n  \"Power_output_current_mA\": 200.000,\n\n  \"DIO_total_channel_count\": 2,\n  \"DIO_configurable_as_pulse_input\": true,\n  \"Counter_channel_count\": 2,\n  \"Counter_bits\": 32\n}",
-            "id": 4
-        },
-        {
-            "output": "{\n  \"DA_channel_count\": 16,\n  \"DA_resolution_bits\": 16,\n  \"DA_output_voltage_min_V\": -10.000000,\n  \"DA_output_voltage_max_V\": 10.000000,\n  \"DA_output_current_min_mA\": 0.000000,\n  \"DA_output_current_max_mA\": 20.000000,\n  \"DA_accuracy_current_percent_FS\": 0.0500,\n  \"DA_accuracy_voltage_percent_FS\": 0.1000,\n  \"DA_output_mode_programmable\": true\n}",
-            "id": 5
-        },
-        {
-            "output": "{\n  \"DA_channel_count\": 16,\n  \"DA_resolution_bits\": 16,\n  \"DA_output_voltage_min_V\": -10.000000,\n  \"DA_output_voltage_max_V\": 10.000000,\n  \"DA_output_current_min_mA\": 0.000000,\n  \"DA_output_current_max_mA\": 20.000000,\n  \"DA_accuracy_voltage_percent_FS\": 0.1000,\n  \"DA_accuracy_current_percent_FS\": 0.0500,\n  \"DA_output_mode_programmable\": true,\n  \"DIO_total_channel_count\": 16,\n  \"DIO_direction_group_size\": 8,\n  \"DIO_logic_level\": \"5V CMOS/TTL\"\n}",
-            "id": 6
-        },
-        {
-            "output": "{\n  \"AD_channel_count_single_ended\": 16,\n  \"AD_resolution_bits\": 16,\n  \"AD_sampling_rate_Hz\": 200000.000,\n  \"AD_input_voltage_range_min_V\": -10.000,\n  \"AD_input_voltage_range_max_V\": 10.000,\n  \"AD_accuracy_voltage_percent_FS\": 0.1000,\n  \"AD_input_current_ranges_mA\": \"-20~+20\",\n  \"AD_accuracy_current_percent_FS\": 0.1000,\n  \"AD_channel_group_size\": 8,\n  \"AD_group_configurable_voltage_current\": true,\n  \"custom_voltage_range_min_V\": -30.000,\n  \"custom_voltage_range_max_V\": 30.000,\n  \"custom_current_range_min_mA\": -100.000,\n  \"custom_current_range_max_mA\": 100.000\n}",
-            "id": 7
-        },
-        {
-            "output": "{\n  \"AD_channel_count_single_ended\": 32,\n  \"AD_resolution_bits\": 16,\n  \"AD_sampling_rate_Hz\": 200000.000,\n  \"AD_input_voltage_range_min_V\": -10.000,\n  \"AD_input_voltage_range_max_V\": 10.000,\n  \"AD_accuracy_voltage_percent_FS\": 0.2000,\n  \"AD_input_current_ranges_mA\": \"-20~+20\",\n  \"AD_accuracy_current_percent_FS\": 0.2000,\n  \"AD_channel_group_size\": 8,\n  \"AD_group_configurable_voltage_current\": true,\n  \"custom_voltage_range_min_V\": -30.000,\n  \"custom_voltage_range_max_V\": 30.000,\n  \"custom_current_range_min_mA\": -100.000,\n  \"custom_current_range_max_mA\": 100.000\n}",
-            "id": 8
-        },
-        {
-            "output": "{\n  \"AD_channel_count_single_ended\": 32,\n  \"AD_resolution_bits\": 16,\n  \"AD_sampling_rate_Hz\": 100000.000,\n  \"AD_input_voltage_range_min_V\": -10.000,\n  \"AD_input_voltage_range_max_V\": 10.000,\n  \"AD_input_current_ranges_mA\": \"-20~+20\",\n  \"AD_current_sampling_resistor_ohm\": 470.000,\n  \"AD_current_sampling_resistor_accuracy_percent\": 0.1000,\n  \"AD_input_impedance_ohm\": 10000000.000,\n  \"custom_voltage_range_min_V\": -30.000,\n  \"custom_voltage_range_max_V\": 30.000\n}",
-            "id": 9
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"PCI\",\n  \"UART_channel_count\": 8,\n  \"UART_interface_types_supported\": [\"RS-232\", \"RS-422\", \"RS-485\"],\n  \"UART_max_baud_rate_bps\": 921600,\n  \"UART_FIFO_depth_bytes\": 128\n}",
-            "id": 10
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"PCIe\",\n  \"UART_channel_count\": 8,\n  \"UART_interface_types_supported\": [\"RS-232\", \"RS-422\", \"RS-485\"],\n  \"UART_max_baud_rate_bps\": 921600,\n  \"UART_FIFO_depth_bytes\": 128\n}",
-            "id": 11
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"PCI\",\n  \"UART_channel_count\": 4,\n  \"UART_interface_types_supported\": [\"RS-232\", \"RS-422\", \"RS-485\"],\n  \"UART_max_baud_rate_bps\": 921600\n}",
-            "id": 12
-        },
-        {
-            "output": "{\n  \"CAN_channel_count\": 2,\n  \"CAN_baud_rate_max_bps\": 1000000,\n  \"CAN_isolation_voltage_V\": 20.000\n}",
-            "id": 13
-        },
-        {
-            "output": "{\n  \"CAN_channel_count\": 4,\n  \"CAN_baud_rate_min_bps\": 40000,\n  \"CAN_baud_rate_max_bps\": 1000000,\n  \"CAN_FD_support\": true,\n  \"CAN_FD_baud_rate_min_bps\": 1000000,\n  \"CAN_FD_baud_rate_max_bps\": 5000000\n}",
-            "id": 14
-        },
-        {
-            "output": "{\n  \"CAN_channel_count\": 2,\n  \"CAN_baud_rate_min_bps\": 40000,\n  \"CAN_baud_rate_max_bps\": 1000000,\n  \"CAN_FD_support\": true,\n  \"CAN_FD_baud_rate_min_bps\": 1000000,\n  \"CAN_FD_baud_rate_max_bps\": 5000000\n}",
-            "id": 15
-        },
-        {
-            "output": "{\n  \"Profinet_support\": true,\n  \"Protocol_analysis_support\": true,\n  \"DPM_support\": true,\n  \"driver_support_windows\": true,\n  \"driver_support_linux\": true,\n  \"driver_support_realtime\": true,\n  \"Coupler_port_count\": 2\n}",
-            "id": 16
-        },
-        {
-            "output": "{\n  \"EtherCat_support\": true,\n  \"driver_support_windows\": true,\n  \"driver_support_linux\": true,\n  \"driver_support_realtime\": true,\n  \"DPM_support\": true,\n  \"Protocol_analysis_support\": false\n}",
-            "id": 17
-        },
-        {
-            "output": "{\n  \"DeviceNet_support\": true,\n  \"Protocol_analysis_support\": false,\n  \"DPM_support\": true,\n  \"driver_support_windows\": true,\n  \"driver_support_linux\": true,\n  \"driver_support_realtime\": true\n}",
-            "id": 18
-        },
-        {
-            "output": "{\n  \"DIO_total_channel_count\": 40,\n  \"DIO_logic_level\": \"TTL / 5V CMOS\",\n  \"DO_drive_current_mA\": 10.000,\n  \"DO_sink_current_max_mA\": 10.000,\n  \"DO_voltage_range_min_V\": 4.500,\n  \"DO_voltage_range_max_V\": 5.500,\n  \"DI_voltage_range_min_V\": 3.500,\n  \"DI_voltage_range_max_V\": 5.500,\n  \"DO_voltage_range_min_V\": -0.200,\n  \"DO_voltage_range_max_V\": 0.800,\n  \"DI_voltage_range_min_V\": -0.200,\n  \"DI_voltage_range_max_V\": 1.200,\n  \"Output_on_resistance_ohm\": 50.000,\n  \"DIO_direction_group_size\": 1\n}",
-            "id": 19
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"PCI\",\n  \"MIL1553_channel_count\": 2,\n  \"MIL1553_redundancy_support\": true,\n  \"MIL1553_operation_modes_supported\": [\"BC\", \"RT\", \"BM\"],\n  \"MIL1553_multifunction_support\": true\n}",
-            "id": 20
-        },
-        {
-            "output": "{\n  \"Profibus_DP_support\": true,\n  \"driver_support_linux\": true,\n  \"driver_support_windows\": true,\n  \"driver_support_realtime\": true,\n  \"DPM_support\": true,\n  \"Protocol_analysis_support\": false\n}",
-            "id": 21
-        },
-        {
-            "output": "{\n  \"DIO_total_channel_count\": 128,\n  \"DI_channel_count\": 128,\n  \"DIO_interrupt_capability\": true,\n  \"DI_voltage_range_min_V\": 5.000,\n  \"DI_voltage_range_max_V\": 25.000,\n  \"Input_overvoltage_protection_V\": 2000.000,\n  \"DIO_isolation_support\": true\n}",
-            "id": 22
-        },
-        {
-            "output": "{\n  \"DO_channel_count\": 128,\n  \"DIO_isolation_support\": true,\n  \"DIO_isolation_voltage_V\": 2000.000,\n  \"DO_voltage_range_min_V\": 5.000,\n  \"DO_voltage_range_max_V\": 40.000,\n  \"DO_sink_current_max_mA\": 90.000,\n  \"DA_output_mode_configurable_switch\": true\n}",
-            "id": 23
-        },
-        {
-            "output": "{\n  \"DIO_total_channel_count\": 64,\n  \"DIO_isolation_support\": true,\n  \"DIO_interrupt_capability\": true,\n  \"DI_voltage_range_min_V\": 5.000,\n  \"DI_voltage_range_max_V\": 25.000,\n  \"Input_overvoltage_protection_V\": 2000.000\n}",
-            "id": 24
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"PCI\",\n  \"RFM_memory_size_bytes\": 268435456,\n  \"RFM_FIFO_depth_bytes\": 16384,\n  \"RFM_fiber_mode\": \"多模\",\n  \"driver_support_realtime\": true\n}",
-            "id": 25
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"PCI-E\",\n  \"RFM_memory_size_bytes\": 268435456,\n  \"RFM_FIFO_depth_bytes\": 16384,\n  \"RFM_fiber_mode\": \"多模\",\n  \"driver_support_realtime\": true\n}",
-            "id": 26
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"PCI\",\n  \"RFM_memory_size_bytes\": 268435456,\n  \"RFM_fiber_mode\": \"多模\"\n}",
-            "id": 27
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"PCI-E\",\n  \"RFM_memory_size_bytes\": 268435456,\n  \"RFM_fiber_mode\": \"多模\"\n}",
-            "id": 28
-        },
-        {
-            "output": "{\n  \"DA_channel_count\": 4,\n  \"DA_resolution_bits\": 16,\n  \"DA_output_voltage_min_V\": -10.000,\n  \"DA_output_voltage_max_V\": 10.000,\n  \"DA_update_rate_Hz\": 8000.000,\n\n  \"Motion_pulse_output_channel_count\": 4,\n  \"Motion_pulse_output_type\": \"差分\",\n\n  \"AD_channel_count_single_ended\": 4,\n  \"AD_resolution_bits\": 12,\n  \"AD_input_voltage_range_min_V\": -10.000,\n  \"AD_input_voltage_range_max_V\": 10.000,\n  \"AD_sampling_rate_Hz\": 8000.000,\n\n  \"Encoder_quadrature_channel_count\": 4,\n\n  \"Motion_enable_reset_channel_count\": 4\n}",
-            "id": 29
-        },
-        {
-            "output": "{\n  \"DA_channel_count\": 8,\n  \"DA_resolution_bits\": 16,\n  \"DA_output_voltage_min_V\": -10.000000,\n  \"DA_output_voltage_max_V\": 10.000000,\n  \"DA_update_rate_Hz\": 8000.000,\n\n  \"AD_channel_count_single_ended\": 8,\n  \"AD_resolution_bits\": 12,\n  \"AD_input_voltage_range_min_V\": -10.000,\n  \"AD_input_voltage_range_max_V\": 10.000,\n  \"AD_sampling_rate_Hz\": 8000.000,\n\n  \"Motion_control_axis_count\": 8,\n  \"Motion_pulse_output_channel_count\": 8,\n  \"Motion_pulse_output_type\": \"差分\",\n  \"Motion_encoder_input_channel_count\": 8,\n  \"Motion_enable_reset_channel_count\": 8\n}",
-            "id": 30
-        },
-        {
-            "output": "{\n  \"category\": \"以太网卡\",\n  \"type\": \"PCIe接口以太网卡\",\n  \"brief_description\": \"4个RJ-45 10/100/1000BASE-T接口, Intel® 82576EB千兆以太网控制器，PCI-E X1接口\",\n  \"Bus_interface_type\": \"PCIe x1\",\n  \"detailed_description\": \"4个RJ-45 10/100/1000BASE-T接口, Intel® 82576EB千兆以太网控制器，PCI-E X1接口\"\n}",
-            "id": 31
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"PCIe x2\",\n  \"SPI_channel_count\": 4,\n  \"SPI_master_slave_modes\": \"2主2从\",\n  \"SPI_logic_level\": \"5V RS422/5V CMOS\",\n  \"SSI_channel_count\": 2,\n  \"AD_input_modes\": [\"单端\", \"差分\"],\n  \"SPI_isolation_support\": true,\n  \"SSI_isolation_support\": true\n}",
-            "id": 32
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"PCIE\",\n  \"FPGA_fiber_channel_count\": 4,\n  \"FPGA_logic_cells\": 1143000,\n  \"FPGA_flip_flops\": 1045000,\n  \"FPGA_block_ram_Mb\": 36.000,\n  \"FPGA_transceivers_count_and_speed\": \"GTY 28Gb/s x24, GTH 16Gb/s x32\"\n}",
-            "id": 33
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"PCIe x8\",\n  \"FPGA_logic_cells\": 444000,\n  \"FPGA_luts\": 277400,\n  \"FPGA_flip_flops\": 554800,\n  \"FPGA_multipliers_MACCs\": 2020,\n  \"FPGA_block_ram_Mb\": 26.5,\n  \"FPGA_transceivers_count_and_speed\": \"16xGTX, PCIe Gen2x8\",\n  \"FPGA_fiber_channel_count\": 4,\n  \"FPGA_PS_ARM_cores\": 2,\n  \"FPGA_PS_CPU_frequency_Hz\": 800000000,\n  \"FPGA_PS_cache_L1_L2\": \"32KB L1 per CPU, 512KB shared L2\",\n  \"FPGA_PS_on_chip_ram_KB\": 256,\n  \"FPGA_PS_external_memory_support\": \"16/32 bit DDR2, DDR3\"\n}",
-            "id": 34
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"CompactPCI\",\n  \"Form_factor\": \"3U\",\n  \"Supported_series\": \"PICMG 2.0 R2.1\",\n  \"RDC_SDC_channel_count\": 2,\n  \"driver_support_realtime\": true,\n  \"driver_support_windows\": true\n}",
-            "id": 68
-        },
-        {
-            "output": "{\n  \"DA_channel_count\": 24,\n  \"DA_resolution_bits\": 16,\n  \"DA_update_rate_Hz\": 1000000.000,\n  \"DA_output_voltage_min_V\": -10.000,\n  \"DA_output_voltage_max_V\": 10.000,\n  \"AD_channel_count_single_ended\": 16,\n  \"AD_resolution_bits\": 16,\n  \"AD_sampling_rate_Hz\": 1000000.000,\n  \"AD_input_voltage_range_min_V\": -10.000,\n  \"AD_input_voltage_range_max_V\": 10.000,\n  \"brief_description\": \"1) 24通道DA输出，16位，1Msps，输出电压范围-10V～+10V 2) 16通道AD采集，16位，1Msps，输入范围-10V～+10V 3) 光口通讯实现DA、AD控制 （适配AX7202开发板）\",\n  \"detailed_description\": \"1) 24通道DA输出，16位，1Msps，输出电压范围-10V～+10V 2) 16通道AD采集，16位，1Msps，输入范围-10V～+10V 3) 光口通讯实现DA、AD控制 （适配AX7202开发板）\"\n}",
-            "id": 35
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"PCIe x1\",\n  \"Form_factor\": \"标准安卡结构\",\n  \"DIO_total_channel_count\": 32,\n  \"DO_channel_count\": 32,\n  \"DIO_logic_level\": \"5V/3.3V (跳线选择)\",\n  \"DIO_direction_group_size\": 8,\n  \"Power_output_channel_count\": 1\n}",
-            "id": 36
-        },
-        {
-            "output": "{\n  \"DIO_total_channel_count\": 40,\n  \"DI_channel_count\": 20,\n  \"DO_channel_count\": 20,\n  \"DIO_logic_level\": \"5V CMOS/5V RS422\",\n  \"Bus_interface_type\": \"FMC\",\n  \"brief_description\": \"1)FMC接口； 2)16 通道 5V·CMOS 输出接口； 3)16 通道 5V·CMOS 输入接口； 4)4通道5V·RS422输出接口； 5)4通道5V·RS422输入接口； 6)对外接口SCSI68孔型连接器。 （适配Links-IPCe-FPGA-02）\"\n}",
-            "id": 37
-        },
-        {
-            "output": "{\n  \"PWM_output_channel_count\": 12,\n  \"PWM_frequency_min_Hz\": 10.000,\n  \"PWM_frequency_max_Hz\": 1000000.000,\n  \"PWM_complementary_output_support\": true,\n  \"PWM_dead_zone_configurable\": true,\n\n  \"Encoder_quadrature_channel_count\": 2,\n  \"Encoder_counter_bits\": 32,\n\n  \"Encoder_hall_channel_count\": 6,\n\n  \"AD_channel_count_single_ended\": 8,\n  \"AD_resolution_bits\": 16,\n  \"AD_sampling_rate_Hz\": 100000.000,\n  \"AD_input_voltage_range_min_V\": -10.000,\n  \"AD_input_voltage_range_max_V\": 10.000,\n\n  \"DA_channel_count\": 4,\n  \"DA_resolution_bits\": 16,\n  \"DA_output_voltage_min_V\": -10.000,\n  \"DA_output_voltage_max_V\": 10.000,\n\n  \"DIO_total_channel_count\": 16,\n  \"DI_channel_count\": 8,\n  \"DO_channel_count\": 8,\n  \"DIO_logic_level\": \"5V CMOS/TTL\",\n\n  \"Power_output_channel_count\": 2,\n  \"Power_output_voltage_V\": 5.000000,\n  \"Power_output_current_mA\": 200.000,\n\n  \"DIO_configurable_as_pulse_input\": true,\n  \"Counter_channel_count\": 2,\n  \"Counter_bits\": 32\n}",
-            "id": 38
-        },
-        {
-            "output": "{\n  \"AD_channel_count_single_ended\": 16,\n  \"AD_resolution_bits\": 16,\n  \"AD_sampling_rate_Hz\": 100000.000,\n  \"AD_input_voltage_range_min_V\": -10.000,\n  \"AD_input_voltage_range_max_V\": 10.000,\n  \"AD_input_voltage_programmable\": false,\n  \"custom_voltage_range_min_V\": -30.000,\n  \"custom_voltage_range_max_V\": 30.000,\n  \n  \"DA_channel_count\": 16,\n  \"DA_resolution_bits\": 16,\n  \"DA_update_rate_Hz\": 100000.000,\n  \"DA_output_voltage_min_V\": -10.000,\n  \"DA_output_voltage_max_V\": 10.000,\n  \n  \"DIO_total_channel_count\": 32,\n  \"DIO_logic_level\": \"5V CMOS/TTL\",\n  \"DIO_configurable_as_counter\": true,\n  \"DIO_configurable_as_pwm\": true,\n  \"Counter_channel_count\": 16,\n  \"Counter_bits\": 32\n}",
-            "id": 39
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"cPCI/PCI/PCIe/PXIe\",\n  \"DA_channel_count\": 18,\n  \"DA_resolution_bits\": null,\n  \"DA_update_rate_Hz\": 1000000.000,\n  \"DA_output_voltage_min_V\": -10.000,\n  \"DA_output_voltage_max_V\": 10.000,\n  \"DA_output_current_min_mA\": -20.000,\n  \"DA_output_current_max_mA\": 20.000,\n  \"DIO_total_channel_count\": 32,\n  \"DI_channel_count\": null,\n  \"DO_channel_count\": null,\n  \"DIO_direction_group_size\": 8\n}",
-            "id": 40
-        },
-        {
-            "output": "```json\n{\n  \"AD_channel_count_single_ended\": 16,\n  \"AD_resolution_bits\": 16,\n  \"AD_sampling_rate_Hz\": 200000.000,\n  \"AD_input_voltage_range_min_V\": -10.000,\n  \"AD_input_voltage_range_max_V\": 10.000,\n  \"AD_accuracy_voltage_percent_FS\": 0.1000,\n  \"AD_input_current_ranges_mA\": \"-20~+20\",\n  \"AD_accuracy_current_percent_FS\": 0.1000,\n  \"AD_channel_group_size\": 8,\n  \"AD_group_configurable_voltage_current\": true,\n  \"custom_voltage_range_min_V\": -30.000,\n  \"custom_voltage_range_max_V\": 30.000,\n  \"custom_current_range_min_mA\": -100.000,\n  \"custom_current_range_max_mA\": 100.000\n}\n```",
-            "id": 41
-        },
-        {
-            "output": "{\n  \"AD_channel_count_single_ended\": 32,\n  \"AD_resolution_bits\": 16,\n  \"AD_sampling_rate_Hz\": 200000.000,\n  \"AD_input_voltage_range_min_V\": -10.000,\n  \"AD_input_voltage_range_max_V\": 10.000,\n  \"AD_accuracy_voltage_percent_FS\": 0.2000,\n  \"AD_input_current_ranges_mA\": \"-20~+20\",\n  \"AD_accuracy_current_percent_FS\": 0.2000,\n  \"AD_channel_group_size\": 8,\n  \"AD_group_configurable_voltage_current\": true,\n  \"custom_voltage_range_min_V\": -30.000,\n  \"custom_voltage_range_max_V\": 30.000,\n  \"custom_current_range_min_mA\": -100.000,\n  \"custom_current_range_max_mA\": 100.000\n}",
-            "id": 42
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"CPCI\",\n  \"UART_channel_count\": 16,\n  \"UART_interface_types_supported\": [\"RS-232\", \"RS-422\", \"RS-485\"],\n  \"UART_max_baud_rate_bps\": 2000000,\n  \"UART_FIFO_depth_bytes\": 33554432,\n  \"UART_isolation_support\": true\n}",
-            "id": 83
-        },
-        {
-            "output": "{\n  \"AD_channel_count_single_ended\": 32,\n  \"AD_resolution_bits\": 16,\n  \"AD_input_voltage_range_min_V\": -10.000,\n  \"AD_input_voltage_range_max_V\": 10.000,\n  \"AD_accuracy_voltage_percent_FS\": 0.2000,\n  \"AD_input_current_ranges_mA\": \"-20~+20\",\n  \"AD_accuracy_current_percent_FS\": 0.2000,\n  \"AD_channel_group_size\": 8,\n  \"AD_group_configurable_voltage_current\": true,\n  \"custom_voltage_range_min_V\": -30.000,\n  \"custom_voltage_range_max_V\": 30.000,\n  \"custom_current_range_min_mA\": -100.000,\n  \"custom_current_range_max_mA\": 100.000\n}",
-            "id": 43
-        },
-        {
-            "output": "{\n  \"AD_channel_count_differential\": 8,\n  \"AD_coupling_mode\": \"DC\",\n  \"AD_input_modes\": [\"差分\"],\n  \"AD_sampling_rate_Hz\": 10000.000,\n  \"AD_resolution_bits\": 24,\n  \"AD_input_voltage_range_min_V\": -10.000,\n  \"AD_input_voltage_range_max_V\": 10.000,\n  \"AD_input_voltage_programmable\": true,\n  \"AD_accuracy_description\": \"1V及以上：±0.01%+0.5mV；1V以下：±0.01%+2uV\"\n}",
-            "id": 44
-        },
-        {
-            "output": "{\n  \"DA_channel_count\": 8,\n  \"DA_resolution_bits\": 16,\n  \"DA_output_voltage_min_V\": -10.000000,\n  \"DA_output_voltage_max_V\": 10.000000,\n  \"DA_output_current_min_mA\": 0.000000,\n  \"DA_output_current_max_mA\": 20.000000,\n  \"DA_accuracy_current_percent_FS\": 0.1000,\n  \"DA_accuracy_voltage_percent_FS\": 0.2000,\n  \"DA_slew_rate_V_per_us\": 0.500000,\n  \"DA_slew_rate_mA_per_us\": 1.400000,\n  \"DA_output_mode_configurable_switch\": true\n}",
-            "id": 45
-        },
-        {
-            "output": "{\n  \"DA_channel_count\": 16,\n  \"DA_resolution_bits\": 16,\n  \"DA_output_voltage_min_V\": -10.000000,\n  \"DA_output_voltage_max_V\": 10.000000,\n  \"DA_output_current_min_mA\": 0.000000,\n  \"DA_output_current_max_mA\": 20.000000,\n  \"DA_accuracy_current_percent_FS\": 0.0500,\n  \"DA_accuracy_voltage_percent_FS\": 0.1000,\n  \"DA_output_mode_configurable_switch\": true\n}",
-            "id": 46
-        },
-        {
-            "output": "{\n  \"DA_channel_count\": 16,\n  \"DA_resolution_bits\": 16,\n  \"DA_output_current_min_mA\": 0.000000,\n  \"DA_output_current_max_mA\": 20.000000,\n  \"DA_accuracy_current_percent_FS\": 0.0500,\n  \"DA_isolation_support\": true\n}",
-            "id": 47
-        },
-        {
-            "output": "{\n  \"DA_channel_count\": 16,\n  \"DA_resolution_bits\": 16,\n  \"DA_output_voltage_min_V\": -10.000000,\n  \"DA_output_voltage_max_V\": 10.000000,\n  \"DA_output_current_min_mA\": 0.000000,\n  \"DA_output_current_max_mA\": 20.000000,\n  \"DA_accuracy_voltage_percent_FS\": 0.1000,\n  \"DA_accuracy_current_percent_FS\": 0.0500,\n  \"DA_output_mode_programmable\": true,\n  \"DIO_total_channel_count\": 16,\n  \"DIO_direction_group_size\": 8,\n  \"DIO_logic_level\": \"5V CMOS/TTL\"\n}",
-            "id": 48
-        },
-        {
-            "output": "{\n  \"DIO_total_channel_count\": 32,\n  \"DI_channel_count\": 32,\n  \"DIO_logic_level\": \"5V or custom (0~28V)\",\n  \"DI_voltage_range_min_V\": 0.000,\n  \"DI_voltage_range_max_V\": 28.000,\n  \"DIO_isolation_support\": false,\n  \"Input_overvoltage_protection_V\": 40.000\n}",
-            "id": 49
-        },
-        {
-            "output": "{\n  \"DIO_total_channel_count\": 32,\n  \"DO_channel_count\": 32,\n  \"DIO_logic_level\": \"5V or custom (0~28V)\",\n  \"DO_voltage_range_min_V\": 0.000,\n  \"DO_voltage_range_max_V\": 28.000,\n  \"custom_voltage_range_min_V\": 0.000,\n  \"custom_voltage_range_max_V\": 28.000,\n  \"DO_is_relay\": true\n}",
-            "id": 50
-        },
-        {
-            "output": "{\n  \"DO_channel_count\": 32,\n  \"DO_is_relay\": true,\n  \"Relay_type\": \"FORM 1C\",\n  \"Relay_bounce_time_ms\": 8.000,\n  \"Relay_max_current_mA\": 200.000,\n  \"Relay_max_voltage_VDC\": 48.000,\n  \"Power_output_channel_count\": 1,\n  \"Power_output_voltage_V\": 5.000000,\n  \"Power_output_current_mA\": 1500.000\n}",
-            "id": 51
-        },
-        {
-            "output": "{\n  \"DIO_total_channel_count\": 64,\n  \"DI_channel_count\": 32,\n  \"DO_channel_count\": 32,\n  \"DIO_logic_level\": \"5V CMOS/TTL\",\n  \"DIO_configurable_as_pwm\": true,\n  \"DIO_configurable_as_pulse_input\": true,\n  \"Encoder_quadrature_channel_count\": 8,\n  \"PWM_output_channel_count\": 8\n}",
-            "id": 52
-        },
-        {
-            "output": "{\n  \"category\": \"数据采集卡\",\n  \"type\": \"离散量输入板卡\",\n  \"Bus_interface_type\": \"PCI/cPCI/PXIe\",\n  \"DIO_total_channel_count\": 96,\n  \"DI_channel_count\": 96,\n  \"DI_voltage_range_min_V\": -60.000,\n  \"DI_voltage_range_max_V\": 60.000,\n  \"custom_voltage_range_min_V\": -1.000,\n  \"custom_voltage_range_max_V\": 36.000,\n  \"DIO_logic_level\": \"+18V~+36V高电平, -1V~+1V低电平\",\n  \"brief_description\": \"96通道离散量输入，支持三种状态检测：电源/电源断、电源/电源地、电源地/电源地断；每通道可单独配置；带可编程数字滤波器（0Hz~10MHz）\",\n  \"detailed_description\": \"PCI/cPCI/PXIe标准板卡； 可实现电源/电源断、电源/电源地、电源地/电源地断三种状态的检测； 检测电平范围：高电平+18V~+36V，低电平-1V~+1V； 96 通道离散量输入； 通道数：96； 逻辑门限：高电平+18V~+36V，低电平-1V~+1V； 最大输入电平范围：±60V； 通道特性：每通道可单独设置为电源/电源断、电源/电源地或电源/电源地断输入； 可编程数字滤波器：滤波频率为 0Hz~10MHz。\"\n}",
-            "id": 53
-        },
-        {
-            "output": "{\n  \"category\": \"离散量输出板卡\",\n  \"type\": \"PCI/cPCI/PXIe标准板卡\",\n  \"DIO_total_channel_count\": 96,\n  \"DO_channel_count\": 96,\n  \"DO_voltage_range_min_V\": -60.000,\n  \"DO_voltage_range_max_V\": 60.000,\n  \"Output_on_resistance_ohm\": 10.000,\n  \"DO_drive_current_mA\": 100.000,\n  \"brief_description\": \"PCI/cPCI/PXIe标准板卡； 可实现电源/电源断、电源地/电源地断两种状态的输出； 96 路离散量输出； 通道数：96； 最大负载电压范围：±60V； 导通电阻：10Ω（MAX）； 每通道输出持续电流：100mA（MAX）； 通道特性：每通道可单独设置为电源/电源断或电源地/电源地断输出。\"\n}",
-            "id": 54
-        },
-        {
-            "output": "{\n  \"category\": \"离散量输入/输出板卡\",\n  \"type\": \"PCI/PCIe/cPCI/PXIe标准板卡\",\n  \"DIO_total_channel_count\": 96,\n  \"DI_channel_count\": 48,\n  \"DO_channel_count\": 48,\n  \"DI_voltage_range_min_V\": -60.000,\n  \"DI_voltage_range_max_V\": 60.000,\n  \"DO_voltage_range_min_V\": -60.000,\n  \"DO_voltage_range_max_V\": 60.000,\n  \"DO_drive_current_mA\": 100.000,\n  \"Output_on_resistance_ohm\": 10.000,\n  \"DIO_logic_level\": \"高电平+18V~+36V，低电平-1V~+1V\"\n}",
-            "id": 55
-        },
-        {
-            "output": "{\n  \"Endat_channel_count\": 2,\n  \"Endat_version\": \"2.2\",\n  \"Endat_resolution_bits_min\": 8,\n  \"Endat_resolution_bits_max\": 32,\n  \"Endat_baud_rate_options_Hz\": [8000000, 4000000, 2000000, 1000000],\n  \"endat22_flag_bits_options\": [1, 2],\n  \"endat22_recovery_time_min_us\": 0,\n  \"endat22_recovery_time_max_us\": 255,\n  \"DIO_total_channel_count\": 16,\n  \"DIO_logic_level\": \"5V CMOS\",\n  \"DIO_direction_group_size\": 8\n}",
-            "id": 56
-        },
-        {
-            "output": "{\n  \"Endat_channel_count\": 5,\n  \"Endat_version\": \"2.2\",\n  \"Endat_resolution_bits_min\": 8,\n  \"Endat_resolution_bits_max\": 32,\n  \"Endat_baud_rate_options_Hz\": [8000000, 4000000, 2000000, 1000000],\n  \"endat22_flag_bits_options\": [1, 2],\n  \"endat22_recovery_time_min_us\": 0,\n  \"endat22_recovery_time_max_us\": 255,\n  \"DIO_total_channel_count\": 16,\n  \"DIO_logic_level\": \"5V CMOS\",\n  \"DIO_direction_group_size\": 8\n}",
-            "id": 57
-        },
-        {
-            "output": "{\n  \"Form_factor\": \"3U\",\n  \"Supported_series\": \"CompactPCI PICMG 2.0 R2.1\",\n  \"SSI_channel_count\": 5,\n  \"SSI_data_width_bits_min\": 8,\n  \"SSI_data_width_bits_max\": 32,\n  \"SSI_baud_rate_options_Hz\": [2000000, 1000000, 0, 250000],\n  \"SSI_measurement_interval_us\": 255\n}",
-            "id": 58
-        },
-        {
-            "output": "{\n  \"Encoder_quadrature_channel_count\": 8,\n  \"Encoder_channel_count_differential\": 3,\n  \"Encoder_channel_count_single_ended\": 5,\n  \"Encoder_signal_types_supported\": [\"RS-422\", \"5V CMOS\"],\n  \"Encoder_max_input_frequency_Hz\": 8000000.000,\n  \"Encoder_counter_bits\": 32\n}",
-            "id": 59
-        },
-        {
-            "output": "{\n  \"Encoder_quadrature_channel_count\": 8,\n  \"Encoder_channel_count_single_ended\": 8,\n  \"Encoder_signal_types_supported\": [\"RS-422\", \"5V CMOS\"],\n  \"Encoder_max_input_frequency_Hz\": 8000000.000,\n  \"Encoder_counter_bits\": 32,\n  \"Encoder_isolation_support\": true\n}",
-            "id": 60
-        },
-        {
-            "output": "{\n  \"Encoder_channel_count_differential\": 8,\n  \"Encoder_quadrature_channel_count\": 8,\n  \"Encoder_signal_types_supported\": [\"RS-422\", \"5V CMOS\"],\n  \"Encoder_max_input_frequency_Hz\": 10000000.000,\n  \"Encoder_counter_bits\": 32,\n  \"Encoder_isolation_support\": true\n}",
-            "id": 61
-        },
-        {
-            "output": "{\n  \"SPI_channel_count\": 2,\n  \"SPI_data_width_bits\": 16,\n  \"SPI_logic_level\": \"RS422\",\n  \"SPI_clock_frequency_Hz\": 3000000.000,\n\n  \"SSI_channel_count\": 2,\n  \"SSI_data_width_bits_min\": 16,\n  \"SSI_data_width_bits_max\": 16,\n  \"SPI_logic_level\": \"RS422\",\n  \"SSI_baud_rate_options_Hz\": [3000000],\n\n  \"RDC_SDC_channel_count\": 2,\n  \"RDC_SDC_resolution_bits\": 16,\n  \"RDC_SDC_excitation_voltage_Vpp\": 20.000000,\n  \"RDC_SDC_excitation_frequency_min_Hz\": 10.000,\n  \"RDC_SDC_excitation_frequency_max_Hz\": 100.000,\n  \"RDC_SDC_input_signal_max_Vrms\": 26.000000,\n  \"RDC_SDC_input_signal_min_Vrms\": 0.000000,\n  \"AD_input_modes\": [\"单端\", \"差分\"]\n}",
-            "id": 62
-        },
-        {
-            "output": "{\n  \"SPI_channel_count\": 2,\n  \"SPI_data_width_bits\": 16,\n  \"SPI_logic_level\": \"RS422\",\n  \"SPI_clock_frequency_Hz\": 3000000.000,\n  \"SSI_channel_count\": 2,\n  \"SSI_data_width_bits_min\": 16,\n  \"SSI_data_width_bits_max\": 16,\n  \"SSI_baud_rate_options_Hz\": [3000000.000]\n}",
-            "id": 63
-        },
-        {
-            "output": "{\n  \"Counter_channel_count\": 16,\n  \"Counter_max_input_frequency_Hz\": 16000000.000,\n  \"Counter_reference_clock_Hz\": 40000000.000,\n  \"DIO_logic_level\": \"5V CMOS/TTL\",\n  \"DIO_interrupt_capability\": true\n}",
-            "id": 64
-        },
-        {
-            "output": "根据提供的描述和建表结构，该板卡为“转速采集”类型，重点涉及编码器（Encoder）或数字输入（DIO）相关功能。结合字段语义和枚举约束，提取如下属性：\n\n```json\n{\n  \"Bus_interface_type\": \"3U cPCI\",\n  \"Encoder_channel_count_single_ended\": 8,\n  \"Encoder_quadrature_channel_count\": 8,\n  \"Encoder_max_input_frequency_Hz\": 10000000.000,\n  \"Encoder_isolation_support\": true,\n  \"Encoder_signal_types_supported\": [\"RS-422\"],\n  \"DIO_interrupt_capability\": true,\n  \"DIO_configurable_as_pulse_input\": true\n}\n```\n\n说明：\n\n- “8/16通道转速采集接口”：取较小值 8 作为通道数（通常表示可配置为8差分或16单端，但此处每通道含转速+转向，符合正交编码器 A/B 相结构，故视为 8 路正交编码器通道），填入 `Encoder_quadrature_channel_count = 8`；同时因每通道两个信号（转速+转向），若以单端信号计则为 16，但描述未明确区分差分/单端，默认按正交编码器理解，且电平为 RS-422（差分），但 `Encoder_channel_count_differential` 字段对应的是差分信号对数量，而 `Encoder_quadrature_channel_count` 表示完整正交通道数，更贴合业务语义，因此优先使用后者。\n- 由于提到“转速和转向输入信号”，这正是正交编码器（Quadrature Encoder）的标准信号（A/B相），因此使用 `Encoder_quadrature_channel_count`。\n- “输入接口最宽频10MHz” → `Encoder_max_input_frequency_Hz = 10,000,000 Hz`\n- “隔离输入” → `Encoder_isolation_support = true`\n- “电平规格：5V RS422电平” → `Encoder_signal_types_supported = ['RS-422']`（注意：尽管写“5V RS422”，但枚举中只有 'RS-422' 和 '5V CMOS'，RS-422 本身可兼容 5V 逻辑，故选 'RS-422'）\n- “支持转速脉冲定时中断功能 / 整数中断功能” → 表明具备中断能力，且用于脉冲输入，映射到 DIO 层面的通用能力：`DIO_interrupt_capability = true` 和 `DIO_configurable_as_pulse_input = true`\n- 总线类型：“3U cPCI总线板卡” → `Bus_interface_type = \"3U cPCI\"`\n- 输出接口型号（TE-5787082-7）属于连接器信息，表中无对应字段，忽略。\n\n> 注：未填写 `Encoder_channel_count_differential` 是因为正交编码器通道数已由 `Encoder_quadrature_channel_count` 表达；若每路正交信号使用一对差分线（A+/A-, B+/B-），则差分通道数应为 16（8通道 × 2相信号 × 差分=16差分通道？），但通常“通道数”指编码器轴数，即 8 路。为避免歧义，且字段 `Encoder_quadrature_channel_count` 明确用于此类场景，优先使用它。\n\n最终输出严格遵循 SQL 表结构和示例格式。",
-            "id": 65
-        },
-        {
-            "output": "{\n  \"RDC_SDC_channel_count\": 2,\n  \"RDC_SDC_resolution_bits\": 16,\n  \"RDC_SDC_excitation_voltage_Vpp\": 20.000000,\n  \"RDC_SDC_excitation_frequency_min_Hz\": 10.000,\n  \"RDC_SDC_excitation_frequency_max_Hz\": 100.000,\n  \"RDC_SDC_input_signal_min_Vrms\": 0.000000,\n  \"RDC_SDC_input_signal_max_Vrms\": 26.000000,\n  \"RDC_SDC_coarse_fine_support\": true,\n  \"RDC_SDC_mode_configurable\": true,\n  \"AD_input_modes\": [\"单端\", \"差分\"]\n}",
-            "id": 66
-        },
-        {
-            "output": "{\n  \"RDC_SDC_channel_count\": 2,\n  \"RDC_SDC_resolution_bits\": 16,\n  \"RDC_SDC_excitation_voltage_Vpp\": 20.000000,\n  \"RDC_SDC_excitation_frequency_min_Hz\": 10.000,\n  \"RDC_SDC_excitation_frequency_max_Hz\": 100.000,\n  \"RDC_SDC_input_signal_max_Vrms\": 26.000000,\n  \"RDC_SDC_mode_configurable\": true,\n  \"RDC_SDC_coarse_fine_support\": true,\n  \"AD_input_modes\": [\"单端\", \"差分\"]\n}",
-            "id": 67
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"cPCI/PCI/PCIe/PXIe\",\n  \"LVDT_RVDT_channel_count\": 2,\n  \"LVDT_RVDT_accuracy_arcmin\": 8.000,\n  \"LVDT_RVDT_reference_voltage_V\": 10.000,\n  \"LVDT_RVDT_reference_frequency_min_Hz\": 50.000,\n  \"LVDT_RVDT_reference_frequency_max_Hz\": 100.000,\n  \"LVDT_RVDT_output_voltage_min_V\": 1.000,\n  \"LVDT_RVDT_output_voltage_max_V\": 10.000,\n  \"Output_on_resistance_ohm\": 5.000,\n  \"LVDT_RVDT_rdc_support\": true\n}",
-            "id": 69
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"cPCI/PCI/PCIe/PXIe\",\n  \"LVDT_RVDT_channel_count\": 4,\n  \"LVDT_RVDT_accuracy_arcmin\": 8.000,\n  \"LVDT_RVDT_reference_voltage_V\": 10.000,\n  \"LVDT_RVDT_reference_frequency_min_Hz\": 50.000,\n  \"LVDT_RVDT_reference_frequency_max_Hz\": 100.000,\n  \"LVDT_RVDT_output_voltage_min_V\": 1.000,\n  \"LVDT_RVDT_output_voltage_max_V\": 10.000,\n  \"Output_on_resistance_ohm\": 5.000,\n  \"LVDT_RVDT_rdc_support\": true\n}",
-            "id": 70
-        },
-        {
-            "output": "```json\n{\n  \"LVDT_RVDT_channel_count\": 8,\n  \"LVDT_RVDT_reference_frequency_min_Hz\": 400.000,\n  \"LVDT_RVDT_reference_frequency_max_Hz\": 15000.000,\n  \"LVDT_RVDT_reference_voltage_V\": 10.000,\n  \"LVDT_RVDT_output_voltage_min_V\": -10.000,\n  \"LVDT_RVDT_output_voltage_max_V\": 10.000,\n  \"AD_resolution_bits\": 16\n}\n```",
-            "id": 71
-        },
-        {
-            "output": "{\n  \"CAN_channel_count\": 2,\n  \"CAN_baud_rate_max_bps\": 1000000,\n  \"CAN_isolation_voltage_V\": 20.000,\n  \"FPGA_clock_frequency_Hz\": 16000000.000\n}",
-            "id": 72
-        },
-        {
-            "output": "{\n  \"CAN_channel_count\": 4,\n  \"CAN_baud_rate_max_bps\": 1000000,\n  \"CAN_isolation_voltage_V\": 10.000,\n  \"CAN_FD_support\": false\n}",
-            "id": 73
-        },
-        {
-            "output": "{\n  \"CAN_channel_count\": 10,\n  \"CAN_baud_rate_min_bps\": 10000,\n  \"CAN_baud_rate_max_bps\": 1000000\n}",
-            "id": 74
-        },
-        {
-            "output": "{\n  \"category\": \"串口通信卡\",\n  \"form_factor\": \"3U CPCI\",\n  \"UART_channel_count\": 4,\n  \"UART_interface_types_supported\": [\"RS-232\", \"RS-422\", \"RS-485\"],\n  \"UART_max_baud_rate_bps\": 921600\n}",
-            "id": 75
-        },
-        {
-            "output": "{\n  \"category\": \"串口板卡\",\n  \"type\": \"3U CPCI\",\n  \"UART_channel_count\": 4,\n  \"UART_interface_types_supported\": [\"RS-232\", \"RS-422\", \"RS-485\"],\n  \"UART_max_baud_rate_bps\": 8000000,\n  \"UART_isolation_support\": true,\n  \"brief_description\": \"3U CPCI，4路隔离串行通讯接口，支持RS-232/422/485，RS232最高支持230.4Kbps波特率，RS422/485波特率800~8Mbps\"\n}",
-            "id": 76
-        },
-        {
-            "output": "{\n  \"category\": \"串口通信卡\",\n  \"type\": \"3U CPCI板卡\",\n  \"UART_channel_count\": 8,\n  \"UART_interface_types_supported\": [\"RS-232\", \"RS-422\", \"RS-485\"],\n  \"UART_max_baud_rate_bps\": 8000000,\n  \"UART_isolation_support\": true,\n  \"Bus_interface_type\": \"3U CPCI\"\n}",
-            "id": 77
-        },
-        {
-            "output": "{\n  \"category\": \"串口通讯卡\",\n  \"type\": \"3U CPCI 板卡\",\n  \"UART_channel_count\": 16,\n  \"UART_interface_types_supported\": [\"RS-232\", \"RS-422\", \"RS-485\"],\n  \"UART_max_baud_rate_bps\": 8000000,\n  \"UART_isolation_support\": true,\n  \"Bus_interface_type\": \"3U CPCI\"\n}",
-            "id": 78
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"CPCI\",\n  \"UART_channel_count\": 4,\n  \"UART_interface_types_supported\": [\"RS-232\", \"RS-422\", \"RS-485\"],\n  \"UART_max_baud_rate_bps\": 2000000\n}",
-            "id": 79
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"CPCI\",\n  \"UART_channel_count\": 8,\n  \"UART_interface_types_supported\": [\"RS-232\", \"RS-422\", \"RS-485\"],\n  \"UART_max_baud_rate_bps\": 2000000\n}",
-            "id": 80
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"CPCI\",\n  \"UART_channel_count\": 8,\n  \"UART_interface_types_supported\": [\"RS-232\", \"RS-422\", \"RS-485\"],\n  \"UART_max_baud_rate_bps\": 4000000\n}",
-            "id": 81
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"CPCI\",\n  \"UART_channel_count\": 8,\n  \"UART_interface_types_supported\": [\"RS-232\", \"RS-422\", \"RS-485\"],\n  \"UART_max_baud_rate_bps\": 4000000\n}",
-            "id": 82
-        },
-        {
-            "output": "{\n  \"category\": \"串口板卡\",\n  \"type\": \"PXIe总线板卡\",\n  \"UART_channel_count\": 12,\n  \"UART_interface_types_supported\": [\"RS-422\"],\n  \"UART_max_baud_rate_bps\": 10000000,\n  \"Bus_interface_type\": \"PXIe\",\n  \"UART_isolation_support\": false,\n  \"Termination_resistor_ohm\": 100.000,\n  \"brief_description\": \"12通道串口板卡，PXIe总线，支持差分和单端输入输出，差分速率可达10Mbps，IO与背板非隔离，带100欧姆端接。\",\n  \"detailed_description\": \"12通道串口板卡  PXIe总线板卡  提供12通道差分和单端输出@AM26C31  提供12通道差分和单端输入@AM26C32  差分通道支持10M bps通过能力  差分与单端信号可独立控制  对外接口（输入、输出）与PXIe背板非隔离  输入接口具有100欧姆端接  输出接口：SCSI100 Female  提供离散IO测试工程（不含应用工程）\"\n}",
-            "id": 84
-        },
-        {
-            "output": "{\n  \"SENT_channel_count\": 2\n}",
-            "id": 85
-        },
-        {
-            "output": "{\n  \"PSI5_channel_count\": 2\n}",
-            "id": 86
-        },
-        {
-            "output": "{\n  \"Form_factor\": \"3U\",\n  \"Supported_series\": \"CompactPCI PICMG 2.0 R2.1\",\n  \"SPI_channel_count\": 4,\n  \"SPI_data_width_bits\": 16,\n  \"SPI_logic_level\": \"RS422\",\n  \"SPI_clock_frequency_Hz\": 50000000.000\n}",
-            "id": 87
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"3U cPCI\",\n  \"I2C_channel_count\": 4,\n  \"I2C_interface_type\": \"Slave\",\n  \"i2c_standard_mode_rate_kbps\": 100,\n  \"i2c_fast_mode_rate_kbps\": 400,\n  \"i2c_fast_mode_plus_rate_Mbps\": 1.00,\n  \"I2C_address_space_bytes\": 2048,\n  \"SPI_data_width_bits\": 32,\n  \"DIO_logic_level\": \"5V CMOS/TTL\"\n}",
-            "id": 88
-        },
-        {
-            "output": "{\n  \"category\": \"通讯板卡\",\n  \"type\": \"3U cPCI板卡\",\n  \"PCM_channel_count\": 4,\n  \"Encoder_signal_types_supported\": [\"RS-422\"],\n  \"AD_input_modes\": [\"差分\"],\n  \"DIO_interrupt_capability\": true,\n  \"UART_FIFO_depth_bytes\": 4096\n}",
-            "id": 89
-        },
-        {
-            "output": "{\n  \"category\": \"通讯板卡\",\n  \"type\": \"3U cPCI板卡\",\n  \"LVDS_channel_count\": 4,\n  \"Bus_interface_type\": \"3U cPCI\",\n  \"LVDS_signaling_mode\": \"差分\",\n  \"LVDS_logic_level\": \"5V RS422\",\n  \"LVDS_FIFO_depth_bytes\": 4096,\n  \"DIO_interrupt_capability\": true\n}",
-            "id": 90
-        },
-        {
-            "output": "{\n  \"Form_factor\": \"3U欧规卡\",\n  \"Supported_series\": \"CompactPCI PICMG 2.0 R2.1\",\n  \"BISSC_channel_count\": 5,\n  \"BISSC_data_width_bits_min\": 8,\n  \"BISSC_data_width_bits_max\": 32,\n  \"BISSC_baud_rate_options_Hz\": [2000000, 1000000, 0, 250000],\n  \"SSI_measurement_interval_us\": 255\n}",
-            "id": 91
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"3U CPCI\",\n  \"MIL1553_channel_count\": 1,\n  \"MIL1553_redundancy_support\": true,\n  \"MIL1553_multifunction_support\": false,\n  \"MIL1553_operation_modes_supported\": [\"BC\", \"RT\", \"BM\"]\n}",
-            "id": 92
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"3U CPCI\",\n  \"MIL1553_channel_count\": 1,\n  \"MIL1553_redundancy_support\": true,\n  \"MIL1553_operation_modes_supported\": [\"BC\", \"RT\", \"BM\"],\n  \"MIL1553_multifunction_support\": true\n}",
-            "id": 93
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"3U CPCI\",\n  \"MIL1553_channel_count\": 2,\n  \"MIL1553_redundancy_support\": true,\n  \"MIL1553_multifunction_support\": false,\n  \"MIL1553_operation_modes_supported\": [\"BC\", \"RT\", \"BM\"]\n}",
-            "id": 94
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"3U CPCI\",\n  \"MIL1553_channel_count\": 2,\n  \"MIL1553_redundancy_support\": true,\n  \"MIL1553_operation_modes_supported\": [\"BC\", \"RT\", \"BM\"],\n  \"MIL1553_multifunction_support\": true\n}",
-            "id": 95
-        },
-        {
-            "output": "{\n  \"Termination_resistor_ohm\": 78.000\n}",
-            "id": 96
-        },
-        {
-            "output": "{\n  \"MIL1553_channel_count\": 2,\n  \"Coupler_port_count\": 2\n}",
-            "id": 97
-        },
-        {
-            "output": "{\n  \"MIL1553_channel_count\": 4,\n  \"Coupler_port_count\": 4\n}",
-            "id": 98
-        },
-        {
-            "output": "{\n  \"MIL1553_channel_count\": 8,\n  \"Coupler_port_count\": 8\n}",
-            "id": 99
-        },
-        {
-            "output": "{\n  \"MIL1553_channel_count\": 1,\n  \"brief_description\": \"2米1553B电缆\"\n}",
-            "id": 100
-        },
-        {
-            "output": "{\n  \"category\": \"接口卡\",\n  \"type\": \"3U CPCI总线 ARINC429接口卡\",\n  \"Bus_interface_type\": \"3U CPCI\",\n  \"A429_tx_channel_count\": 4,\n  \"A429_rx_channel_count\": 4,\n  \"A429_baud_rate_options_bps\": \"12.5k,48k,100k\",\n  \"A429_FIFO_depth_bytes\": 1024\n}",
-            "id": 101
-        },
-        {
-            "output": "{\n  \"category\": \"接口卡\",\n  \"type\": \"ARINC429接口卡\",\n  \"Bus_interface_type\": \"3U CPCI\",\n  \"A429_tx_channel_count\": 8,\n  \"A429_rx_channel_count\": 8,\n  \"A429_baud_rate_options_bps\": \"12.5k,48k,100k\",\n  \"A429_FIFO_depth_bytes\": 1024\n}",
-            "id": 102
-        },
-        {
-            "output": "{\n  \"category\": \"接口卡\",\n  \"type\": \"3U CPCI ARINC429接口卡\",\n  \"Bus_interface_type\": \"3U CPCI\",\n  \"A429_tx_channel_count\": 16,\n  \"A429_rx_channel_count\": 16,\n  \"A429_baud_rate_options_bps\": \"12.5k,48k,100k\",\n  \"A429_FIFO_depth_bytes\": 1024\n}",
-            "id": 103
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"CPCI\",\n  \"A429_rx_channel_count\": 8,\n  \"A429_tx_channel_count\": 8,\n  \"A429_baud_rate_options_bps\": \"10K,12.5K,48K,50K,100K,150K\"\n}",
-            "id": 104
-        },
-        {
-            "output": "{\n  \"category\": \"通讯接口卡\",\n  \"type\": \"CPCI板卡\",\n  \"Bus_interface_type\": \"CPCI\",\n  \"Form_factor\": \"3U\",\n  \"A429_rx_channel_count\": 16,\n  \"A429_tx_channel_count\": 16,\n  \"A429_baud_rate_options_bps\": \"10K,12.5K,48K,50K,100K,150K\"\n}",
-            "id": 105
-        },
-        {
-            "output": "{\n  \"category\": \"AFDX接口板卡\",\n  \"type\": \"3U CPCI板卡\",\n  \"brief_description\": \"3U CPCI，支持ARINC664规范；2路双冗余通道（2路发送，2路接收，4个10/100M端口），发送存储深度：8MByte/通道（可选16M），接收存储深度：8MByte/通道（可选16M），硬件实现AFDX协议栈；32bit,33MHz； 支持时间来源于IRIG（可选）\",\n  \"detailed_description\": \"3U CPCI，支持ARINC664规范；2路双冗余通道（2路发送，2路接收，4个10/100M端口），发送存储深度：8MByte/通道（可选16M），接收存储深度：8MByte/通道（可选16M），硬件实现AFDX协议栈；32bit,33MHz； 支持时间来源于IRIG（可选）\",\n  \"AFDX_channel_count\": 2,\n  \"AFDX_port_count\": 4,\n  \"AFDX_tx_buffer_depth_bytes\": 8388608,\n  \"AFDX_rx_buffer_depth_bytes\": 8388608,\n  \"AFDX_hardware_protocol_stack\": true,\n  \"Bus_interface_type\": \"32bit,33MHz CPCI\",\n  \"Form_factor\": \"3U\"\n}",
-            "id": 106
-        },
-        {
-            "output": "{\n  \"category\": \"AFDX接口板卡\",\n  \"type\": \"3U CPCI AFDX板卡\",\n  \"brief_description\": \"3U CPCI，支持ARINC664规范；单通道单冗余通道，发送存储深度：8MByte/通道（可选16M），接收存储深度：8MByte/通道（可选16M），硬件实现AFDX协议栈；32bit,33MHz； 支持时间来源于IRIG（可选）\",\n  \"detailed_description\": \"3U CPCI，支持ARINC664规范；单通道单冗余通道，发送存储深度：8MByte/通道（可选16M），接收存储深度：8MByte/通道（可选16M），硬件实现AFDX协议栈；32bit,33MHz； 支持时间来源于IRIG（可选）\",\n  \"AFDX_channel_count\": 1,\n  \"AFDX_port_count\": 1,\n  \"AFDX_tx_buffer_depth_bytes\": 8388608,\n  \"AFDX_rx_buffer_depth_bytes\": 8388608,\n  \"AFDX_hardware_protocol_stack\": true,\n  \"Bus_interface_type\": \"32bit,33MHz CPCI\",\n  \"Form_factor\": \"3U\"\n}",
-            "id": 107
-        },
-        {
-            "output": "{\n  \"category\": \"网络接口卡\",\n  \"type\": \"以太网卡\",\n  \"Bus_interface_type\": \"未明确（根据上下文可能为PCIe/PCI等）\",\n  \"detailed_description\": \"4个10/100/1000 Base-T接口，RJ-45连接器，IEEE802.3x Support\"\n}",
-            "id": 108
-        },
-        {
-            "output": "```json\n{\n  \"PPS_input_channel_count\": 4,\n  \"PPS_output_channel_count\": 4,\n  \"PPS_oscillator_frequency_Hz\": 40000000.000,\n  \"PPS_oscillator_stability_ppb\": 100.000,\n  \"PPS_logic_levels_supported\": [\"5V CMOS\", \"5V RS422\"],\n  \"PPS_sync_accuracy_ns\": 75.000\n}\n```",
-            "id": 109
-        },
-        {
-            "output": "{\n  \"category\": \"秒脉冲板卡\",\n  \"type\": \"3U cPCI板卡\",\n  \"PPS_input_channel_count\": 8,\n  \"PPS_output_channel_count\": 8,\n  \"PPS_oscillator_frequency_Hz\": 40000000.000,\n  \"PPS_oscillator_stability_ppb\": 100.000,\n  \"PPS_logic_levels_supported\": [\"5V CMOS\", \"5V RS422\"]\n}",
-            "id": 110
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"PXI\",\n  \"RTD_channel_count\": 10,\n  \"RTD_resolution_bits\": 12,\n  \"RTD_resistance_min_ohm\": 0.000000,\n  \"RTD_resistance_max_ohm\": 4000.000000,\n  \"driver_support_realtime\": true\n}",
-            "id": 111
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"PXI\",\n  \"RTD_channel_count\": 10,\n  \"RTD_resolution_bits\": 16,\n  \"RTD_resistance_min_ohm\": 0.000000,\n  \"RTD_resistance_max_ohm\": 65000.000000,\n  \"driver_support_realtime\": true\n}",
-            "id": 112
-        },
-        {
-            "output": "{\n  \"Bus_interface_type\": \"PXI\",\n  \"RTD_channel_count\": 18,\n  \"RTD_resolution_bits\": 8,\n  \"RTD_resistance_min_ohm\": 0.000000,\n  \"RTD_resistance_max_ohm\": 255.000000,\n  \"driver_support_realtime\": true\n}",
-            "id": 113
-        },
-        {
-            "output": "{\n  \"category\": \"RTD小电阻模拟板卡\",\n  \"type\": \"3U CPCI板卡\",\n  \"AD_resolution_bits\": 16,\n  \"RTD_channel_count\": 4,\n  \"RTD_resistance_min_ohm\": 0.2,\n  \"RTD_resistance_max_ohm\": 1.6,\n  \"RTD_resolution_ohm\": 0.1,\n  \"driver_support_realtime\": true\n}",
-            "id": 114
-        },
-        {
-            "output": "{\n  \"category\": \"数据采集卡\",\n  \"type\": \"CompactPCI板卡\",\n  \"Form_factor\": \"3U欧规卡\",\n  \"Supported_series\": \"CompactPCI PICMG 2.0 R2.1\",\n  \"RTD_channel_count\": 8,\n  \"RTD_resolution_bits\": 12,\n  \"RTD_resistance_min_ohm\": 1.000000,\n  \"RTD_resistance_max_ohm\": 4095.000000,\n  \"RTD_resolution_ohm\": 1.000000,\n  \"driver_support_realtime\": true,\n  \"driver_support_windows\": true\n}",
-            "id": 115
-        },
-        {
-            "output": "{\n  \"RTD_channel_count\": 8,\n  \"RTD_resistance_min_ohm\": 3.000000,\n  \"RTD_resistance_max_ohm\": 100.000000,\n  \"RTD_resolution_ohm\": 0.125000,\n  \"RTD_accuracy_percent\": 0.1000,\n  \"RTD_accuracy_ohm_offset\": 0.125000\n}",
-            "id": 116
-        },
-        {
-            "output": "{\n  \"AD_channel_count_single_ended\": 4,\n  \"RTD_channel_count\": 4,\n  \"RTD_resistance_min_ohm\": 0.000000,\n  \"RTD_resistance_max_ohm\": 159999.900000,\n  \"RTD_resolution_ohm\": 0.100000,\n  \"RTD_accuracy_percent\": 0.1000,\n  \"RTD_accuracy_ohm_offset\": 0.100000,\n  \"RTD_max_power_mW\": 400.000,\n  \"AD_input_voltage_range_max_V\": 40.000\n}",
-            "id": 117
-        },
-        {
-            "output": "{\n  \"AD_channel_count_single_ended\": 8,\n  \"RTD_channel_count\": 8,\n  \"RTD_resistance_min_ohm\": 0.000000,\n  \"RTD_resistance_max_ohm\": 511.750000,\n  \"RTD_resolution_ohm\": 0.250000,\n  \"RTD_max_power_mW\": 400.000,\n  \"RTD_accuracy_percent\": 0.1000,\n  \"RTD_accuracy_ohm_offset\": 0.250000,\n  \"custom_voltage_range_min_V\": 0.000,\n  \"custom_voltage_range_max_V\": 40.000\n}",
-            "id": 118
-        },
-        {
-            "output": "{\n  \"RTD_channel_count\": 8,\n  \"RTD_resistance_min_ohm\": 0.000000,\n  \"RTD_resistance_max_ohm\": 4095.000000,\n  \"RTD_resolution_ohm\": 0.100000,\n  \"RTD_max_power_mW\": 400.000,\n  \"RTD_accuracy_percent\": 0.1000,\n  \"RTD_accuracy_ohm_offset\": 0.100000,\n  \"custom_voltage_range_min_V\": 0.000,\n  \"custom_voltage_range_max_V\": 40.000\n}",
-            "id": 119
-        },
-        {
-            "output": "{\n  \"RTD_channel_count\": 16,\n  \"AD_resolution_bits\": 24,\n  \"AD_sampling_rate_Hz\": 100.000\n}",
-            "id": 120
-        },
-        {
-            "output": "{\n  \"category\": \"反射内存卡\",\n  \"type\": \"3U CPCI 反射内存板卡\",\n  \"Form_factor\": \"3U CPCI\",\n  \"RFM_memory_size_bytes\": 268435456,\n  \"RFM_FIFO_depth_bytes\": 4096,\n  \"RFM_baud_rate_bps\": 2120000000,\n  \"RFM_fiber_transmission_distance_m\": 300.000,\n  \"RFM_fiber_mode\": \"多模\",\n  \"Protocol_analysis_support\": true\n}",
-            "id": 121
-        },
-        {
-            "output": "{\n  \"category\": \"反射内存卡\",\n  \"type\": \"CPCI板卡\",\n  \"Form_factor\": \"3U\",\n  \"Bus_interface_type\": \"CPCI\",\n  \"RFM_memory_size_bytes\": 268435456,\n  \"RFM_fiber_mode\": \"多模\"\n}",
-            "id": 122
-        },
-        {
-            "output": "{\n  \"AD_channel_count_differential\": 8,\n  \"AD_coupling_mode\": \"DC\",\n  \"AD_input_modes\": [\"差分\"],\n  \"AD_sampling_rate_Hz\": 10000.000,\n  \"AD_resolution_bits\": 24,\n  \"AD_input_voltage_range_min_V\": -10.000,\n  \"AD_input_voltage_range_max_V\": 10.000,\n  \"AD_input_voltage_programmable\": true,\n  \"AD_accuracy_description\": \"1V及以上：±0.01%+0.5mV；1V以下：±0.01%+2uV\"\n}",
-            "id": 123
-        }
-    ]
+  "qq": [
+    {
+      "output": {
+        "id": 90,
+        "LVDS_channel_count": 4,
+        "DIO_logic_level": "5V RS422",
+        "UART_FIFO_depth_bytes": 4096
+      }
+    },
+    {
+      "output": {
+        "id": 91,
+        "Form_factor": "3U欧规卡",
+        "Supported_series": "CompactPCI PICMG 2.0 R2.1",
+        "BISSC_channel_count": 5,
+        "BISSC_data_width_bits_min": 8,
+        "BISSC_data_width_bits_max": 32,
+        "BISSC_baud_rate_options_Hz": [
+          2000000,
+          1000000,
+          0,
+          250000
+        ],
+        "SSI_measurement_interval_us": 255
+      }
+    },
+    {
+      "output": {
+        "id": 92,
+        "Bus_interface_type": "3U CPCI",
+        "MIL1553_channel_count": 1,
+        "MIL1553_redundancy_support": true,
+        "MIL1553_operation_modes_supported": [
+          "BC",
+          "RT",
+          "BM"
+        ],
+        "MIL1553_multifunction_support": false
+      }
+    },
+    {
+      "output": {
+        "id": 93,
+        "Bus_interface_type": "3U CPCI",
+        "MIL1553_channel_count": 1,
+        "MIL1553_redundancy_support": true,
+        "MIL1553_operation_modes_supported": [
+          "BC",
+          "RT",
+          "BM"
+        ],
+        "MIL1553_multifunction_support": true
+      }
+    },
+    {
+      "output": {
+        "id": 94,
+        "Bus_interface_type": "3U CPCI",
+        "MIL1553_channel_count": 2,
+        "MIL1553_redundancy_support": true,
+        "MIL1553_operation_modes_supported": [
+          "BC",
+          "RT",
+          "BM"
+        ],
+        "MIL1553_multifunction_support": false
+      }
+    },
+    {
+      "output": {
+        "id": 95,
+        "Bus_interface_type": "3U CPCI",
+        "MIL1553_channel_count": 2,
+        "MIL1553_redundancy_support": true,
+        "MIL1553_operation_modes_supported": [
+          "BC",
+          "RT",
+          "BM"
+        ],
+        "MIL1553_multifunction_support": true
+      }
+    },
+    {
+      "output": {
+        "id": 96,
+        "Termination_resistor_ohm": 78
+      }
+    },
+    {
+      "output": {
+        "id": 97,
+        "Coupler_port_count": 2
+      }
+    },
+    {
+      "output": {
+        "id": 98,
+        "Coupler_port_count": 4
+      }
+    },
+    {
+      "output": {
+        "id": 99,
+        "Coupler_port_count": 8
+      }
+    },
+    {
+      "output": {
+        "id": 100
+      }
+    },
+    {
+      "output": {
+        "id": 101,
+        "Bus_interface_type": "3U CPCI",
+        "A429_tx_channel_count": 4,
+        "A429_rx_channel_count": 4,
+        "A429_baud_rate_options_bps": "12.5k,48k,100k",
+        "A429_FIFO_depth_bytes": 1024
+      }
+    },
+    {
+      "output": {
+        "id": 102,
+        "A429_tx_channel_count": 8,
+        "A429_rx_channel_count": 8,
+        "A429_baud_rate_options_bps": "12.5k,48k,100k",
+        "A429_FIFO_depth_bytes": 1024,
+        "Bus_interface_type": "3U CPCI"
+      }
+    },
+    {
+      "output": {
+        "id": 103,
+        "Bus_interface_type": "3U CPCI",
+        "A429_tx_channel_count": 16,
+        "A429_rx_channel_count": 16,
+        "A429_baud_rate_options_bps": "12.5k,48k,100k",
+        "A429_FIFO_depth_bytes": 1024
+      }
+    },
+    {
+      "output": {
+        "id": 104,
+        "Bus_interface_type": "CPCI",
+        "A429_tx_channel_count": 8,
+        "A429_rx_channel_count": 8,
+        "A429_baud_rate_options_bps": "10K,12.5K,48K,50K,100K,150K"
+      }
+    },
+    {
+      "output": {
+        "id": 105,
+        "Bus_interface_type": "CPCI",
+        "Form_factor": "3U",
+        "A429_tx_channel_count": 16,
+        "A429_rx_channel_count": 16,
+        "A429_baud_rate_options_bps": "10K,12.5K,48K,50K,100K,150K"
+      }
+    },
+    {
+      "output": {
+        "id": 106,
+        "AFDX_channel_count": 2,
+        "AFDX_port_count": 4,
+        "AFDX_tx_buffer_depth_bytes": 8388608,
+        "AFDX_rx_buffer_depth_bytes": 8388608,
+        "AFDX_hardware_protocol_stack": true,
+        "Bus_interface_type": "3U CPCI",
+        "Form_factor": "3U",
+        "Supported_series": "ARINC664"
+      }
+    },
+    {
+      "output": {
+        "id": 107,
+        "Bus_interface_type": "3U CPCI",
+        "Form_factor": "3U",
+        "AFDX_channel_count": 1,
+        "AFDX_port_count": 1,
+        "AFDX_tx_buffer_depth_bytes": 8388608,
+        "AFDX_rx_buffer_depth_bytes": 8388608,
+        "AFDX_hardware_protocol_stack": true
+      }
+    },
+    {
+      "output": {
+        "id": 108
+      }
+    },
+    {
+      "output": {
+        "id": 109,
+        "PPS_input_channel_count": 4,
+        "PPS_output_channel_count": 4,
+        "PPS_oscillator_frequency_Hz": 40000000,
+        "PPS_oscillator_stability_ppb": 100,
+        "PPS_logic_levels_supported": [
+          "5V CMOS",
+          "5V RS422"
+        ],
+        "PPS_sync_accuracy_ns": 75
+      }
+    },
+    {
+      "output": {
+        "id": 110,
+        "PPS_input_channel_count": 8,
+        "PPS_output_channel_count": 8,
+        "PPS_oscillator_frequency_Hz": 40000000,
+        "PPS_oscillator_stability_ppb": 100,
+        "PPS_logic_levels_supported": [
+          "5V CMOS",
+          "5V RS422"
+        ],
+        "Form_factor": "3U cPCI"
+      }
+    },
+    {
+      "output": {
+        "id": 111,
+        "Bus_interface_type": "PXI",
+        "RTD_channel_count": 10,
+        "RTD_resolution_bits": 12,
+        "RTD_resistance_min_ohm": 0,
+        "RTD_resistance_max_ohm": 4000,
+        "driver_support_realtime": true
+      }
+    },
+    {
+      "output": {
+        "id": 112,
+        "Bus_interface_type": "PXI",
+        "RTD_channel_count": 10,
+        "RTD_resolution_bits": 16,
+        "RTD_resistance_min_ohm": 0,
+        "RTD_resistance_max_ohm": 65000,
+        "driver_support_realtime": true
+      }
+    },
+    {
+      "output": {
+        "id": 113,
+        "Bus_interface_type": "PXI",
+        "RTD_channel_count": 18,
+        "RTD_resolution_bits": 8,
+        "RTD_resistance_min_ohm": 0,
+        "RTD_resistance_max_ohm": 255,
+        "driver_support_realtime": true
+      }
+    },
+    {
+      "output": {
+        "id": 114,
+        "RTD_channel_count": 4,
+        "RTD_resolution_ohm": 0.1,
+        "RTD_resistance_min_ohm": 0.2,
+        "RTD_resistance_max_ohm": 1.6,
+        "driver_support_realtime": true
+      }
+    },
+    {
+      "output": {
+        "id": 115,
+        "RTD_channel_count": 8,
+        "RTD_resolution_bits": 12,
+        "RTD_resistance_min_ohm": 1,
+        "RTD_resistance_max_ohm": 4095,
+        "RTD_resolution_ohm": 1,
+        "driver_support_realtime": true,
+        "driver_support_windows": true,
+        "Form_factor": "3U欧规卡",
+        "Supported_series": "CompactPCI PICMG 2.0 R2.1"
+      }
+    },
+    {
+      "output": {
+        "id": 116,
+        "RTD_channel_count": 8,
+        "RTD_resistance_min_ohm": 3,
+        "RTD_resistance_max_ohm": 100,
+        "RTD_resolution_ohm": 0.125,
+        "RTD_accuracy_percent": 0.1,
+        "RTD_accuracy_ohm_offset": 0.125
+      }
+    },
+    {
+      "output": {
+        "id": 117,
+        "RTD_channel_count": 4,
+        "RTD_resistance_min_ohm": 0,
+        "RTD_resistance_max_ohm": 159999.9,
+        "RTD_resolution_ohm": 0.1,
+        "RTD_max_power_mW": 400,
+        "custom_voltage_range_min_V": 0,
+        "custom_voltage_range_max_V": 40,
+        "RTD_accuracy_percent": 0.1,
+        "RTD_accuracy_ohm_offset": 0.1
+      }
+    },
+    {
+      "output": {
+        "id": 118,
+        "RTD_channel_count": 8,
+        "RTD_resistance_min_ohm": 0,
+        "RTD_resistance_max_ohm": 511.75,
+        "RTD_resolution_ohm": 0.25,
+        "RTD_max_power_mW": 400,
+        "RTD_accuracy_percent": 0.1,
+        "RTD_accuracy_ohm_offset": 0.25,
+        "custom_voltage_range_min_V": 0,
+        "custom_voltage_range_max_V": 40
+      }
+    },
+    {
+      "output": {
+        "id": 119,
+        "RTD_channel_count": 8,
+        "RTD_resistance_min_ohm": 0,
+        "RTD_resistance_max_ohm": 4095,
+        "RTD_resolution_ohm": 0.1,
+        "RTD_max_power_mW": 400,
+        "custom_voltage_range_min_V": 0,
+        "custom_voltage_range_max_V": 40,
+        "RTD_accuracy_percent": 0.1,
+        "RTD_accuracy_ohm_offset": 0.1
+      }
+    },
+    {
+      "output": {
+        "id": 120,
+        "RTD_channel_count": 16,
+        "AD_sampling_rate_Hz": 100,
+        "AD_resolution_bits": 24
+      }
+    },
+    {
+      "output": {
+        "id": 121,
+        "Bus_interface_type": "3U CPCI",
+        "RFM_memory_size_bytes": 268435456,
+        "RFM_FIFO_depth_bytes": 4096,
+        "RFM_baud_rate_bps": 2120000000,
+        "RFM_fiber_transmission_distance_m": 300,
+        "RFM_fiber_mode": "多模",
+        "DIO_interrupt_capability": true
+      }
+    },
+    {
+      "output": {
+        "id": 122,
+        "Bus_interface_type": "3U CPCI",
+        "RFM_memory_size_bytes": 268435456,
+        "RFM_fiber_mode": "多模"
+      }
+    },
+    {
+      "output": {
+        "id": 123,
+        "AD_channel_count_single_ended": null,
+        "AD_channel_count_differential": 8,
+        "AD_resolution_bits": 24,
+        "AD_sampling_rate_Hz": 10000,
+        "AD_input_voltage_range_min_V": -10,
+        "AD_input_voltage_range_max_V": 10,
+        "AD_input_voltage_programmable": true,
+        "AD_input_current_ranges_mA": null,
+        "AD_accuracy_voltage_percent_FS": 0.01,
+        "AD_accuracy_current_percent_FS": null,
+        "AD_accuracy_description": "1V及以上：±0.01%+0.5mV；1V以下：±0.01%+2uV",
+        "AD_input_impedance_ohm": null,
+        "AD_coupling_mode": "DC",
+        "AD_input_modes": [
+          "差分"
+        ],
+        "AD_isolation_support": null,
+        "AD_channel_group_size": null,
+        "AD_group_configurable_voltage_current": null,
+        "AD_current_sampling_resistor_ohm": null,
+        "AD_current_sampling_resistor_accuracy_percent": null
+      }
+    },
+    {
+      "output": {
+        "id": 1,
+        "AD_channel_count_single_ended": 16,
+        "AD_channel_count_differential": null,
+        "AD_resolution_bits": 16,
+        "AD_sampling_rate_Hz": 100000,
+        "AD_input_voltage_range_min_V": -10,
+        "AD_input_voltage_range_max_V": 10,
+        "AD_input_voltage_programmable": null,
+        "AD_input_current_ranges_mA": null,
+        "AD_accuracy_voltage_percent_FS": null,
+        "AD_accuracy_current_percent_FS": null,
+        "AD_accuracy_description": null,
+        "AD_input_impedance_ohm": null,
+        "AD_coupling_mode": null,
+        "AD_input_modes": [
+          "单端"
+        ],
+        "AD_isolation_support": null,
+        "AD_channel_group_size": null,
+        "AD_group_configurable_voltage_current": null,
+        "AD_current_sampling_resistor_ohm": null,
+        "AD_current_sampling_resistor_accuracy_percent": null,
+        "DA_channel_count": 16,
+        "DA_resolution_bits": 16,
+        "DA_update_rate_Hz": 100000,
+        "DA_output_voltage_min_V": -10,
+        "DA_output_voltage_max_V": 10,
+        "DA_output_current_min_mA": null,
+        "DA_output_current_max_mA": null,
+        "DA_accuracy_voltage_percent_FS": null,
+        "DA_accuracy_current_percent_FS": null,
+        "DA_slew_rate_V_per_us": null,
+        "DA_slew_rate_mA_per_us": null,
+        "DA_isolation_support": null,
+        "DA_output_mode_programmable": null,
+        "DA_output_mode_configurable_switch": null,
+        "DIO_total_channel_count": 32,
+        "DI_channel_count": null,
+        "DO_channel_count": null,
+        "DIO_logic_level": "5V CMOS/TTL",
+        "DIO_isolation_voltage_V": null,
+        "DIO_interrupt_capability": null,
+        "DIO_direction_group_size": null,
+        "DIO_isolation_support": null,
+        "DIO_configurable_as_counter": true,
+        "DIO_configurable_as_pwm": true,
+        "DIO_configurable_as_pulse_input": null,
+        "DI_voltage_range_min_V": null,
+        "DI_voltage_range_max_V": null,
+        "DO_voltage_range_min_V": null,
+        "DO_voltage_range_max_V": null,
+        "DO_drive_current_mA": null,
+        "DO_sink_current_max_mA": null,
+        "DO_is_relay": null,
+        "Counter_channel_count": 16,
+        "Counter_bits": 32,
+        "Counter_max_input_frequency_Hz": null,
+        "Counter_reference_clock_Hz": null,
+        "custom_voltage_range_min_V": -30,
+        "custom_voltage_range_max_V": 30,
+        "custom_current_range_min_mA": null,
+        "custom_current_range_max_mA": null
+      }
+    },
+    {
+      "output": {
+        "id": 2,
+        "AD_channel_count_single_ended": 32,
+        "AD_channel_count_differential": 16,
+        "AD_resolution_bits": 16,
+        "AD_sampling_rate_Hz": 0,
+        "AD_input_voltage_range_min_V": -10,
+        "AD_input_voltage_range_max_V": 10,
+        "AD_input_voltage_programmable": true,
+        "AD_input_current_ranges_mA": null,
+        "AD_accuracy_voltage_percent_FS": null,
+        "AD_accuracy_current_percent_FS": null,
+        "AD_accuracy_description": null,
+        "AD_input_impedance_ohm": null,
+        "AD_coupling_mode": null,
+        "AD_input_modes": [
+          "单端",
+          "差分"
+        ],
+        "AD_isolation_support": null,
+        "AD_channel_group_size": null,
+        "AD_group_configurable_voltage_current": null,
+        "AD_current_sampling_resistor_ohm": null,
+        "AD_current_sampling_resistor_accuracy_percent": null,
+        "DA_channel_count": 4,
+        "DA_resolution_bits": 16,
+        "DA_update_rate_Hz": 2800000,
+        "DA_output_voltage_min_V": -10,
+        "DA_output_voltage_max_V": 10,
+        "DA_output_current_min_mA": null,
+        "DA_output_current_max_mA": null,
+        "DA_accuracy_voltage_percent_FS": null,
+        "DA_accuracy_current_percent_FS": null,
+        "DA_slew_rate_V_per_us": null,
+        "DA_slew_rate_mA_per_us": null,
+        "DA_isolation_support": null,
+        "DA_output_mode_programmable": null,
+        "DA_output_mode_configurable_switch": null,
+        "DIO_total_channel_count": 48,
+        "DI_channel_count": null,
+        "DO_channel_count": null,
+        "DIO_logic_level": "TTL",
+        "DIO_isolation_voltage_V": null,
+        "DIO_interrupt_capability": null,
+        "DIO_direction_group_size": null,
+        "DIO_isolation_support": null,
+        "DIO_configurable_as_counter": null,
+        "DIO_configurable_as_pwm": null,
+        "DIO_configurable_as_pulse_input": null,
+        "DI_voltage_range_min_V": null,
+        "DI_voltage_range_max_V": null,
+        "DO_voltage_range_min_V": null,
+        "DO_voltage_range_max_V": null,
+        "DO_drive_current_mA": null,
+        "DO_sink_current_max_mA": null,
+        "DO_is_relay": null,
+        "Counter_channel_count": 4,
+        "Counter_bits": 32,
+        "Counter_max_input_frequency_Hz": null,
+        "Counter_reference_clock_Hz": null
+      }
+    },
+    {
+      "output": {
+        "id": 3,
+        "AD_channel_count_single_ended": 32,
+        "AD_channel_count_differential": 16,
+        "AD_resolution_bits": 16,
+        "AD_sampling_rate_Hz": 100000,
+        "AD_input_voltage_range_min_V": -10,
+        "AD_input_voltage_range_max_V": 10,
+        "AD_input_voltage_programmable": true,
+        "AD_input_current_ranges_mA": null,
+        "AD_accuracy_voltage_percent_FS": null,
+        "AD_accuracy_current_percent_FS": null,
+        "AD_accuracy_description": null,
+        "AD_input_impedance_ohm": null,
+        "AD_coupling_mode": null,
+        "AD_input_modes": [
+          "单端",
+          "差分"
+        ],
+        "AD_isolation_support": true,
+        "AD_channel_group_size": null,
+        "AD_group_configurable_voltage_current": null,
+        "AD_current_sampling_resistor_ohm": null,
+        "AD_current_sampling_resistor_accuracy_percent": null,
+        "DIO_total_channel_count": 32,
+        "DI_channel_count": 16,
+        "DO_channel_count": 16,
+        "DIO_logic_level": null,
+        "DIO_isolation_voltage_V": 20,
+        "DIO_interrupt_capability": null,
+        "DIO_direction_group_size": null,
+        "DIO_isolation_support": true,
+        "DIO_configurable_as_counter": null,
+        "DIO_configurable_as_pwm": null,
+        "DIO_configurable_as_pulse_input": null,
+        "DI_voltage_range_min_V": null,
+        "DI_voltage_range_max_V": null,
+        "DO_voltage_range_min_V": null,
+        "DO_voltage_range_max_V": null,
+        "DO_drive_current_mA": null,
+        "DO_sink_current_max_mA": null,
+        "DO_is_relay": null,
+        "Counter_channel_count": 1,
+        "Counter_bits": 32,
+        "Counter_max_input_frequency_Hz": null,
+        "Counter_reference_clock_Hz": null
+      }
+    },
+    {
+      "output": {
+        "id": 4,
+        "PWM_output_channel_count": 12,
+        "PWM_frequency_min_Hz": 10,
+        "PWM_frequency_max_Hz": 1000000,
+        "PWM_complementary_output_support": true,
+        "PWM_dead_zone_configurable": true,
+        "Encoder_quadrature_channel_count": 2,
+        "Encoder_counter_bits": 32,
+        "Encoder_channel_count_differential": 6,
+        "Encoder_hall_channel_count": 6,
+        "AD_channel_count_single_ended": 8,
+        "AD_resolution_bits": 16,
+        "AD_sampling_rate_Hz": 100000,
+        "AD_input_voltage_range_min_V": -10,
+        "AD_input_voltage_range_max_V": 10,
+        "DA_channel_count": 4,
+        "DA_resolution_bits": 16,
+        "DA_output_voltage_min_V": -10,
+        "DA_output_voltage_max_V": 10,
+        "DIO_total_channel_count": 16,
+        "DI_channel_count": 8,
+        "DO_channel_count": 8,
+        "DIO_logic_level": "TTL",
+        "Power_output_channel_count": 2,
+        "Power_output_voltage_V": 5,
+        "Power_output_current_mA": 200,
+        "DIO_configurable_as_pulse_input": true
+      }
+    },
+    {
+      "output": {
+        "id": 5,
+        "DA_channel_count": 16,
+        "DA_resolution_bits": 16,
+        "DA_output_voltage_min_V": -10,
+        "DA_output_voltage_max_V": 10,
+        "DA_output_current_min_mA": 0,
+        "DA_output_current_max_mA": 20,
+        "DA_accuracy_current_percent_FS": 0.05,
+        "DA_accuracy_voltage_percent_FS": 0.1
+      }
+    },
+    {
+      "output": {
+        "id": 6,
+        "DA_channel_count": 16,
+        "DIO_total_channel_count": 16,
+        "DI_channel_count": null,
+        "DO_channel_count": null,
+        "DIO_logic_level": "5V CMOS/TTL",
+        "DIO_direction_group_size": 8,
+        "DA_resolution_bits": 16,
+        "DA_output_voltage_min_V": -10,
+        "DA_output_voltage_max_V": 10,
+        "DA_output_current_min_mA": 0,
+        "DA_output_current_max_mA": 20,
+        "DA_accuracy_current_percent_FS": 0.05,
+        "DA_accuracy_voltage_percent_FS": 0.1
+      }
+    },
+    {
+      "output": {
+        "id": 7,
+        "AD_channel_count_single_ended": 16,
+        "AD_channel_count_differential": null,
+        "AD_resolution_bits": 16,
+        "AD_sampling_rate_Hz": 200000,
+        "AD_input_voltage_range_min_V": -10,
+        "AD_input_voltage_range_max_V": 10,
+        "AD_input_voltage_programmable": null,
+        "AD_input_current_ranges_mA": "-20 to +20",
+        "AD_accuracy_voltage_percent_FS": 0.1,
+        "AD_accuracy_current_percent_FS": 0.1,
+        "AD_accuracy_description": null,
+        "AD_input_impedance_ohm": null,
+        "AD_coupling_mode": null,
+        "AD_input_modes": [
+          "单端"
+        ],
+        "AD_isolation_support": null,
+        "AD_channel_group_size": 8,
+        "AD_group_configurable_voltage_current": true,
+        "AD_current_sampling_resistor_ohm": null,
+        "AD_current_sampling_resistor_accuracy_percent": null,
+        "custom_voltage_range_min_V": -30,
+        "custom_voltage_range_max_V": 30,
+        "custom_current_range_min_mA": -100,
+        "custom_current_range_max_mA": 100
+      }
+    },
+    {
+      "output": {
+        "id": 8,
+        "AD_channel_count_single_ended": 32,
+        "AD_channel_count_differential": null,
+        "AD_resolution_bits": 16,
+        "AD_sampling_rate_Hz": 200000,
+        "AD_input_voltage_range_min_V": -10,
+        "AD_input_voltage_range_max_V": 10,
+        "AD_input_voltage_programmable": null,
+        "AD_input_current_ranges_mA": "-20 to +20",
+        "AD_accuracy_voltage_percent_FS": 0.2,
+        "AD_accuracy_current_percent_FS": 0.2,
+        "AD_accuracy_description": null,
+        "AD_input_impedance_ohm": null,
+        "AD_coupling_mode": null,
+        "AD_input_modes": [
+          "单端"
+        ],
+        "AD_isolation_support": null,
+        "AD_channel_group_size": 8,
+        "AD_group_configurable_voltage_current": true,
+        "AD_current_sampling_resistor_ohm": null,
+        "AD_current_sampling_resistor_accuracy_percent": null,
+        "custom_voltage_range_min_V": -30,
+        "custom_voltage_range_max_V": 30,
+        "custom_current_range_min_mA": -100,
+        "custom_current_range_max_mA": 100
+      }
+    },
+    {
+      "output": {
+        "id": 9,
+        "AD_channel_count_single_ended": 32,
+        "AD_channel_count_differential": null,
+        "AD_resolution_bits": null,
+        "AD_sampling_rate_Hz": 100000,
+        "AD_input_voltage_range_min_V": -10,
+        "AD_input_voltage_range_max_V": 10,
+        "AD_input_voltage_programmable": null,
+        "AD_input_current_ranges_mA": "-20 to +20",
+        "AD_accuracy_voltage_percent_FS": 10,
+        "AD_accuracy_current_percent_FS": null,
+        "AD_accuracy_description": null,
+        "AD_input_impedance_ohm": 10000000,
+        "AD_coupling_mode": null,
+        "AD_input_modes": [
+          "单端"
+        ],
+        "AD_isolation_support": null,
+        "AD_channel_group_size": null,
+        "AD_group_configurable_voltage_current": null,
+        "AD_current_sampling_resistor_ohm": 470,
+        "AD_current_sampling_resistor_accuracy_percent": 0.1,
+        "custom_voltage_range_min_V": -30,
+        "custom_voltage_range_max_V": 30,
+        "custom_current_range_min_mA": null,
+        "custom_current_range_max_mA": null
+      }
+    },
+    {
+      "output": {
+        "id": 10,
+        "Bus_interface_type": "PCI",
+        "UART_channel_count": 8,
+        "UART_interface_types_supported": [
+          "RS-232",
+          "RS-422",
+          "RS-485"
+        ],
+        "UART_max_baud_rate_bps": 921600,
+        "UART_FIFO_depth_bytes": 128
+      }
+    },
+    {
+      "output": {
+        "id": 11,
+        "Bus_interface_type": "PCIe",
+        "UART_channel_count": 8,
+        "UART_interface_types_supported": [
+          "RS-232",
+          "RS-422",
+          "RS-485"
+        ],
+        "UART_max_baud_rate_bps": 921600,
+        "UART_FIFO_depth_bytes": 128
+      }
+    },
+    {
+      "output": {
+        "id": 12,
+        "Bus_interface_type": "PCI",
+        "UART_channel_count": 4,
+        "UART_interface_types_supported": [
+          "RS-232",
+          "RS-422",
+          "RS-485"
+        ],
+        "UART_max_baud_rate_bps": 921600,
+        "UART_FIFO_depth_bytes": 256
+      }
+    },
+    {
+      "output": {
+        "id": 13,
+        "CAN_channel_count": 2,
+        "CAN_baud_rate_min_bps": 1000000,
+        "CAN_baud_rate_max_bps": 1000000,
+        "CAN_isolation_voltage_V": 20
+      }
+    },
+    {
+      "output": {
+        "id": 14,
+        "CAN_channel_count": 4,
+        "CAN_baud_rate_min_bps": 40000,
+        "CAN_baud_rate_max_bps": 1000000,
+        "CAN_FD_support": true,
+        "CAN_FD_baud_rate_min_bps": 1000000,
+        "CAN_FD_baud_rate_max_bps": 5000000,
+        "CAN_isolation_voltage_V": null,
+        "can_protocol_j1939_support": true,
+        "can_protocol_canopen_support": true,
+        "can_protocol_dbc_support": true,
+        "can_protocol_uds_support": true,
+        "driver_support_linux": true,
+        "Termination_resistor_ohm": 120
+      }
+    },
+    {
+      "output": {
+        "id": 15,
+        "CAN_channel_count": 2,
+        "CAN_baud_rate_min_bps": 40000,
+        "CAN_baud_rate_max_bps": 1000000,
+        "CAN_FD_support": true,
+        "CAN_FD_baud_rate_min_bps": 1000000,
+        "CAN_FD_baud_rate_max_bps": 5000000,
+        "CAN_isolation_voltage_V": null,
+        "can_protocol_j1939_support": true,
+        "can_protocol_canopen_support": true,
+        "can_protocol_dbc_support": true,
+        "can_protocol_uds_support": true,
+        "driver_support_linux": true,
+        "Termination_resistor_ohm": 120
+      }
+    },
+    {
+      "output": {
+        "id": 16,
+        "Profinet_support": true,
+        "DPM_support": true
+      }
+    },
+    {
+      "output": {
+        "id": 17,
+        "EtherCat_support": true,
+        "DPM_support": true
+      }
+    },
+    {
+      "output": {
+        "id": 18,
+        "DeviceNet_support": true,
+        "DPM_support": true
+      }
+    },
+    {
+      "output": {
+        "id": 19,
+        "DIO_total_channel_count": 40,
+        "DIO_logic_level": "TTL / 5V COMS",
+        "DO_drive_current_mA": 10,
+        "DO_sink_current_max_mA": 10,
+        "DO_voltage_range_min_V": 4.5,
+        "DO_voltage_range_max_V": 5.5,
+        "DI_voltage_range_min_V": 3.5,
+        "DI_voltage_range_max_V": 5.5,
+        "Output_on_resistance_ohm": 50
+      }
+    },
+    {
+      "output": {
+        "id": 20,
+        "Bus_interface_type": "3U CPCI",
+        "MIL1553_channel_count": 2,
+        "MIL1553_redundancy_support": true,
+        "MIL1553_operation_modes_supported": [
+          "BC",
+          "RT",
+          "BM"
+        ],
+        "MIL1553_multifunction_support": true
+      }
+    },
+    {
+      "output": {
+        "id": 21,
+        "Profibus_DP_support": true,
+        "DPM_support": true
+      }
+    },
+    {
+      "output": {
+        "id": 22,
+        "DIO_total_channel_count": 128,
+        "DI_channel_count": 128,
+        "DO_channel_count": 0,
+        "DIO_logic_level": null,
+        "DIO_isolation_voltage_V": null,
+        "DIO_interrupt_capability": true,
+        "DIO_direction_group_size": null,
+        "DIO_isolation_support": true,
+        "DIO_configurable_as_counter": null,
+        "DIO_configurable_as_pwm": null,
+        "DIO_configurable_as_pulse_input": null,
+        "DI_voltage_range_min_V": 5,
+        "DI_voltage_range_max_V": 25,
+        "DO_voltage_range_min_V": null,
+        "DO_voltage_range_max_V": null,
+        "DO_drive_current_mA": null,
+        "DO_sink_current_max_mA": null,
+        "DO_is_relay": null
+      }
+    },
+    {
+      "output": {
+        "id": 23,
+        "DIO_total_channel_count": 128,
+        "DO_channel_count": 128,
+        "DIO_isolation_support": true,
+        "DIO_isolation_voltage_V": 2000,
+        "DO_voltage_range_min_V": 5,
+        "DO_voltage_range_max_V": 40,
+        "DO_sink_current_max_mA": 90,
+        "DA_output_mode_configurable_switch": true
+      }
+    },
+    {
+      "output": {
+        "id": 24,
+        "DIO_total_channel_count": 64,
+        "DI_channel_count": 64,
+        "DO_channel_count": 0,
+        "DIO_logic_level": "5V CMOS/TTL",
+        "DIO_isolation_voltage_V": 2,
+        "DIO_interrupt_capability": true,
+        "DI_voltage_range_min_V": 5,
+        "DI_voltage_range_max_V": 25
+      }
+    },
+    {
+      "output": {
+        "id": 25,
+        "Bus_interface_type": "PCI",
+        "RFM_memory_size_bytes": 268435456,
+        "RFM_FIFO_depth_bytes": 16384,
+        "RFM_fiber_mode": "多模",
+        "driver_support_realtime": true
+      }
+    },
+    {
+      "output": {
+        "id": 26,
+        "Bus_interface_type": "PCI-E",
+        "RFM_memory_size_bytes": 268435456,
+        "RFM_FIFO_depth_bytes": 16384,
+        "RFM_fiber_mode": "多模",
+        "driver_support_realtime": true
+      }
+    },
+    {
+      "output": {
+        "id": 27,
+        "Bus_interface_type": "PCI",
+        "RFM_memory_size_bytes": 268435456,
+        "RFM_fiber_mode": "多模"
+      }
+    },
+    {
+      "output": {
+        "id": 28,
+        "Bus_interface_type": "PCI-E",
+        "RFM_memory_size_bytes": 268435456,
+        "RFM_fiber_mode": "多模"
+      }
+    },
+    {
+      "output": {
+        "id": 29,
+        "DA_channel_count": 4,
+        "DA_resolution_bits": 16,
+        "DA_output_voltage_min_V": -10,
+        "DA_output_voltage_max_V": 10,
+        "DA_update_rate_Hz": 8000,
+        "AD_channel_count_single_ended": 4,
+        "AD_resolution_bits": 12,
+        "AD_sampling_rate_Hz": 8000,
+        "AD_input_voltage_range_min_V": -10,
+        "AD_input_voltage_range_max_V": 10,
+        "Encoder_quadrature_channel_count": 4,
+        "Motion_enable_reset_channel_count": 4,
+        "Motion_pulse_output_channel_count": 4,
+        "Motion_pulse_output_type": "差分"
+      }
+    },
+    {
+      "output": {
+        "id": 30,
+        "DA_channel_count": 8,
+        "DA_resolution_bits": 16,
+        "DA_output_voltage_min_V": -10,
+        "DA_output_voltage_max_V": 10,
+        "DA_update_rate_Hz": 8000,
+        "AD_channel_count_single_ended": 8,
+        "AD_channel_count_differential": null,
+        "AD_resolution_bits": 12,
+        "AD_sampling_rate_Hz": 8000,
+        "AD_input_voltage_range_min_V": -10,
+        "AD_input_voltage_range_max_V": 10,
+        "Motion_pulse_output_channel_count": 8,
+        "Motion_pulse_output_type": "差分",
+        "Encoder_quadrature_channel_count": 8,
+        "Motion_enable_reset_channel_count": 8
+      }
+    },
+    {
+      "output": {
+        "id": 31,
+        "Bus_interface_type": "PCI-E X1",
+        "Form_factor": null,
+        "Supported_series": null
+      }
+    },
+    {
+      "output": {
+        "id": 32,
+        "Bus_interface_type": "PCIe x2",
+        "SPI_channel_count": 4,
+        "SPI_master_slave_modes": "2主2从",
+        "SPI_logic_level": "5V CMOS/5V RS422",
+        "SSI_channel_count": 2,
+        "AD_input_modes": [
+          "差分",
+          "单端"
+        ],
+        "SPI_isolation_support": true,
+        "SSI_isolation_support": true
+      }
+    },
+    {
+      "output": {
+        "id": 33,
+        "Bus_interface_type": "PCIE",
+        "FPGA_fiber_channel_count": 4,
+        "FPGA_logic_cells": 1143000,
+        "FPGA_flip_flops": 1045000,
+        "FPGA_block_ram_Mb": 36,
+        "FPGA_transceivers_count_and_speed": "GTY 28Gb/s X 24, GTH 16Gb/s X 32"
+      }
+    },
+    {
+      "output": {
+        "id": 34,
+        "FPGA_logic_cells": 444000,
+        "FPGA_luts": 277400,
+        "FPGA_flip_flops": 554800,
+        "FPGA_multipliers_MACCs": 2020,
+        "FPGA_block_ram_Mb": 26.5,
+        "FPGA_transceivers_count_and_speed": "16x PCIE Gen2x8",
+        "FPGA_PS_ARM_cores": 2,
+        "FPGA_PS_CPU_frequency_Hz": 800000000,
+        "FPGA_PS_cache_L1_L2": "32KB L1 per CPU, 512KB shared L2",
+        "FPGA_PS_on_chip_ram_KB": 256,
+        "FPGA_PS_external_memory_support": "16/32 bit DDR2, DDR3",
+        "Bus_interface_type": "PCIEx8"
+      }
+    },
+    {
+      "output": {
+        "id": 35,
+        "DA_channel_count": 24,
+        "DA_resolution_bits": 16,
+        "DA_update_rate_Hz": 1000000,
+        "DA_output_voltage_min_V": -10,
+        "DA_output_voltage_max_V": 10,
+        "AD_channel_count_single_ended": 16,
+        "AD_resolution_bits": 16,
+        "AD_sampling_rate_Hz": 1000000,
+        "AD_input_voltage_range_min_V": -10,
+        "AD_input_voltage_range_max_V": 10,
+        "Supported_series": "AX7202"
+      }
+    },
+    {
+      "output": {
+        "id": 36,
+        "Bus_interface_type": "PCIe x1",
+        "Form_factor": "标准安卡",
+        "DIO_total_channel_count": 32,
+        "DI_channel_count": 0,
+        "DO_channel_count": 32,
+        "DIO_logic_level": "5V CMOS/TTL",
+        "DIO_direction_group_size": 8,
+        "UART_channel_count": 0,
+        "Power_output_channel_count": 1
+      }
+    },
+    {
+      "output": {
+        "id": 37,
+        "DIO_total_channel_count": 40,
+        "DI_channel_count": 20,
+        "DO_channel_count": 20,
+        "DIO_logic_level": "5V CMOS/5V RS422",
+        "Bus_interface_type": "FMC",
+        "Form_factor": "SCSI68孔型连接器"
+      }
+    },
+    {
+      "output": {
+        "id": 38,
+        "PWM_output_channel_count": 12,
+        "PWM_frequency_min_Hz": 10,
+        "PWM_frequency_max_Hz": 1000000,
+        "PWM_complementary_output_support": true,
+        "PWM_dead_zone_configurable": true,
+        "PWM_isolation_support": null,
+        "Encoder_quadrature_channel_count": 2,
+        "Encoder_hall_channel_count": 6,
+        "Encoder_channel_count_differential": 6,
+        "Encoder_channel_count_single_ended": null,
+        "Encoder_counter_bits": 32,
+        "Encoder_max_input_frequency_Hz": null,
+        "Encoder_signal_types_supported": null,
+        "Encoder_isolation_support": null,
+        "Encoder_digital_debounce_support": null,
+        "AD_channel_count_single_ended": 8,
+        "AD_channel_count_differential": null,
+        "AD_resolution_bits": 16,
+        "AD_sampling_rate_Hz": 100000,
+        "AD_input_voltage_range_min_V": -10,
+        "AD_input_voltage_range_max_V": 10,
+        "AD_input_voltage_programmable": null,
+        "AD_input_current_ranges_mA": null,
+        "AD_accuracy_voltage_percent_FS": null,
+        "AD_accuracy_current_percent_FS": null,
+        "AD_accuracy_description": null,
+        "AD_input_impedance_ohm": null,
+        "AD_coupling_mode": null,
+        "AD_input_modes": [
+          "单端"
+        ],
+        "AD_isolation_support": null,
+        "AD_channel_group_size": null,
+        "AD_group_configurable_voltage_current": null,
+        "AD_current_sampling_resistor_ohm": null,
+        "AD_current_sampling_resistor_accuracy_percent": null,
+        "DA_channel_count": 4,
+        "DA_resolution_bits": 16,
+        "DA_update_rate_Hz": null,
+        "DA_output_voltage_min_V": -10,
+        "DA_output_voltage_max_V": 10,
+        "DA_output_current_min_mA": null,
+        "DA_output_current_max_mA": null,
+        "DA_accuracy_voltage_percent_FS": null,
+        "DA_accuracy_current_percent_FS": null,
+        "DA_slew_rate_V_per_us": null,
+        "DA_slew_rate_mA_per_us": null,
+        "DA_isolation_support": null,
+        "DA_output_mode_programmable": null,
+        "DA_output_mode_configurable_switch": null,
+        "DIO_total_channel_count": 16,
+        "DI_channel_count": 8,
+        "DO_channel_count": 8,
+        "DIO_logic_level": "TTL",
+        "DIO_isolation_voltage_V": null,
+        "DIO_interrupt_capability": null,
+        "DIO_direction_group_size": null,
+        "DIO_isolation_support": null,
+        "DIO_configurable_as_counter": null,
+        "DIO_configurable_as_pwm": null,
+        "DIO_configurable_as_pulse_input": null,
+        "DI_voltage_range_min_V": null,
+        "DI_voltage_range_max_V": null,
+        "DO_voltage_range_min_V": null,
+        "DO_voltage_range_max_V": null,
+        "DO_drive_current_mA": null,
+        "DO_sink_current_max_mA": null,
+        "DO_is_relay": null,
+        "Power_output_channel_count": 2,
+        "Power_output_voltage_V": 5,
+        "Power_output_current_mA": 200
+      }
+    },
+    {
+      "output": {
+        "id": 39,
+        "AD_channel_count_single_ended": 16,
+        "AD_channel_count_differential": null,
+        "AD_resolution_bits": 16,
+        "AD_sampling_rate_Hz": 100000,
+        "AD_input_voltage_range_min_V": -10,
+        "AD_input_voltage_range_max_V": 10,
+        "AD_input_voltage_programmable": null,
+        "AD_input_current_ranges_mA": null,
+        "AD_accuracy_voltage_percent_FS": null,
+        "AD_accuracy_current_percent_FS": null,
+        "AD_accuracy_description": null,
+        "AD_input_impedance_ohm": null,
+        "AD_coupling_mode": null,
+        "AD_input_modes": [
+          "单端"
+        ],
+        "AD_isolation_support": null,
+        "AD_channel_group_size": null,
+        "AD_group_configurable_voltage_current": null,
+        "AD_current_sampling_resistor_ohm": null,
+        "AD_current_sampling_resistor_accuracy_percent": null,
+        "DA_channel_count": 16,
+        "DA_resolution_bits": 16,
+        "DA_update_rate_Hz": 100000,
+        "DA_output_voltage_min_V": -10,
+        "DA_output_voltage_max_V": 10,
+        "DA_output_current_min_mA": null,
+        "DA_output_current_max_mA": null,
+        "DA_accuracy_voltage_percent_FS": null,
+        "DA_accuracy_current_percent_FS": null,
+        "DA_slew_rate_V_per_us": null,
+        "DA_slew_rate_mA_per_us": null,
+        "DA_isolation_support": null,
+        "DA_output_mode_programmable": null,
+        "DA_output_mode_configurable_switch": null,
+        "DIO_total_channel_count": 32,
+        "DI_channel_count": null,
+        "DO_channel_count": null,
+        "DIO_logic_level": "5V CMOS/TTL",
+        "DIO_isolation_voltage_V": null,
+        "DIO_interrupt_capability": null,
+        "DIO_direction_group_size": null,
+        "DIO_isolation_support": null,
+        "DIO_configurable_as_counter": true,
+        "DIO_configurable_as_pwm": true,
+        "DIO_configurable_as_pulse_input": null,
+        "DI_voltage_range_min_V": null,
+        "DI_voltage_range_max_V": null,
+        "DO_voltage_range_min_V": null,
+        "DO_voltage_range_max_V": null,
+        "DO_drive_current_mA": null,
+        "DO_sink_current_max_mA": null,
+        "DO_is_relay": null,
+        "Counter_channel_count": 16,
+        "Counter_bits": 32,
+        "Counter_max_input_frequency_Hz": null,
+        "Counter_reference_clock_Hz": null,
+        "custom_voltage_range_min_V": -30,
+        "custom_voltage_range_max_V": 30,
+        "custom_current_range_min_mA": null,
+        "custom_current_range_max_mA": null
+      }
+    },
+    {
+      "output": {
+        "id": 40,
+        "Bus_interface_type": "cPCI/PCI/PCIe/PXIe",
+        "DA_channel_count": 18,
+        "DA_resolution_bits": null,
+        "DA_update_rate_Hz": 1000000,
+        "DA_output_voltage_min_V": -10,
+        "DA_output_voltage_max_V": 10,
+        "DA_output_current_min_mA": -20,
+        "DA_output_current_max_mA": 20,
+        "DA_accuracy_voltage_percent_FS": null,
+        "DA_accuracy_current_percent_FS": null,
+        "DA_slew_rate_V_per_us": null,
+        "DA_slew_rate_mA_per_us": null,
+        "DA_isolation_support": null,
+        "DA_output_mode_programmable": true,
+        "DA_output_mode_configurable_switch": null,
+        "DIO_total_channel_count": 32,
+        "DI_channel_count": null,
+        "DO_channel_count": null,
+        "DIO_logic_level": null,
+        "DIO_isolation_voltage_V": null,
+        "DIO_interrupt_capability": null,
+        "DIO_direction_group_size": 8,
+        "DIO_isolation_support": null,
+        "DIO_configurable_as_counter": null,
+        "DIO_configurable_as_pwm": null,
+        "DIO_configurable_as_pulse_input": null,
+        "DI_voltage_range_min_V": null,
+        "DI_voltage_range_max_V": null,
+        "DO_voltage_range_min_V": null,
+        "DO_voltage_range_max_V": null,
+        "DO_drive_current_mA": null,
+        "DO_sink_current_max_mA": null,
+        "DO_is_relay": null
+      }
+    },
+    {
+      "output": {
+        "id": 41,
+        "AD_channel_count_single_ended": 16,
+        "AD_channel_count_differential": null,
+        "AD_resolution_bits": 16,
+        "AD_sampling_rate_Hz": 200000,
+        "AD_input_voltage_range_min_V": -10,
+        "AD_input_voltage_range_max_V": 10,
+        "AD_input_voltage_programmable": null,
+        "AD_input_current_ranges_mA": "-20 to +20",
+        "AD_accuracy_voltage_percent_FS": 0.1,
+        "AD_accuracy_current_percent_FS": 0.1,
+        "AD_accuracy_description": null,
+        "AD_input_impedance_ohm": 10000000,
+        "AD_coupling_mode": null,
+        "AD_input_modes": [
+          "单端"
+        ],
+        "AD_isolation_support": null,
+        "AD_channel_group_size": 8,
+        "AD_group_configurable_voltage_current": true,
+        "AD_current_sampling_resistor_ohm": 470,
+        "AD_current_sampling_resistor_accuracy_percent": null,
+        "custom_voltage_range_min_V": -30,
+        "custom_voltage_range_max_V": 30,
+        "custom_current_range_min_mA": -100,
+        "custom_current_range_max_mA": 100
+      }
+    },
+    {
+      "output": {
+        "id": 42,
+        "AD_channel_count_single_ended": 32,
+        "AD_channel_count_differential": null,
+        "AD_resolution_bits": 16,
+        "AD_sampling_rate_Hz": 200000,
+        "AD_input_voltage_range_min_V": -10,
+        "AD_input_voltage_range_max_V": 10,
+        "AD_input_voltage_programmable": null,
+        "AD_input_current_ranges_mA": "-20 to +20",
+        "AD_accuracy_voltage_percent_FS": 0.2,
+        "AD_accuracy_current_percent_FS": 0.2,
+        "AD_accuracy_description": null,
+        "AD_input_impedance_ohm": 10000000,
+        "AD_coupling_mode": null,
+        "AD_input_modes": [
+          "单端"
+        ],
+        "AD_isolation_support": null,
+        "AD_channel_group_size": 8,
+        "AD_group_configurable_voltage_current": true,
+        "AD_current_sampling_resistor_ohm": 470,
+        "AD_current_sampling_resistor_accuracy_percent": null,
+        "custom_voltage_range_min_V": -30,
+        "custom_voltage_range_max_V": 30,
+        "custom_current_range_min_mA": -100,
+        "custom_current_range_max_mA": 100
+      }
+    },
+    {
+      "output": {
+        "id": 43,
+        "AD_channel_count_single_ended": 32,
+        "AD_channel_count_differential": null,
+        "AD_resolution_bits": 16,
+        "AD_sampling_rate_Hz": null,
+        "AD_input_voltage_range_min_V": -10,
+        "AD_input_voltage_range_max_V": 10,
+        "AD_input_voltage_programmable": null,
+        "AD_input_current_ranges_mA": "-20 to +20",
+        "AD_accuracy_voltage_percent_FS": 0.2,
+        "AD_accuracy_current_percent_FS": 0.2,
+        "AD_accuracy_description": null,
+        "AD_input_impedance_ohm": 10000000,
+        "AD_coupling_mode": null,
+        "AD_input_modes": [
+          "单端"
+        ],
+        "AD_isolation_support": null,
+        "AD_channel_group_size": 8,
+        "AD_group_configurable_voltage_current": true,
+        "AD_current_sampling_resistor_ohm": 470,
+        "AD_current_sampling_resistor_accuracy_percent": null,
+        "custom_voltage_range_min_V": -30,
+        "custom_voltage_range_max_V": 30,
+        "custom_current_range_min_mA": -100,
+        "custom_current_range_max_mA": 100
+      }
+    },
+    {
+      "output": {
+        "id": 44,
+        "AD_channel_count_single_ended": null,
+        "AD_channel_count_differential": 8,
+        "AD_resolution_bits": 24,
+        "AD_sampling_rate_Hz": 10000,
+        "AD_input_voltage_range_min_V": -10,
+        "AD_input_voltage_range_max_V": 10,
+        "AD_input_voltage_programmable": true,
+        "AD_input_current_ranges_mA": null,
+        "AD_accuracy_voltage_percent_FS": 0.01,
+        "AD_accuracy_current_percent_FS": null,
+        "AD_accuracy_description": "1V及以上：±0.01%+0.5mV；1V以下：±0.01%+2uV",
+        "AD_input_impedance_ohm": null,
+        "AD_coupling_mode": "DC",
+        "AD_input_modes": [
+          "差分"
+        ],
+        "AD_isolation_support": null,
+        "AD_channel_group_size": null,
+        "AD_group_configurable_voltage_current": null,
+        "AD_current_sampling_resistor_ohm": null,
+        "AD_current_sampling_resistor_accuracy_percent": null
+      }
+    },
+    {
+      "output": {
+        "id": 45,
+        "DA_channel_count": 8,
+        "DA_resolution_bits": 16,
+        "DA_output_voltage_min_V": -10,
+        "DA_output_voltage_max_V": 10,
+        "DA_output_current_min_mA": 0,
+        "DA_output_current_max_mA": 20,
+        "DA_accuracy_voltage_percent_FS": 0.2,
+        "DA_accuracy_current_percent_FS": 0.1,
+        "DA_slew_rate_V_per_us": 0.5,
+        "DA_slew_rate_mA_per_us": 1.4,
+        "DA_output_mode_configurable_switch": true
+      }
+    },
+    {
+      "output": {
+        "id": 46,
+        "DA_channel_count": 16,
+        "DA_resolution_bits": 16,
+        "DA_output_voltage_min_V": -10,
+        "DA_output_voltage_max_V": 10,
+        "DA_output_current_min_mA": 0,
+        "DA_output_current_max_mA": 20,
+        "DA_accuracy_voltage_percent_FS": 0.1,
+        "DA_accuracy_current_percent_FS": 0.05,
+        "DA_output_mode_configurable_switch": true
+      }
+    },
+    {
+      "output": {
+        "id": 47,
+        "DA_channel_count": 16,
+        "DA_resolution_bits": 16,
+        "DA_output_current_min_mA": 0,
+        "DA_output_current_max_mA": 20,
+        "DA_accuracy_current_percent_FS": 0.05,
+        "DA_isolation_support": true
+      }
+    },
+    {
+      "output": {
+        "id": 48,
+        "DA_channel_count": 16,
+        "DA_resolution_bits": 16,
+        "DA_output_voltage_min_V": -10,
+        "DA_output_voltage_max_V": 10,
+        "DA_output_current_min_mA": 0,
+        "DA_output_current_max_mA": 20,
+        "DA_accuracy_voltage_percent_FS": 0.1,
+        "DA_accuracy_current_percent_FS": 0.05,
+        "DA_output_mode_programmable": true,
+        "DIO_total_channel_count": 16,
+        "DIO_direction_group_size": 8,
+        "DIO_logic_level": "5V CMOS/TTL"
+      }
+    },
+    {
+      "output": {
+        "id": 49,
+        "DIO_total_channel_count": 32,
+        "DI_channel_count": 32,
+        "DIO_logic_level": "5V or custom (0-28V)",
+        "DI_voltage_range_min_V": 0,
+        "DI_voltage_range_max_V": 28,
+        "Input_overvoltage_protection_V": 40
+      }
+    },
+    {
+      "output": {
+        "id": 50,
+        "DIO_total_channel_count": 32,
+        "DO_channel_count": 32,
+        "DIO_logic_level": "5V or custom (0-28V)",
+        "DO_is_relay": false
+      }
+    },
+    {
+      "output": {
+        "id": 51,
+        "DO_channel_count": 32,
+        "DO_is_relay": true,
+        "Relay_type": "FORM 1C",
+        "Relay_bounce_time_ms": 8,
+        "Relay_max_current_mA": 200,
+        "Relay_max_voltage_VDC": 48,
+        "Power_output_channel_count": 1,
+        "Power_output_voltage_V": 5,
+        "Power_output_current_mA": 1500
+      }
+    },
+    {
+      "output": {
+        "id": 52,
+        "DIO_total_channel_count": 64,
+        "DI_channel_count": 32,
+        "DO_channel_count": 32,
+        "DIO_logic_level": "5V CMOS/TTL",
+        "DIO_configurable_as_pwm": true,
+        "DIO_configurable_as_pulse_input": true,
+        "Encoder_quadrature_channel_count": 8,
+        "PWM_output_channel_count": 8
+      }
+    },
+    {
+      "output": {
+        "id": 53,
+        "DIO_total_channel_count": 96,
+        "DI_channel_count": 96,
+        "DO_channel_count": null,
+        "DIO_logic_level": null,
+        "DIO_isolation_voltage_V": null,
+        "DIO_interrupt_capability": null,
+        "DIO_direction_group_size": 1,
+        "DIO_isolation_support": null,
+        "DIO_configurable_as_counter": null,
+        "DIO_configurable_as_pwm": null,
+        "DIO_configurable_as_pulse_input": null,
+        "DI_voltage_range_min_V": -1,
+        "DI_voltage_range_max_V": 36,
+        "DO_voltage_range_min_V": null,
+        "DO_voltage_range_max_V": null,
+        "DO_drive_current_mA": null,
+        "DO_sink_current_max_mA": null,
+        "DO_is_relay": null
+      }
+    },
+    {
+      "output": {
+        "id": 54,
+        "Bus_interface_type": "PCI/cPCI/PXIe",
+        "DIO_total_channel_count": 96,
+        "DO_channel_count": 96,
+        "DO_voltage_range_min_V": -60,
+        "DO_voltage_range_max_V": 60,
+        "Output_on_resistance_ohm": 10,
+        "DO_drive_current_mA": 100
+      }
+    },
+    {
+      "output": {
+        "id": 55,
+        "DIO_total_channel_count": 96,
+        "DI_channel_count": 48,
+        "DO_channel_count": 48,
+        "DI_voltage_range_min_V": -60,
+        "DI_voltage_range_max_V": 60,
+        "DO_voltage_range_min_V": -60,
+        "DO_voltage_range_max_V": 60,
+        "DO_drive_current_mA": 100,
+        "Output_on_resistance_ohm": 10,
+        "Bus_interface_type": "PCI/PCIe/cPCI/PXIe"
+      }
+    },
+    {
+      "output": {
+        "id": 56,
+        "Endat_channel_count": 2,
+        "Endat_version": "2.2",
+        "Endat_resolution_bits_min": 8,
+        "Endat_resolution_bits_max": 32,
+        "Endat_baud_rate_options_Hz": [
+          8000000,
+          4000000,
+          2000000,
+          1000000
+        ],
+        "endat22_flag_bits_options": [
+          1,
+          2
+        ],
+        "endat22_recovery_time_min_us": 0,
+        "endat22_recovery_time_max_us": 255,
+        "DIO_total_channel_count": 16,
+        "DIO_direction_group_size": 8,
+        "DIO_logic_level": "5V CMOS/TTL"
+      }
+    },
+    {
+      "output": {
+        "id": 57,
+        "Endat_channel_count": 5,
+        "Endat_version": "2.2",
+        "Endat_resolution_bits_min": 8,
+        "Endat_resolution_bits_max": 32,
+        "Endat_baud_rate_options_Hz": [
+          8000000,
+          4000000,
+          2000000,
+          1000000
+        ],
+        "endat22_flag_bits_options": [
+          1,
+          2
+        ],
+        "endat22_recovery_time_min_us": 0,
+        "endat22_recovery_time_max_us": 255,
+        "DIO_total_channel_count": 16,
+        "DIO_logic_level": "5V CMOS",
+        "DIO_direction_group_size": 8
+      }
+    },
+    {
+      "output": {
+        "id": 58,
+        "Form_factor": "3U欧规卡",
+        "Supported_series": "CompactPCI PICMG 2.0 R2.1",
+        "SSI_channel_count": 5,
+        "SSI_data_width_bits_min": 8,
+        "SSI_data_width_bits_max": 32,
+        "SSI_baud_rate_options_Hz": [
+          2000000,
+          1000000,
+          0,
+          250000
+        ],
+        "SSI_measurement_interval_us": 255
+      }
+    },
+    {
+      "output": {
+        "id": 59,
+        "Encoder_quadrature_channel_count": 8,
+        "Encoder_channel_count_differential": 3,
+        "Encoder_channel_count_single_ended": 5,
+        "Encoder_signal_types_supported": [
+          "RS-422",
+          "5V CMOS"
+        ],
+        "Encoder_max_input_frequency_Hz": 8000000,
+        "Encoder_counter_bits": 32,
+        "Encoder_digital_debounce_support": true
+      }
+    },
+    {
+      "output": {
+        "id": 60,
+        "Encoder_quadrature_channel_count": 8,
+        "Encoder_channel_count_single_ended": 8,
+        "Encoder_signal_types_supported": [
+          "RS-422",
+          "5V CMOS"
+        ],
+        "Encoder_isolation_support": true,
+        "Encoder_max_input_frequency_Hz": 8000000,
+        "Encoder_counter_bits": 32,
+        "Encoder_digital_debounce_support": true
+      }
+    },
+    {
+      "output": {
+        "id": 61,
+        "Encoder_quadrature_channel_count": 8,
+        "Encoder_hall_channel_count": null,
+        "Encoder_channel_count_differential": 8,
+        "Encoder_channel_count_single_ended": null,
+        "Encoder_counter_bits": 32,
+        "Encoder_max_input_frequency_Hz": 10000000,
+        "Encoder_signal_types_supported": [
+          "RS-422",
+          "5V CMOS"
+        ],
+        "Encoder_isolation_support": true,
+        "Encoder_digital_debounce_support": true,
+        "Power_output_channel_count": 1,
+        "Power_output_voltage_V": 5,
+        "Power_output_current_mA": 800
+      }
+    },
+    {
+      "output": {
+        "id": 62,
+        "SPI_channel_count": 2,
+        "SPI_data_width_bits": 16,
+        "SPI_logic_level": "RS422",
+        "SPI_clock_frequency_Hz": 3000000,
+        "SSI_channel_count": 2,
+        "SSI_data_width_bits_min": 16,
+        "SSI_data_width_bits_max": 16,
+        "SPI_master_slave_modes": null,
+        "SSI_baud_rate_options_Hz": [
+          3000000
+        ],
+        "SSI_measurement_interval_us": null,
+        "RDC_SDC_channel_count": 2,
+        "RDC_SDC_resolution_bits": 16,
+        "RDC_SDC_excitation_voltage_Vpp": 20,
+        "RDC_SDC_excitation_frequency_min_Hz": 10,
+        "RDC_SDC_excitation_frequency_max_Hz": 100,
+        "RDC_SDC_input_signal_min_Vrms": null,
+        "RDC_SDC_input_signal_max_Vrms": 26,
+        "RDC_SDC_coarse_fine_support": null,
+        "RDC_SDC_mode_configurable": null,
+        "AD_input_modes": [
+          "差分",
+          "单端"
+        ]
+      }
+    },
+    {
+      "output": {
+        "id": 63,
+        "SPI_channel_count": 2,
+        "SPI_data_width_bits": 16,
+        "SPI_logic_level": "RS422",
+        "SPI_clock_frequency_Hz": 3000000,
+        "SSI_channel_count": 2,
+        "SSI_data_width_bits_min": 16,
+        "SSI_data_width_bits_max": 16,
+        "SSI_baud_rate_options_Hz": [
+          3000000
+        ]
+      }
+    },
+    {
+      "output": {
+        "id": 64,
+        "Counter_channel_count": 16,
+        "Counter_bits": 32,
+        "Counter_max_input_frequency_Hz": 16000000,
+        "Counter_reference_clock_Hz": 40000000,
+        "DIO_logic_level": "5V CMOS",
+        "DIO_interrupt_capability": true
+      }
+    },
+    {
+      "output": {
+        "id": 65,
+        "DIO_total_channel_count": 16,
+        "DI_channel_count": 16,
+        "DIO_logic_level": "5V RS422",
+        "DIO_isolation_support": true,
+        "DIO_interrupt_capability": true,
+        "DIO_configurable_as_pulse_input": true
+      }
+    },
+    {
+      "output": {
+        "id": 66,
+        "RDC_SDC_channel_count": 2,
+        "RDC_SDC_resolution_bits": 16,
+        "RDC_SDC_excitation_voltage_Vpp": 20,
+        "RDC_SDC_excitation_frequency_min_Hz": 10,
+        "RDC_SDC_excitation_frequency_max_Hz": 100,
+        "RDC_SDC_input_signal_min_Vrms": 0,
+        "RDC_SDC_input_signal_max_Vrms": 26,
+        "RDC_SDC_coarse_fine_support": true,
+        "RDC_SDC_mode_configurable": true,
+        "AD_input_modes": [
+          "差分",
+          "单端"
+        ]
+      }
+    },
+    {
+      "output": {
+        "id": 67,
+        "RDC_SDC_channel_count": 2,
+        "RDC_SDC_resolution_bits": 16,
+        "RDC_SDC_excitation_voltage_Vpp": 20,
+        "RDC_SDC_excitation_frequency_min_Hz": 10,
+        "RDC_SDC_excitation_frequency_max_Hz": 100,
+        "RDC_SDC_input_signal_min_Vrms": 0,
+        "RDC_SDC_input_signal_max_Vrms": 26,
+        "RDC_SDC_coarse_fine_support": true,
+        "RDC_SDC_mode_configurable": true,
+        "Encoder_channel_count_differential": 2,
+        "Encoder_channel_count_single_ended": 2
+      }
+    },
+    {
+      "output": {
+        "id": 68,
+        "RDC_SDC_channel_count": 2,
+        "Form_factor": "3U",
+        "Bus_interface_type": "CompactPCI PICMG 2.0 R2.1",
+        "driver_support_realtime": true,
+        "driver_support_windows": true
+      }
+    },
+    {
+      "output": {
+        "id": 69,
+        "Bus_interface_type": "cPCI/PCI/PCIe/PXIe",
+        "LVDT_RVDT_channel_count": 2,
+        "LVDT_RVDT_accuracy_arcmin": 8,
+        "LVDT_RVDT_reference_voltage_V": 10,
+        "LVDT_RVDT_reference_frequency_min_Hz": 50,
+        "LVDT_RVDT_reference_frequency_max_Hz": 100,
+        "LVDT_RVDT_output_voltage_min_V": 1,
+        "LVDT_RVDT_output_voltage_max_V": 10,
+        "Output_on_resistance_ohm": 5
+      }
+    },
+    {
+      "output": {
+        "id": 70,
+        "Bus_interface_type": "cPCI/PCI/PCIe/PXIe",
+        "LVDT_RVDT_channel_count": 4,
+        "LVDT_RVDT_accuracy_arcmin": 8,
+        "LVDT_RVDT_reference_voltage_V": 10,
+        "LVDT_RVDT_reference_frequency_min_Hz": 50,
+        "LVDT_RVDT_reference_frequency_max_Hz": 100,
+        "LVDT_RVDT_output_voltage_min_V": 1,
+        "LVDT_RVDT_output_voltage_max_V": 10,
+        "Output_on_resistance_ohm": 5,
+        "LVDT_RVDT_rdc_support": true
+      }
+    },
+    {
+      "output": {
+        "id": 71,
+        "LVDT_RVDT_channel_count": 8,
+        "LVDT_RVDT_reference_frequency_min_Hz": 400,
+        "LVDT_RVDT_reference_frequency_max_Hz": 15000,
+        "LVDT_RVDT_reference_voltage_V": 10,
+        "LVDT_RVDT_output_voltage_min_V": -10,
+        "LVDT_RVDT_output_voltage_max_V": 10,
+        "LVDT_RVDT_resolution_bits": 16
+      }
+    },
+    {
+      "output": {
+        "id": 72,
+        "CAN_channel_count": 2,
+        "CAN_baud_rate_max_bps": 1000000,
+        "CAN_isolation_voltage_V": 20
+      }
+    },
+    {
+      "output": {
+        "id": 73,
+        "CAN_channel_count": 4,
+        "CAN_baud_rate_min_bps": 1000000,
+        "CAN_baud_rate_max_bps": 1000000,
+        "CAN_isolation_voltage_V": 10,
+        "can_protocol_dbc_support": true
+      }
+    },
+    {
+      "output": {
+        "id": 74,
+        "CAN_channel_count": 10,
+        "CAN_baud_rate_min_bps": 10000,
+        "CAN_baud_rate_max_bps": 1000000
+      }
+    },
+    {
+      "output": {
+        "id": 75,
+        "Bus_interface_type": "3U CPCI",
+        "UART_channel_count": 4,
+        "UART_interface_types_supported": [
+          "RS-232",
+          "RS-422",
+          "RS-485"
+        ],
+        "UART_max_baud_rate_bps": 921600
+      }
+    },
+    {
+      "output": {
+        "id": 76,
+        "UART_channel_count": 4,
+        "UART_interface_types_supported": [
+          "RS-232",
+          "RS-422",
+          "RS-485"
+        ],
+        "UART_max_baud_rate_bps": 230400,
+        "UART_FIFO_depth_bytes": 2048,
+        "UART_isolation_support": true,
+        "Form_factor": "3U CPCI"
+      }
+    },
+    {
+      "output": {
+        "id": 77,
+        "UART_channel_count": 8,
+        "UART_interface_types_supported": [
+          "RS-232",
+          "RS-422",
+          "RS-485"
+        ],
+        "UART_max_baud_rate_bps": 230400,
+        "UART_FIFO_depth_bytes": 2048,
+        "UART_isolation_support": true,
+        "RFM_memory_size_bytes": 33554432
+      }
+    },
+    {
+      "output": {
+        "id": 78,
+        "Form_factor": "3U CPCI",
+        "UART_channel_count": 16,
+        "UART_interface_types_supported": [
+          "RS-232",
+          "RS-422",
+          "RS-485"
+        ],
+        "UART_max_baud_rate_bps": 230400,
+        "UART_isolation_support": true,
+        "UART_FIFO_depth_bytes": 2048
+      }
+    },
+    {
+      "output": {
+        "id": 79,
+        "Bus_interface_type": "CPCI",
+        "UART_channel_count": 4,
+        "UART_interface_types_supported": [
+          "RS-232",
+          "RS-422",
+          "RS-485"
+        ],
+        "UART_max_baud_rate_bps": 2000000,
+        "UART_FIFO_depth_bytes": 33554432,
+        "UART_isolation_support": true
+      }
+    },
+    {
+      "output": {
+        "id": 80,
+        "Bus_interface_type": "CPCI",
+        "UART_channel_count": 8,
+        "UART_interface_types_supported": [
+          "RS-232",
+          "RS-422",
+          "RS-485"
+        ],
+        "UART_max_baud_rate_bps": 2000000,
+        "UART_FIFO_depth_bytes": 33554432
+      }
+    },
+    {
+      "output": {
+        "id": 81,
+        "Bus_interface_type": "CPCI",
+        "UART_channel_count": 8,
+        "UART_interface_types_supported": [
+          "RS-232",
+          "RS-422",
+          "RS-485"
+        ],
+        "UART_max_baud_rate_bps": 4000000,
+        "UART_isolation_support": true,
+        "Protocol_analysis_support": true
+      }
+    },
+    {
+      "output": {
+        "id": 82,
+        "Bus_interface_type": "CPCI",
+        "UART_channel_count": 8,
+        "UART_interface_types_supported": [
+          "RS-232",
+          "RS-422",
+          "RS-485"
+        ],
+        "UART_max_baud_rate_bps": 4000000,
+        "UART_FIFO_depth_bytes": 2048,
+        "UART_isolation_support": true
+      }
+    },
+    {
+      "output": {
+        "id": 83,
+        "Bus_interface_type": "CPCI",
+        "UART_channel_count": 16,
+        "UART_interface_types_supported": [
+          "RS-232",
+          "RS-422",
+          "RS-485"
+        ],
+        "UART_max_baud_rate_bps": 2000000,
+        "UART_FIFO_depth_bytes": 33554432,
+        "UART_isolation_support": true
+      }
+    },
+    {
+      "output": {
+        "id": 84,
+        "UART_channel_count": 12,
+        "UART_interface_types_supported": [
+          "RS-422"
+        ],
+        "UART_max_baud_rate_bps": 10000000,
+        "UART_isolation_support": false,
+        "Bus_interface_type": "PXIe",
+        "Termination_resistor_ohm": 100
+      }
+    },
+    {
+      "output": {
+        "id": 85,
+        "SENT_channel_count": 2
+      }
+    },
+    {
+      "output": {
+        "id": 86,
+        "PSI5_channel_count": 2
+      }
+    },
+    {
+      "output": {
+        "id": 87,
+        "SPI_channel_count": 4,
+        "SPI_data_width_bits": 16,
+        "SPI_logic_level": "RS422",
+        "SPI_clock_frequency_Hz": 50000000
+      }
+    },
+    {
+      "output": {
+        "id": 88,
+        "I2C_channel_count": 4,
+        "I2C_interface_type": "Slave",
+        "i2c_standard_mode_rate_kbps": 100,
+        "i2c_fast_mode_rate_kbps": 400,
+        "i2c_fast_mode_plus_rate_Mbps": 1,
+        "I2C_address_space_bytes": 2048,
+        "Bus_interface_type": "3U cPCI",
+        "DIO_logic_level": "5V CMOS/TTL"
+      }
+    },
+    {
+      "output": {
+        "id": 89,
+        "PCM_channel_count": 4,
+        "Bus_interface_type": "3U cPCI",
+        "DIO_interrupt_capability": true
+      }
+    }
+  ]
 }

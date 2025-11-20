@@ -89,7 +89,7 @@ CREATE TABLE hardware_specifications_1109 (
     -- A/D (模拟量输入)
     AD_channel_count_single_ended INT,          -- 单端通道数量（例如：32）
     AD_channel_count_differential INT,          -- 差分通道数量（例如：16）
-    AD_resolution_bits INT NOT NULL,            -- 分辨率，单位：位（如16）
+    AD_resolution_bits INT,            -- 分辨率，单位：位（如16）
     AD_sampling_rate_Hz NUMERIC(15, 3),         -- 最大采样率，单位：Hz（如100000.000）
     AD_input_voltage_range_min_V NUMERIC(10, 3), -- 最小输入电压（如 -10.000）
     AD_input_voltage_range_max_V NUMERIC(10, 3), -- 最大输入电压（如 +10.000）

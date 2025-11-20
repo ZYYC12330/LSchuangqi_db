@@ -1,0 +1,66 @@
+﻿分类,类型,型号,描述（精简）,描述（详细）,制造商,报价（￥）,数量,总价（￥）,系列
+机箱&CPU控制器,实时仿真器,Links-Box-03-S4（便携）,"CPU：Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统；
+硬盘：1TB SATA硬盘；
+内存： 16GB DDR4 SDRAM（up to 32GB）；
+IO扩展插槽：2个PCI+1个PCIe×4+1个PCIe×16扩展插槽；","CPU：Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统；
+硬盘：1TB SATA硬盘；
+内存： 16GB DDR4 SDRAM（up to 32GB）；
+IO扩展插槽：2个PCI+1个PCIe×4+1个PCIe×16扩展插槽；",灵思创奇,"￥35,000",1,"￥35,000",Links-BOX
+机箱&CPU控制器,实时仿真器,Links-Box-03-S7,"CPU：Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统；
+硬盘：1TB SATA硬盘；
+内存：16G DDR4 SDRAM；
+IO扩展插槽：1个PCIe x1，1个PCIe x4，1个PCIex16，4个PCI；
+体积：430mm（W）×450mm（H)）×177mm（D）","CPU：Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统；
+硬盘：1TB SATA硬盘；
+内存：16G DDR4 SDRAM；
+IO扩展插槽：1个PCIe x1，1个PCIe x4，1个PCIex16，4个PCI；
+体积：430mm（W）×450mm（H)）×177mm（D）",灵思创奇,"￥45,000",1,"￥45,000",Links-BOX
+机箱&CPU控制器,实时仿真器,Links-Box-03-S12A,"CPU：Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统；
+硬盘：1TB SATA硬盘；
+内存： 16G DDR4 SDRAM；
+IO扩展插槽：3个PCIe x4，1个PCIex16，8个PCI；","CPU：Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统；
+硬盘：1TB SATA硬盘；
+内存： 16G DDR4 SDRAM；
+IO扩展插槽：3个PCIe x4，1个PCIex16，8个PCI；",灵思创奇,"￥55,000",1,"￥55,000",Links-BOX
+机箱&CPU控制器,实时仿真器,Links-Box-03-S12B,"CPU：Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统；
+硬盘：1TB SATA硬盘；
+内存：16G DDR4 SDRAM；
+IO扩展插槽：5个PCIe x1，2个PCIe x4，1个PCIex16，4个PCI；","CPU：Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统；
+硬盘：1TB SATA硬盘；
+内存：16G DDR4 SDRAM；
+IO扩展插槽：5个PCIe x1，2个PCIe x4，1个PCIex16，4个PCI；",灵思创奇,"￥55,000",1,"￥55,000",Links-BOX
+机箱&CPU控制器,实时仿真器,Links-Box-04-S5,"CPU：Intel Corei9-9900K 3.6GHz八核处理器，运行实时操作系统；
+硬盘：1TB SATA硬盘；
+内存： 16G DDR4 SDRAM；
+IO扩展插槽：2个PCIe x1，2个PCIe×4，1个PCIex16，2个PC；","CPU：Intel Corei9-9900K 3.6GHz八核处理器，运行实时操作系统；
+硬盘：1TB SATA硬盘；
+内存： 16G DDR4 SDRAM；
+IO扩展插槽：2个PCIe x1，2个PCIe×4，1个PCIex16，2个PC；",灵思创奇,"￥80,000",1,"￥80,000",Links-BOX
+机箱&CPU控制器,实时仿真器,Links-SuperBox--XC216-S6,机架式安装，志强金牌双CPU（单CPU8核），16核32线程主频3.9G， 64G内存，1T硬盘，2个千兆网口，6个pcie扩展插槽，运行RTLinux操作系统；可配置多核并行仿真组件使用；,机架式安装，志强金牌双CPU（单CPU8核），16核32线程主频3.9G， 64G内存，1T硬盘，2个千兆网口，6个pcie扩展插槽，运行RTLinux操作系统；可配置多核并行仿真组件使用；,信利恒丰,"￥100,000",1,"￥100,000",Links-BOX
+机箱&CPU控制器,实时仿真器,Links-Box-05-S3（HG01）,"CPU：海光3350八核处理器，主频3.0GHz，三级缓存16MB，运行实时操作系统；
+硬盘：512G吧；
+内存：16GB；
+IO扩展插槽：1个PCIe×16，1个PCIe×4，1个PCIe×1。","CPU：海光3350八核处理器，主频3.0GHz，三级缓存16MB，运行实时操作系统；
+硬盘：512G吧；
+内存：16GB；
+IO扩展插槽：1个PCIe×16，1个PCIe×4，1个PCIe×1。",灵思创奇,"￥80,000",1,"￥80,000",Links-BOX
+机箱&CPU控制器,实时仿真器,Links-SuperBox-01-S6,"CPU：2颗英特尔® 至强® Gold 3.9GHz八核处理器，共计16核，运行实时操作系统；
+硬盘：1TB SATA硬盘（up to 4TB）；
+内存：64G DDR4 SDRAM（up to 256G）；
+IO扩展插槽：CPU1：2个PCIe×8，1个PCIe×16；CPU2：3个PCIe×16。","CPU：2颗英特尔® 至强® Gold 3.9GHz八核处理器，共计16核，运行实时操作系统；
+硬盘：1TB SATA硬盘（up to 4TB）；
+内存：64G DDR4 SDRAM（up to 256G）；
+IO扩展插槽：CPU1：2个PCIe×8，1个PCIe×16；CPU2：3个PCIe×16。",灵思创奇,"￥120,000",1,"￥120,000",Links-BOX
+机箱&CPU控制器,实时仿真器,Links-SuperBox-02-S6,"CPU：2颗英特尔® 至强® 金牌 3.0GHz十八核处理器，共计36核，运行实时操作系统；
+硬盘：1TB SATA硬盘（up to 4TB）；
+内存：64G DDR4 SDRAM（up to 256G）；
+IO扩展插槽：CPU1：2个PCIe×8，1个PCIe×16；CPU2：3个PCIe×16。","CPU：2颗英特尔® 至强® 金牌 3.0GHz十八核处理器，共计36核，运行实时操作系统；
+硬盘：1TB SATA硬盘（up to 4TB）；
+内存：64G DDR4 SDRAM（up to 256G）；
+IO扩展插槽：CPU1：2个PCIe×8，1个PCIe×16；CPU2：3个PCIe×16。",灵思创奇,"￥200,000",1,"￥200,000",Links-BOX
+机箱&CPU控制板,实时仿真器,Links-C3U-C02-C&Links-C3U-SBC01,4U cPCI机箱，支持3U板卡，8槽，ATX电源200W，半机架尺寸设计，适用于小空间需求的便携式应用。3U cPCI单板计算机，占用两个槽位，第三代Intel Core i7-3555LE双核处理器 2.5GHz ，8GB 内存，2个千兆自适应以太网口，500GB 固态盘,4U cPCI机箱，支持3U板卡，8槽，ATX电源200W，半机架尺寸设计，适用于小空间需求的便携式应用。3U cPCI单板计算机，占用两个槽位，第三代Intel Core i7-3555LE双核处理器 2.5GHz ，8GB DDR3-1600内存，2个千兆自适应以太网口，500GB 固态盘，2通道串口，2通道USB口，1个VGA显示口和2个DisplayPort显示接口，1个PS/2接口,灵思创奇,￥59000,1,￥59000,Links-C3U
+机箱&CPU控制板,实时仿真器,Links-C3U-C02-C&Links-C3U-SBC03,4U cPCI机箱，支持3U板卡，8槽，ATX电源200W，半机架尺寸设计，适用于小空间需求的便携式应用。3U cPCI单板计算机，占用两个槽位，i7-6822EQ，四核处理器2.0GHz，8GB内存，2个RJ45 千兆LAN口，500GB 固态盘,4U cPCI机箱，支持3U板卡，8槽，ATX电源200W，半机架尺寸设计，适用于小空间需求的便携式应用。3U cPCI单板计算机，占用两个槽位，i7-6822EQ，四核处理器2.0GHz，8GB内存，2个RJ45 千兆LAN口，500GB 固态盘,灵思创奇,￥59000,1,￥59000,Links-C3U
+机箱&CPU控制板,实时仿真器,Links-C3U-C02-C&Links-C3U-SBC04,4U cPCI机箱，支持3U板卡，8槽，ATX电源200W，半机架尺寸设计，适用于小空间需求的便携式应用。3U cPCI单板计算机，占用两个槽位，i7-6820EQ，四核处理器2.8GHz，16GB内存，2个RJ45 千兆LAN口，500GB 固态盘,4U cPCI机箱，支持3U板卡，8槽，ATX电源200W，半机架尺寸设计，适用于小空间需求的便携式应用。3U cPCI单板计算机，占用两个槽位，i7-6820EQ，四核处理器2.8GHz，16GB内存，2个RJ45 千兆LAN口，500GB 固态盘,灵思创奇,￥64500,1,￥64500,Links-C3U
+机箱&CPU控制板,实时仿真器,Links-C3U-C03-B&Links-C3U-SBC01,4U 84HP cPCI机箱，支持3U板卡，14槽，冗余可插拔200W，3U cPCI单板计算机，占用两个槽位，第三代Intel Core i7-3555LE双核处理器 2.5GHz ，8GB 内存，2个千兆自适应以太网口，500GB 固态盘,4U 84HP cPCI机箱，支持3U板卡，14槽，冗余可插拔200W，3U cPCI单板计算机，占用两个槽位，第三代Intel Core i7-3555LE双核处理器 2.5GHz ，8GB DDR3-1600内存，2个千兆自适应以太网口，500GB 固态盘，2通道串口，2通道USB口，1个VGA显示口和2个DisplayPort显示接口，1个PS/2接口,灵思创奇,￥79000,1,￥79000,Links-C3U
+机箱&CPU控制板,实时仿真器,Links-C3U-C03-B&Links-C3U-SBC03,4U 84HP cPCI机箱，支持3U板卡，14槽，冗余可插拔200W，3U cPCI单板计算机，占用两个槽位，i7-6822EQ，四核处理器2.0GHz，8GB内存，2个RJ45 千兆LAN口，500GB 固态盘,4U 84HP cPCI机箱，支持3U板卡，14槽，冗余可插拔200W，3U cPCI单板计算机，占用两个槽位，i7-6822EQ，四核处理器2.0GHz，8GB内存，2个RJ45 千兆LAN口，500GB 固态盘,灵思创奇,￥79000,1,￥79000,Links-C3U
+机箱&CPU控制板,实时仿真器,Links-C3U-C03-B&Links-C3U-SBC04,4U 84HP cPCI机箱，支持3U板卡，14槽，冗余可插拔200W，3U cPCI单板计算机，占用两个槽位，i7-6820EQ，四核处理器2.8GHz，16GB内存，2个RJ45 千兆LAN口，500GB 固态盘,4U 84HP cPCI机箱，支持3U板卡，14槽，冗余可插拔200W，3U cPCI单板计算机，占用两个槽位，i7-6820EQ，四核处理器2.8GHz，16GB内存，2个RJ45 千兆LAN口，500GB 固态盘,灵思创奇,￥84500,1,￥84500,Links-C3U

@@ -14,6 +14,12 @@ import uuid
 from process_dnf import BoardProcessor, CHANNEL_COUNT_FIELDS, process_dnf_requirements_core
 from optimize import optimize_card_selection_core
 import sys
+import mimetypes
+
+
+
+
+
 # 添加路径以导入query_sim
 sys.path.insert(0, os.path.dirname(__file__))
 from query_sim import query_all_sim_machines, generate_output_format
@@ -21,7 +27,12 @@ from query_sim import query_all_sim_machines, generate_output_format
 # 配置环境变量
 API_KEY = os.getenv('API_KEY', 'sk-zzvwbcaxoss3')
 FILE_SERVER_URL = os.getenv('FILE_SERVER_URL', 'https://demo.langcore.cn')
-
+# 上传超时时间（秒），可通过环境变量配置
+UPLOAD_TIMEOUT = int(os.getenv('UPLOAD_TIMEOUT', '60'))
+# 上传重试次数
+UPLOAD_RETRIES = int(os.getenv('UPLOAD_RETRIES', '3'))
+# 是否允许上传失败（如果为True，上传失败时返回本地文件路径）
+ALLOW_UPLOAD_FAILURE = os.getenv('ALLOW_UPLOAD_FAILURE', 'false').lower() == 'true'
 
 # API_KEY = os.getenv('API_KEY', 'sk-6zvekr4931xm')
 # FILE_SERVER_URL = os.getenv('FILE_SERVER_URL', 'http://10.120.120.6:3008')
@@ -838,6 +849,12 @@ def generate_excel_from_json_string(json_string: str, template_content: bytes) -
         raise ValueError(f"生成Excel文件时出错: {str(e)}")
 
 
+def get_file_mime_type(file_path: str) -> str:
+    """根据文件扩展名获取MIME类型"""
+    mime_type, _ = mimetypes.guess_type(file_path)
+    # 如果无法识别，默认使用 application/octet-stream
+    return mime_type or 'application/octet-stream'
+
 async def upload_file_to_server(file_path: str, token: str = None) -> Dict[str, Any]:
     """
     上传文件到服务器
@@ -855,7 +872,9 @@ async def upload_file_to_server(file_path: str, token: str = None) -> Dict[str, 
             headers['Authorization'] = f'Bearer {token}'
 
         with open(file_path, 'rb') as f:
-            files = {'file': f}
+            file_name = os.path.basename(file_path)
+            mime_type = get_file_mime_type(file_path)
+            files = {'file': (file_name, f, mime_type)}
             response = requests.post(
                 f'{FILE_SERVER_URL}/api/file',
                 files=files,

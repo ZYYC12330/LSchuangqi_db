@@ -1,0 +1,29 @@
+{
+    "require": [
+      {
+        "original": "硬盘：500GB SSD",
+        "attribute": {
+          "storage_capacity": 500,
+          "storage_type": "SSD"
+        }
+      },
+      {
+        "original": "内存：16GB DDR4",
+        "attribute": {
+          "memory_capacity": 16,
+          "memory_standard": "DDR4"
+        }
+      },
+      {
+        "original": "CPU：Intel Core i7 2.6GHz四核",
+        "attribute": {
+          "cpu_brand": "Intel",
+          "cpu_series": "Core",
+          "cpu_model_code": "i7",
+          "cpu_frequency_value": 2.6,
+          "cpu_frequency_unit": "GHz",
+          "cpu_cores": 4
+        }
+      }
+    ]
+  }

@@ -31,18 +31,30 @@ def clean_json_string(json_str):
     return json_str
 
 
-def parse_output(output_str):
+def parse_output(output_data):
     """
-    解析 output 字段中的 JSON 字符串
+    解析 output 字段
+    支持两种格式：
+    1. 字符串格式：需要解析的 JSON 字符串
+    2. 对象格式：已经是字典/对象
     返回解析后的字典，如果解析失败返回空字典
     """
-    try:
-        cleaned = clean_json_string(output_str)
-        return json.loads(cleaned)
-    except json.JSONDecodeError as e:
-        print(f"解析 JSON 失败: {e}")
-        print(f"问题内容: {output_str[:200]}...")
-        return {}
+    # 如果已经是字典类型，直接返回
+    if isinstance(output_data, dict):
+        return output_data
+    
+    # 如果是字符串，尝试解析
+    if isinstance(output_data, str):
+        try:
+            cleaned = clean_json_string(output_data)
+            return json.loads(cleaned)
+        except json.JSONDecodeError as e:
+            print(f"解析 JSON 失败: {e}")
+            print(f"问题内容: {output_data[:200]}...")
+            return {}
+    
+    # 其他类型返回空字典
+    return {}
 
 
 def convert_json_array_to_sql_format(value):
@@ -106,7 +118,7 @@ def collect_all_fields(data_list):
     """
     all_fields = set()
     for item in data_list:
-        output_data = parse_output(item.get('output', ''))
+        output_data = parse_output(item.get('output', {}))
         # 将所有字段名转换为小写，并排除指定字段
         all_fields.update(key.lower() for key in output_data.keys()
                           if key.lower() not in EXCLUDED_FIELDS)
@@ -136,11 +148,12 @@ def process_workflow_output(input_file, output_file):
 
     # 准备 CSV 数据
     csv_data = []
-    for item in data_list:
-        row = {'id': item.get('id', '')}
+    for idx, item in enumerate(data_list):
+        # 如果没有 id 字段，使用索引+1作为 id
+        row = {'id': item.get('id', str(idx + 1))}
 
         # 解析 output 字段
-        output_data = parse_output(item.get('output', ''))
+        output_data = parse_output(item.get('output', {}))
 
         # 创建字段名映射（原始字段名 -> 小写字段名）
         field_mapping = {key.lower(): key for key in output_data.keys()}
@@ -291,12 +304,16 @@ if __name__ == '__main__':
     script_dir = Path(__file__).parent
     input_file = script_dir / 'workflow_output.json'
     output_file = script_dir / 'workflow_output.csv'
-    output_file_1109 = script_dir / 'workflow_output_1109.csv'
+    output_file_1109 = script_dir / 'workflow_output_1109_v3.csv'
 
     # 处理文件
     process_workflow_output(input_file, output_file)
 
+
+
+
+
     # 整合两个CSV文件
-    io_file = script_dir / 'IO板卡选型.csv'
+    io_file = script_dir / 'IO板卡选型——extend.csv'
     workflow_file = script_dir / 'workflow_output.csv'
     merge_csv_files(io_file, workflow_file, output_file_1109)

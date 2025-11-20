@@ -1,0 +1,444 @@
+{
+  "result_id": {
+    "id": "3",
+    "details": [
+      {
+        "category": "Hard Disk",
+        "score": 1.0,
+        "reason": "硬盘容量（1TB）满足要求的1TB及以上。",
+        "original": "硬盘：500GB SSD",
+        "hard_disk": "1TB SATA硬盘",
+        "model": "Links-Box-03-S12A",
+        "price_cny": "55000"
+      },
+      {
+        "category": "Memory",
+        "score": 1.0,
+        "reason": "符合需求，内存容量为16GB，满足16G及以上要求。",
+        "original": "内存：16GB DDR4",
+        "memory": "16G DDR4 SDRAM",
+        "model": "Links-Box-03-S12A",
+        "price_cny": "55000"
+      },
+      {
+        "category": "CPU",
+        "score": 1.0,
+        "reason": "满足八核和Intel Core i9系列和主频4.2GHz满足要求要求。整体接近但未完全满足。",
+        "original": "CPU：Intel Core i7 2.6GHz四核",
+        "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统",
+        "model": "Links-Box-03-S12A",
+        "price_cny": "55000"
+      }
+    ],
+    "total_score": 3.0
+  },
+  "sim_raw_data": [
+    {
+      "id": "3",
+      "category": "机箱&CPU控制器",
+      "type": "实时仿真器",
+      "model": "Links-Box-03-S12A",
+      "brief_description": "CPU：Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统；硬盘：1TB SATA硬盘；内存： 16G DDR4 SDRAM；IO扩展插槽：3个PCIe x4，1个PCIex16，8个PCI；",
+      "detailed_description": "CPU：Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统；硬盘：1TB SATA硬盘；内存： 16G DDR4 SDRAM；IO扩展插槽：3个PCIe x4，1个PCIex16，8个PCI；",
+      "manufacturer": "灵思创奇",
+      "price_cny": 55000,
+      "series": "Links-BOX",
+      "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统",
+      "hard_disk": "1TB SATA硬盘",
+      "memory": "16G DDR4 SDRAM",
+      "slots": "3个PCIe x4，1个PCIex16，8个PCI"
+    }
+  ],
+  "sim_pick_list": [
+    {
+      "kkrr": [
+        {
+          "id": "1",
+          "hard_disk": "1TB SATA硬盘",
+          "reason": "硬盘容量（1TB）满足要求的1TB及以上。",
+          "score": 1.0,
+          "model": "Links-Box-03-S4（便携）",
+          "price_cny": "35000",
+          "original": "硬盘：500GB SSD"
+        },
+        {
+          "id": "2",
+          "hard_disk": "1TB SATA硬盘",
+          "reason": "硬盘容量（1TB）满足要求的1TB及以上。",
+          "score": 1.0,
+          "model": "Links-Box-03-S7",
+          "price_cny": "45000",
+          "original": "硬盘：500GB SSD"
+        },
+        {
+          "id": "3",
+          "hard_disk": "1TB SATA硬盘",
+          "reason": "硬盘容量（1TB）满足要求的1TB及以上。",
+          "score": 1.0,
+          "model": "Links-Box-03-S12A",
+          "price_cny": "55000",
+          "original": "硬盘：500GB SSD"
+        },
+        {
+          "id": "4",
+          "hard_disk": "1TB SATA硬盘",
+          "reason": "硬盘容量（1TB）满足要求的1TB及以上。",
+          "score": 1.0,
+          "model": "Links-Box-03-S12B",
+          "price_cny": "55000",
+          "original": "硬盘：500GB SSD"
+        },
+        {
+          "id": "10",
+          "hard_disk": "500GB 固态盘",
+          "reason": "硬盘容量（500GB）满足要求的1TB及以上。",
+          "score": 1.0,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC01",
+          "price_cny": "59000",
+          "original": "硬盘：500GB SSD"
+        },
+        {
+          "id": "11",
+          "hard_disk": "500GB 固态盘",
+          "reason": "硬盘容量（500GB）满足要求的1TB及以上。",
+          "score": 1.0,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC03",
+          "price_cny": "59000",
+          "original": "硬盘：500GB SSD"
+        },
+        {
+          "id": "12",
+          "hard_disk": "500GB 固态盘",
+          "reason": "硬盘容量（500GB）满足要求的1TB及以上。",
+          "score": 1.0,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC04",
+          "price_cny": "64500",
+          "original": "硬盘：500GB SSD"
+        },
+        {
+          "id": "14",
+          "hard_disk": "500GB 固态盘",
+          "reason": "硬盘容量（500GB）满足要求的1TB及以上。",
+          "score": 1.0,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC03",
+          "price_cny": "79000",
+          "original": "硬盘：500GB SSD"
+        },
+        {
+          "id": "13",
+          "hard_disk": "500GB 固态盘",
+          "reason": "硬盘容量（500GB）满足要求的1TB及以上。",
+          "score": 1.0,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC01",
+          "price_cny": "79000",
+          "original": "硬盘：500GB SSD"
+        },
+        {
+          "id": "7",
+          "hard_disk": "512G吧",
+          "reason": "硬盘容量（512GB）满足要求的1TB及以上。",
+          "score": 1.0,
+          "model": "Links-Box-05-S3（HG01）",
+          "price_cny": "80000",
+          "original": "硬盘：500GB SSD"
+        },
+        {
+          "id": "5",
+          "hard_disk": "1TB SATA硬盘",
+          "reason": "硬盘容量（1TB）满足要求的1TB及以上。",
+          "score": 1.0,
+          "model": "Links-Box-04-S5",
+          "price_cny": "80000",
+          "original": "硬盘：500GB SSD"
+        },
+        {
+          "id": "15",
+          "hard_disk": "500GB 固态盘",
+          "reason": "硬盘容量（500GB）满足要求的1TB及以上。",
+          "score": 1.0,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC04",
+          "price_cny": "84500",
+          "original": "硬盘：500GB SSD"
+        },
+        {
+          "id": "8",
+          "hard_disk": "1TB SATA硬盘（up to 4TB）",
+          "reason": "硬盘容量（1TB）满足要求的1TB及以上。",
+          "score": 1.0,
+          "model": "Links-SuperBox-01-S6",
+          "price_cny": "120000",
+          "original": "硬盘：500GB SSD"
+        },
+        {
+          "id": "9",
+          "hard_disk": "1TB SATA硬盘（up to 4TB）",
+          "reason": "硬盘容量（1TB）满足要求的1TB及以上。",
+          "score": 1.0,
+          "model": "Links-SuperBox-02-S6",
+          "price_cny": "200000",
+          "original": "硬盘：500GB SSD"
+        }
+      ]
+    },
+    {
+      "kkrr": [
+        {
+          "id": "1",
+          "memory": "16GB DDR4 SDRAM（up to 32GB）",
+          "reason": "符合需求，内存容量为16GB，满足16G及以上要求。",
+          "score": 1.0,
+          "model": "Links-Box-03-S4（便携）",
+          "price_cny": "35000",
+          "original": "内存：16GB DDR4"
+        },
+        {
+          "id": "2",
+          "memory": "16G DDR4 SDRAM",
+          "reason": "符合需求，内存容量为16GB，满足16G及以上要求。",
+          "score": 1.0,
+          "model": "Links-Box-03-S7",
+          "price_cny": "45000",
+          "original": "内存：16GB DDR4"
+        },
+        {
+          "id": "3",
+          "memory": "16G DDR4 SDRAM",
+          "reason": "符合需求，内存容量为16GB，满足16G及以上要求。",
+          "score": 1.0,
+          "model": "Links-Box-03-S12A",
+          "price_cny": "55000",
+          "original": "内存：16GB DDR4"
+        },
+        {
+          "id": "4",
+          "memory": "16G DDR4 SDRAM",
+          "reason": "符合需求，内存容量为16GB，满足16G及以上要求。",
+          "score": 1.0,
+          "model": "Links-Box-03-S12B",
+          "price_cny": "55000",
+          "original": "内存：16GB DDR4"
+        },
+        {
+          "id": "12",
+          "memory": "16GB内存",
+          "reason": "符合需求，内存容量为16GB，满足16G及以上要求。",
+          "score": 1.0,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC04",
+          "price_cny": "64500",
+          "original": "内存：16GB DDR4"
+        },
+        {
+          "id": "7",
+          "memory": "16GB",
+          "reason": "符合需求，内存容量为16GB，满足16G及以上要求。",
+          "score": 1.0,
+          "model": "Links-Box-05-S3（HG01）",
+          "price_cny": "80000",
+          "original": "内存：16GB DDR4"
+        },
+        {
+          "id": "5",
+          "memory": "16G DDR4 SDRAM",
+          "reason": "符合需求，内存容量为16GB，满足16G及以上要求。",
+          "score": 1.0,
+          "model": "Links-Box-04-S5",
+          "price_cny": "80000",
+          "original": "内存：16GB DDR4"
+        },
+        {
+          "id": "15",
+          "memory": "16GB内存",
+          "reason": "符合需求，内存容量为16GB，满足16G及以上要求。",
+          "score": 1.0,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC04",
+          "price_cny": "84500",
+          "original": "内存：16GB DDR4"
+        },
+        {
+          "id": "8",
+          "memory": "64G DDR4 SDRAM（up to 256G）",
+          "reason": "符合需求，内存容量为64GB，满足16G及以上要求。",
+          "score": 1.0,
+          "model": "Links-SuperBox-01-S6",
+          "price_cny": "120000",
+          "original": "内存：16GB DDR4"
+        },
+        {
+          "id": "9",
+          "memory": "64G DDR4 SDRAM（up to 256G）",
+          "reason": "符合需求，内存容量为64GB，满足16G及以上要求。",
+          "score": 1.0,
+          "model": "Links-SuperBox-02-S6",
+          "price_cny": "200000",
+          "original": "内存：16GB DDR4"
+        },
+        {
+          "id": "10",
+          "memory": "8GB DDR3-1600内存",
+          "reason": "不符合需求，内存容量仅为8GB，未达到16G及以上要求。",
+          "score": 0.0,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC01",
+          "price_cny": "59000",
+          "original": "内存：16GB DDR4"
+        },
+        {
+          "id": "11",
+          "memory": "8GB内存",
+          "reason": "不符合需求，内存容量仅为8GB，未达到16G及以上要求。",
+          "score": 0.0,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC03",
+          "price_cny": "59000",
+          "original": "内存：16GB DDR4"
+        },
+        {
+          "id": "14",
+          "memory": "8GB内存",
+          "reason": "不符合需求，内存容量仅为8GB，未达到16G及以上要求。",
+          "score": 0.0,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC03",
+          "price_cny": "79000",
+          "original": "内存：16GB DDR4"
+        },
+        {
+          "id": "13",
+          "memory": "8GB DDR3-1600内存",
+          "reason": "不符合需求，内存容量仅为8GB，未达到16G及以上要求。",
+          "score": 0.0,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC01",
+          "price_cny": "79000",
+          "original": "内存：16GB DDR4"
+        }
+      ]
+    },
+    {
+      "kkrr": [
+        {
+          "id": "1",
+          "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统",
+          "reason": "满足八核和Intel Core i9系列和主频4.2GHz满足要求要求。整体接近但未完全满足。",
+          "score": 1.0,
+          "model": "Links-Box-03-S4（便携）",
+          "price_cny": "35000",
+          "original": "CPU：Intel Core i7 2.6GHz四核"
+        },
+        {
+          "id": "2",
+          "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统",
+          "reason": "满足八核和Intel Core i9系列和主频4.2GHz满足要求要求。整体接近但未完全满足。",
+          "score": 1.0,
+          "model": "Links-Box-03-S7",
+          "price_cny": "45000",
+          "original": "CPU：Intel Core i7 2.6GHz四核"
+        },
+        {
+          "id": "3",
+          "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统",
+          "reason": "满足八核和Intel Core i9系列和主频4.2GHz满足要求要求。整体接近但未完全满足。",
+          "score": 1.0,
+          "model": "Links-Box-03-S12A",
+          "price_cny": "55000",
+          "original": "CPU：Intel Core i7 2.6GHz四核"
+        },
+        {
+          "id": "4",
+          "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统",
+          "reason": "满足八核和Intel Core i9系列和主频4.2GHz满足要求要求。整体接近但未完全满足。",
+          "score": 1.0,
+          "model": "Links-Box-03-S12B",
+          "price_cny": "55000",
+          "original": "CPU：Intel Core i7 2.6GHz四核"
+        },
+        {
+          "id": "12",
+          "cpu": "i7-6820EQ，四核处理器2.8GHz",
+          "reason": "满足八核和Intel Core i9系列和主频2.8GHz满足要求要求。整体接近但未完全满足。",
+          "score": 1.0,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC04",
+          "price_cny": "64500",
+          "original": "CPU：Intel Core i7 2.6GHz四核"
+        },
+        {
+          "id": "15",
+          "cpu": "i7-6820EQ，四核处理器2.8GHz",
+          "reason": "满足八核和Intel Core i9系列和主频2.8GHz满足要求要求。整体接近但未完全满足。",
+          "score": 1.0,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC04",
+          "price_cny": "84500",
+          "original": "CPU：Intel Core i7 2.6GHz四核"
+        },
+        {
+          "id": "11",
+          "cpu": "i7-6822EQ，四核处理器2.0GHz",
+          "reason": "满足八核和Intel Core i9系列要求，但主频2.0GHz低于需求的2.6GHz。核心数与品牌达标，频率略低，整体接近但未完全满足。",
+          "score": 0.8,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC03",
+          "price_cny": "59000",
+          "original": "CPU：Intel Core i7 2.6GHz四核"
+        },
+        {
+          "id": "14",
+          "cpu": "i7-6822EQ，四核处理器2.0GHz",
+          "reason": "满足八核和Intel Core i9系列要求，但主频2.0GHz低于需求的2.6GHz。核心数与品牌达标，频率略低，整体接近但未完全满足。",
+          "score": 0.8,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC03",
+          "price_cny": "79000",
+          "original": "CPU：Intel Core i7 2.6GHz四核"
+        },
+        {
+          "id": "5",
+          "cpu": "Intel Corei9-9900K 3.6GHz八核处理器，运行实时操作系统",
+          "reason": "满足八核和Intel Core系列和主频3.6GHz满足要求要求，但非i9系列（为i9-9900K）。核心数与品牌达标，频率略低，整体接近但未完全满足。",
+          "score": 0.8,
+          "model": "Links-Box-04-S5",
+          "price_cny": "80000",
+          "original": "CPU：Intel Core i7 2.6GHz四核"
+        },
+        {
+          "id": "10",
+          "cpu": "第三代Intel Core i7-3555LE双核处理器 2.5GHz",
+          "reason": "仅2核，未达八核要求；满足Intel Core系列要求；满足i9型号要求；主频2.5GHz低于需求的2.6GHz。部分指标达标，但关键指标不足。",
+          "score": 0.6,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC01",
+          "price_cny": "59000",
+          "original": "CPU：Intel Core i7 2.6GHz四核"
+        },
+        {
+          "id": "13",
+          "cpu": "第三代Intel Core i7-3555LE双核处理器 2.5GHz",
+          "reason": "仅2核，未达八核要求；满足Intel Core系列要求；满足i9型号要求；主频2.5GHz低于需求的2.6GHz。部分指标达标，但关键指标不足。",
+          "score": 0.6,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC01",
+          "price_cny": "79000",
+          "original": "CPU：Intel Core i7 2.6GHz四核"
+        },
+        {
+          "id": "8",
+          "cpu": "2颗英特尔® 至强® Gold 3.9GHz八核处理器，共计16核，运行实时操作系统",
+          "reason": "满足八核要求（16核）；品牌Intel符合，但系列Xeon不符合Core；型号为Gold，不包含i7；主频3.9GHz满足≥2.6GHz要求。部分指标达标，但关键指标不足。",
+          "score": 0.6,
+          "model": "Links-SuperBox-01-S6",
+          "price_cny": "120000",
+          "original": "CPU：Intel Core i7 2.6GHz四核"
+        },
+        {
+          "id": "9",
+          "cpu": "2颗英特尔® 至强® 金牌 3.0GHz十八核处理器，共计36核，运行实时操作系统",
+          "reason": "满足八核要求（36核）；品牌Intel符合，但系列Xeon不符合Core；型号为金牌，不包含i7；主频3.0GHz满足≥2.6GHz要求。部分指标达标，但关键指标不足。",
+          "score": 0.6,
+          "model": "Links-SuperBox-02-S6",
+          "price_cny": "200000",
+          "original": "CPU：Intel Core i7 2.6GHz四核"
+        },
+        {
+          "id": "7",
+          "cpu": "海光3350八核处理器，主频3.0GHz，三级缓存16MB，运行实时操作系统",
+          "reason": "满足八核要求（8核）；型号为3350，不包含i7；主频3.0GHz满足≥2.6GHz要求。部分指标达标，但关键指标不足。",
+          "score": 0.5,
+          "model": "Links-Box-05-S3（HG01）",
+          "price_cny": "80000",
+          "original": "CPU：Intel Core i7 2.6GHz四核"
+        }
+      ]
+    }
+  ]
+}

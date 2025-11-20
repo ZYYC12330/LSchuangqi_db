@@ -1,0 +1,3 @@
+﻿id,UART_interface_types_supported,AD_coupling_mode,AD_input_modes,MIL1553_operation_modes_supported
+1,"{RS-232,RS-422,RS-485}",,,
+
